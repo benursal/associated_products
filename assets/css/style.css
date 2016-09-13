@@ -1,0 +1,152 @@
+body{
+	background-color:#F4F2EE;
+	font-size:16px;
+}
+
+h3{
+	color: #158cba;
+}
+
+.alert h2{
+	font-size:20px !important;
+	margin-top:0;
+	margin-bottom:0;
+}
+
+label{
+	font-weight:300;
+}
+
+.page-header h1{
+	font-size:40px;
+	font-weight:normal;
+	text-align:center;
+}
+
+.page-header p{
+	font-size:20px;
+	color:#909090;
+	text-align:center;
+	margin-top:20px;
+}
+
+#menuHeader{
+	background-color:#127CC0;
+	padding:10px 0;
+}
+
+.navbar{
+	margin-bottom:0;
+	border:0;
+	background-color:#127CC0;
+}
+
+.navbar-brand{
+	color:white !important;
+	font-family: "Source Sans Pro";
+	font-weight:bold;
+	font-size:30px !important;
+}
+
+.navbar li a{
+	color:white !important;
+	font-size:16px;
+	font-weight:300;
+}
+
+.navbar li a.button{
+	border:1px solid #358fc9;
+	border-radius:10px;
+	margin-left:5px;
+}
+
+.navbar li a.button:hover{
+	background-color: #106FAC
+}
+
+.navbar-toggle:hover,
+.navbar-toggle:focus {
+  background-color: #106FAC !important;
+}
+
+#breadcrumbContainer{
+	background-color:#093E60
+}
+
+.breadcrumb {
+	border:0;
+	background-color:transparent;
+	margin-bottom:0;
+	color:white;
+	padding-left:0;
+}
+
+.breadcrumb li,
+.breadcrumb li a{
+	color:white !important;
+	font-size:14px;
+}
+
+.breadcrumb li a{
+	font-weight:700;
+}
+
+.nav-pills{
+	margin-top:20px;
+}
+
+a.list-group-item{
+	color: #158cba;
+	font-weight:300;
+}
+
+a.list-group-item:nth-child(even){
+	background-color:#F4F2EE
+}
+
+a.list-group-item:hover,
+a.list-group-item:focus {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #158cba;
+}
+
+.table-hover > tbody > tr{
+	font-weight:300;
+	cursor:pointer;
+	/* color: #158cba; */
+}
+
+.table-hover > tbody > tr:hover {
+	color: #ffffff;
+	background-color: #158cba;
+}
+
+#mainContent{
+	background-color:white;
+	border-radius:5px;
+	margin-top:30px;
+	margin-bottom:40px;
+}
+
+.search-box{
+	padding:15px;
+	background-color:#FFF1AF;
+	border-radius:5px;
+	border:1px solid #ffd932;
+}
+
+.history-list{
+	font-size:20px;
+	margin-bottom:40px;
+}
+
+.text-value{
+	font-size:20px;
+	color:#28B62C;
+	font-weight:bold;
+}
+
+.tago{
+	display:none;
+}

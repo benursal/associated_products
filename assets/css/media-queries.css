@@ -1,0 +1,31 @@
+@media (max-width: 767px){
+	.page-header{
+		margin-top:10px;
+	}
+	
+	.page-header h1{
+		font-size:30px;
+	}
+
+	.page-header p{
+		font-size:16px;
+	}
+	
+	.navbar-brand{
+		font-size:20px !important;
+	}
+
+	#mainContent{
+		margin-top:0 !important;
+	}
+}
+
+@media (min-width: 768px) {
+	.body-content{
+		padding-bottom:40px;
+	}
+	
+	.form-data-entry{
+		padding-top:20px;
+	}
+}

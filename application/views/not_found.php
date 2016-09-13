@@ -1,0 +1,1 @@
+<div class="not_found"><?php echo $message; ?></div>
