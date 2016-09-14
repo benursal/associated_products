@@ -1,8 +1,8 @@
 <?php
-class User extends DataMapper 
+class Quotation extends DataMapper 
 {	
-	var $table = 'preparer';
-	
+	var $table = 'quotation';
+
 	function __construct($id = NULL)
     {
         parent::__construct($id);

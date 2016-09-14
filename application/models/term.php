@@ -1,7 +1,6 @@
 <?php
-class User extends DataMapper 
+class Term extends DataMapper 
 {	
-	var $table = 'preparer';
 	
 	function __construct($id = NULL)
     {

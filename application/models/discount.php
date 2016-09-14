@@ -1,8 +1,6 @@
 <?php
-class User extends DataMapper 
-{	
-	var $table = 'preparer';
-	
+class Discount extends DataMapper 
+{		
 	function __construct($id = NULL)
     {
         parent::__construct($id);

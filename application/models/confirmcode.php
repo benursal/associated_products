@@ -1,7 +1,7 @@
 <?php
-class User extends DataMapper 
+class Confirmcode extends DataMapper 
 {	
-	var $table = 'preparer';
+	var $table = 'confirmcode';
 	
 	function __construct($id = NULL)
     {

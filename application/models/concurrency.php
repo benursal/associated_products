@@ -1,7 +1,7 @@
 <?php
-class User extends DataMapper 
+class Concurrency extends DataMapper 
 {	
-	var $table = 'preparer';
+	var $table = 'concurrency';
 	
 	function __construct($id = NULL)
     {

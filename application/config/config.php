@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://'.$_SERVER['SERVER_NAME'].'/monte/';
+$config['base_url']	= 'http://'.$_SERVER['SERVER_NAME'].'/associated_products/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -357,7 +357,7 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 /* Custom Config Items */
-$config['secure_base_url']	= 'http://'.$_SERVER['SERVER_NAME'].'/monte/';
+$config['secure_base_url']	= 'http://'.$_SERVER['SERVER_NAME'].'/associated_products/';
 
 // encryption
 $config['encryption_key'] = "baho_tubol";
