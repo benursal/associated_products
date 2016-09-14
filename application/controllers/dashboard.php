@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Dashboard extends MY_Controller
+class Dashboard extends User_Controller
 {
 	function __construct()
 	{
@@ -14,10 +14,12 @@ class Dashboard extends MY_Controller
 	
 	function index()
 	{
-		$u = new User();
+		$u = new Delivery();
 		$u->get();
-		echo $u->all_to_json();
+		$result = $u->all_to_array();
+		$this->show_pre( $result );
 	}
+	
 	
 	
 }

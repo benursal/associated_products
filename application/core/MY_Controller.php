@@ -18,7 +18,7 @@ class MY_Controller extends CI_Controller
 		$this->load->view( $this->footer_file, $this->footer_data );//Load Footer
 	}
 	
-	function print_pre( $array )
+	function show_pre( $array )
 	{
 		echo '<pre>';
 		print_r( $array );

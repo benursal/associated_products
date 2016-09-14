@@ -41,7 +41,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 define('RECORDS_PER_PAGE', 10);
 //Site Path
-define('SITE_PATH', '/monte/');
+define('SITE_PATH', '/associated_products/');
 define('REAL_PATH', $_SERVER['DOCUMENT_ROOT'].SITE_PATH);
 //
 define('BACKUP_PATH', 'G:/');
