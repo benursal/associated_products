@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Supplier extends User_Controller
+class Suppliers extends User_Controller
 {
 	function __construct()
 	{
