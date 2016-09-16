@@ -34,29 +34,17 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"> <span>APP System</span></a>
+              <a href="<?php echo site_url(); ?>" class="site_title"> <i class="fa fa-buysellads" aria-hidden="true"></i> <span>APP System</span></a>
             </div>
 
-            <div class="clearfix"></div>
-
-            <!-- menu profile quick info -->
-            <div class="profile">
-              <div class="profile_pic">
-                <img src="<?php echo site_url('assets/images');?>/img.jpg" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
+            <div class="clearfix"></div>           
 
             <br />
 
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 				<div class="menu_section">
-					<h3>General</h3>
+					
 					<ul class="nav side-menu">
 						<li><a href="<?php echo site_url();?>"><i class="fa fa-home"></i> Dashboard </a></li>
 						<li><a><i class="fa fa-list-ol"></i> Quotations <span class="fa fa-chevron-down"></span></a>
@@ -198,15 +186,4 @@
               </div>
             </div>
             <div class="clearfix"></div>
-            <div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">
-					<div class="x_panel">
-						<div class="x_title">
-							<h2>Form Design <small>different form elements</small></h2>
-							
-							<div class="clearfix"></div>
-						  </div>
-					</div>
-				</div>
-			</div>
-					
+            <!-- place ccontent here -->
