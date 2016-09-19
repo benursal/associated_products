@@ -2,11 +2,11 @@
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="x_panel margin-top-10 padding-40 padding-top-10">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<h1 class="text-large"><?php echo $page_title; ?></h1>
 				</div>
-				<div class="col-md-3 padding-top-10">
-					<a href="<?php echo site_url('supplier/add_new');?>" class="btn btn-success">
+				<div class="col-md-3 margin-top-10">
+					<a href="<?php echo site_url('supplier/add_new');?>" class="btn btn-success btn-sm">
 						<i class="fa fa-plus-circle"></i> Add New
 					</a>
 				</div>
@@ -25,8 +25,8 @@
 							<tbody>
 								<?php foreach( $rows as $row ) : ?>
 								<tr>
-									<td><?php echo $row->sID; ?></td>
-									<td><?php echo $row->name; ?></td>
+									<td><a href="<?php echo site_url('supplier/edit/' . $row->sID);?>"><?php echo $row->sID; ?></a></td>
+									<td><a href="<?php echo site_url('supplier/edit/' . $row->sID);?>"><?php echo $row->name; ?></a></td>
 									<td class="text-center">
 										<a href="<?php echo site_url('supplier/edit/' . $row->sID);?>" class="btn btn-primary btn-sm">
 											<i class="fa fa-pencil-square-o"></i> Edit
