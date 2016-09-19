@@ -180,12 +180,13 @@ CREATE TABLE `supplier` (
   `sID` varchar(10) NOT NULL,
   `name` varchar(50) NOT NULL,
   `address` varchar(150) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`sID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `supplier` */
 
-insert  into `supplier`(`sID`,`name`,`address`) values ('Aloyco','Aloyco International',NULL),('Arizona','Arizona Marketing Corp.',NULL),('aspen','aspen industrial sales corp','Metro Manila Philippines.'),('Burkert','Burkert Contromatic Philippines','8467 West Service Road Km. 14 \r\nSouth Superhighway \r\nSunValley, Parañaque City \r\nPhilippines 1711'),('Electrobus','Electrobus Inc.',NULL),('eurelyn','eurelyn electronics','Laguna'),('festo','festo','Manila'),('ic','innovative controls','Bacolod City'),('innovative','innovative solutions','Bacolod City'),('NEMA Elect','NEMA Electric',NULL),('newbridge','newbridge','Lacson street'),('pcscale','pcscalelift','Manila'),('Presidium','Presidium Controls',NULL),('RS','RS Components','Makati City'),('tradepoint','tradepoints','Victoria St., Villamonte, Bacolod City'),('YPI','Yokogawa Phils. Inc','Quezon City');
+insert  into `supplier`(`sID`,`name`,`address`,`status`) values ('Aloyco','Aloyco International',NULL,1),('Arizona','Arizona Marketing Corp.',NULL,1),('aspen','aspen industrial sales corp','Metro Manila Philippines.',1),('Burkert','Burkert Contromatic Philippines','8467 West Service Road Km. 14 \r\nSouth Superhighway \r\nSunValley, Parañaque City \r\nPhilippines 1711',1),('Electrobus','Electrobus Inc.',NULL,1),('eurelyn','eurelyn electronics','Laguna',1),('festo','festo','Manila',1),('ic','innovative controls','Bacolod City',1),('innovative','innovative solutions','Bacolod City',1),('NEMA Elect','NEMA Electric',NULL,1),('newbridge','newbridge','Lacson street',1),('pcscale','pcscalelift','Manila',1),('Presidium','Presidium Controls',NULL,1),('RS','RS Components','Makati City',1),('tradepoint','tradepoints','Victoria St., Villamonte, Bacolod City',1),('YPI','Yokogawa Phils. Inc','Quezon City',1);
 
 /*Table structure for table `terms` */
 
