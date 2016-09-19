@@ -178,4 +178,12 @@
 	font-size:16px;
 }
 
-/* custom */
+/* message */
+.jGrowl-notification{
+	width:500px;
+}
+
+.jGrowl-message{
+	font-size:16px;
+	text-align:center;
+}

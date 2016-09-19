@@ -6,7 +6,7 @@
 					<h1 class="text-large"><?php echo $page_title; ?></h1>
 				</div>
 				<div class="col-md-3 margin-top-10">
-					<a href="<?php echo site_url('supplier/add_new');?>" class="btn btn-success btn-sm">
+					<a href="<?php echo site_url('suppliers/add_new');?>" class="btn btn-success btn-sm">
 						<i class="fa fa-plus-circle"></i> Add New
 					</a>
 				</div>
@@ -24,14 +24,16 @@
 							</thead>
 							<tbody>
 								<?php foreach( $rows as $row ) : ?>
-								<tr>
+								<tr id="row<?php echo $row->sID;?>">
 									<td><a href="<?php echo site_url('supplier/edit/' . $row->sID);?>"><?php echo $row->sID; ?></a></td>
 									<td><a href="<?php echo site_url('supplier/edit/' . $row->sID);?>"><?php echo $row->name; ?></a></td>
 									<td class="text-center">
 										<a href="<?php echo site_url('supplier/edit/' . $row->sID);?>" class="btn btn-primary btn-sm">
 											<i class="fa fa-pencil-square-o"></i> Edit
 										</a>
-										<button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
+										<button class="btn btn-danger btn-sm" onclick="delete_supplier(this, '<?=$row->sID;?>', '<?=$row->name;?>')">
+											<i class="fa fa-trash"></i> Delete
+										</button>
 									</td>
 								</tr>
 								<?php endforeach; ?>

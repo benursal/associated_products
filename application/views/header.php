@@ -23,7 +23,9 @@
     <link href="<?php echo site_url();?>assets/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
     <!-- starrr -->
     <link href="<?php echo site_url();?>assets/vendors/starrr/dist/starrr.css" rel="stylesheet">
-
+	
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />
+	
     <!-- Custom Theme Style -->
     <link href="<?php echo site_url();?>assets/build/css/custom.min.css" rel="stylesheet">
 	
