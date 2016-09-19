@@ -26,6 +26,8 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo site_url();?>assets/build/css/custom.min.css" rel="stylesheet">
+	
+    <link href="<?php echo site_url();?>assets/custom-styles.css" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -180,10 +182,6 @@
 		<!-- page content -->
         <div class="right_col" role="main">
           <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Form Elements</h3>
-              </div>
-            </div>
+            
             <div class="clearfix"></div>
             <!-- place ccontent here -->

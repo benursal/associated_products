@@ -1,0 +1,181 @@
+/* my custom styles **/
+
+/* alignments */
+.text-left{
+	text-align:left;
+}
+
+.text-center{
+	text-align:center;
+}
+
+.text-right{
+	text-align:right;
+}
+
+/* padding */
+.padding-top-0{
+	padding-top:0 !important;
+}
+
+.padding-top-10{
+	padding-top:10px !important;
+}
+
+.padding-20{
+	padding:20px;
+}
+
+.padding-40{
+	padding:40px;
+}
+
+/* margin */
+.margin-top-10{
+	margin-top:10px;
+}
+
+.margin-top-20{
+	margin-top:20px;
+}
+
+.margin-top-30{
+	margin-top:30px;
+}
+
+.margin-top-40{
+	margin-top:40px;
+}
+
+.margin-top-50{
+	margin-top:50px;
+}
+
+/* text */
+.text-18{
+	font-size:18px !important;
+	line-height:35px !important;
+}
+
+.text-20{
+	font-size:20px !important;
+	line-height:38px !important;
+}
+
+.text-22{
+	font-size:22px !important;
+	line-height:40px !important;
+}
+
+.text-24{
+	font-size:24px !important;
+	line-height:44px !important;
+}
+
+.text-28{
+	font-size:28px !important;
+	line-height:40px !important;
+}
+
+.text-40{
+	font-size:40px !important;
+	line-height:60px !important;
+}
+
+.text-50{
+	font-size:50px !important;
+	line-height:66px !important;
+}
+
+.text-60{
+	font-size:60px !important;
+	line-height:76px !important;
+}
+
+.text-70{
+	font-size:70px !important;
+	line-height:86px !important;
+}
+
+.text-large{
+	font-size:32px !important;
+	line-height:39px !important;
+}
+
+.text-xlarge{
+	font-size:80px !important;
+	line-height:90px !important;
+}
+
+.text-xxlarge{
+	font-size:100px !important;
+	line-height:110px !important;
+}
+
+.text-18{
+	font-size:18px !important;
+	line-height:35px !important;
+}
+
+.text-20{
+	font-size:20px !important;
+	line-height:38px !important;
+}
+
+.text-22{
+	font-size:22px !important;
+	line-height:40px !important;
+}
+
+.text-24{
+	font-size:24px !important;
+	line-height:44px !important;
+}
+
+.text-28{
+	font-size:28px !important;
+	line-height:40px !important;
+}
+
+.text-40{
+	font-size:40px !important;
+	line-height:60px !important;
+}
+
+.text-50{
+	font-size:50px !important;
+	line-height:66px !important;
+}
+
+.text-60{
+	font-size:60px !important;
+	line-height:76px !important;
+}
+
+.text-70{
+	font-size:70px !important;
+	line-height:86px !important;
+}
+
+.text-large{
+	font-size:32px !important;
+	line-height:39px !important;
+}
+
+.text-xlarge{
+	font-size:80px !important;
+	line-height:90px !important;
+}
+
+.text-xxlarge{
+	font-size:100px !important;
+	line-height:110px !important;
+}
+
+/* table */
+.table.text-16 th,
+.table.text-16 td{
+	font-size:16px;
+}
+
+/* custom */
