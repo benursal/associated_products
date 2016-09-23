@@ -46,7 +46,7 @@
 	{
 		foreach( $js_assets as $js )
 		{
-			echo '<script src="'. site_url('assets/' . $js) . '"></script>';
+			echo '<script src="'. $js . '"></script>';
 		}
 	}
 	?>

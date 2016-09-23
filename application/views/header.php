@@ -33,6 +33,11 @@
   </head>
 
   <body class="nav-md">
+	
+	<div class="ajax-loader">
+		<img src="<?php echo site_url('assets/images/loading.gif'); ?>" />
+	</div>
+  
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">

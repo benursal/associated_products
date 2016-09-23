@@ -15,23 +15,8 @@
 			<div class="x_content margin-top-20">
 				<div class="row">
 					<div class="col-md-10">
-						<div class="alert alert-success">
-  <strong>Success!</strong> Indicates a successful or positive action.
-</div>
-
-<div class="alert alert-info">
-  <strong>Info!</strong> Indicates a neutral informative change or action.
-</div>
-
-<div class="alert alert-warning">
-  <strong>Warning!</strong> Indicates a warning that might need attention.
-</div>
-
-<div class="alert alert-danger">
-  <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
-</div>
-
-						<form class="form-horizontal form-label-left input_mask margin-top-20">
+						
+						<form class="form-horizontal form-label-left input_mask margin-top-20" id="formNewSupplier">
 
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
@@ -46,7 +31,7 @@
 									Supplier Name <span class="required">*</span>
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" name="supplier-ID" id="supplierID" required="required" class="form-control col-md-7 col-xs-12">
+									<input type="text" name="supplier-ID" id="supplierName" required="required" class="form-control col-md-7 col-xs-12">
 								</div>
 							</div>
 							<div class="form-group">
@@ -54,7 +39,7 @@
 									Address <span class="required">*</span>
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<textarea type="text" name="supplier-ID" id="supplierID" required="required" 
+									<textarea type="text" name="supplier-ID" id="supplierAddress" required="required" 
 									class="form-control col-md-7 col-xs-12" rows="5"></textarea>
 								</div>
 							</div>
@@ -62,7 +47,7 @@
 							<div class="form-group">
 								<div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-3">
 									<div class="col-md-5">
-										<button type="submit" class="btn btn-reverse btn-block">Cancel</button>
+										<a href="<?php echo site_url('suppliers'); ?>" class="btn btn-default btn-block">Cancel</a>
 									</div>
 									<div class="col-md-5">
 										<button type="submit" class="btn btn-success btn-block">Save New Supplier</button>
@@ -78,3 +63,12 @@
 		</div>
 	</div>
 </div>
+
+<script>
+window.onbeforeunload = function() {
+	if( !form_in_default_values() )
+	{
+		return ""; 
+	}
+};
+</script>
