@@ -74,15 +74,47 @@ class Suppliers extends User_Controller
 	// edit
 	function edit( $id )
 	{
-		$data['page_title'] = 'List of Suppliers';
-		
 		// get details
-		$suppliers = new Supplier();		
-		$suppliers->get();
+		$s = new Supplier();		
+		$s->where('id', $id);
+		$s->where('status', 1);
+		$s->get();
 		
-		$data['rows'] = $suppliers;
+		// page title
+		$data['page_title'] = 'Edit Supplier "' . $s->name . '"';
 		
-		$this->output('suppliers/supplier_list', $data);
+		// external js
+		$data['js_assets'] = array(
+			site_url('assets/suppliers.js')
+		);
+		
+		// the row
+		$data['row'] = $s;
+		
+		$this->output('suppliers/edit_supplier', $data);
+	}
+	
+	function update_supplier()
+	{
+		if( $this->is_ajax() )
+		{
+			$s = new Supplier();
+			$s->where('id', $this->input->post('id'));
+			$s->get();
+			
+			$s->sID = $this->input->post('sID');
+			$s->name = $this->input->post('name');
+			$s->address = $this->input->post('address');
+			
+			if( $s->save() )
+			{
+				echo $s->id;
+			}
+			else
+			{
+				echo 'ERROR';
+			}
+		}
 	}
 	
 	function test()

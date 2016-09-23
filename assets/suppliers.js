@@ -3,6 +3,9 @@ $(document).ready(function(){
 	
 	// save new supplier
 	$('#formNewSupplier').submit(function(){
+		
+		show_loader();
+		
 		$.post( base_url + "suppliers/save_supplier",
 		{
 			sID: $('#supplierID').val(),
@@ -10,6 +13,9 @@ $(document).ready(function(){
 			address: $('#supplierAddress').val()
 		},
 		function(data, status){
+			
+			hide_loader();
+			
 			if( status == 'success' && data != 'ERROR' )
 			{
 				// show success message
@@ -32,6 +38,53 @@ $(document).ready(function(){
 			{
 				$.jGrowl(
 					'An error has occured while adding a new supplier.', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+		});
+		
+		return false;
+	});
+	
+	// update supplier
+	$('#formEditSupplier').submit(function(){
+		
+		show_loader();
+		
+		$.post( base_url + "suppliers/update_supplier",
+		{
+			id: $('#theID').val(),
+			sID: $('#supplierID').val(),
+			name: $('#supplierName').val(),
+			address: $('#supplierAddress').val()
+		},
+		function(data, status){
+			
+			hide_loader();
+			
+			if( status == 'success' && data != 'ERROR' )
+			{
+				// show success message
+				$.jGrowl(
+					'You have successfully updated supplier record', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-success'
+					}
+				);
+				
+				// update title
+				$('#pageTitle').text('Edit Supplier "' + $('#supplierName').val() + '"');
+			}
+			else // error
+			{
+				$.jGrowl(
+					'An error has occured while updating supplier record.', 
 					{ 
 						life: 5000,
 						position: 'center', 

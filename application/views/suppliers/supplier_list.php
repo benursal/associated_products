@@ -25,10 +25,10 @@
 							<tbody>
 								<?php foreach( $rows as $row ) : ?>
 								<tr id="row<?php echo $row->sID;?>">
-									<td><a href="<?php echo site_url('supplier/edit/' . $row->sID);?>"><?php echo $row->sID; ?></a></td>
-									<td><a href="<?php echo site_url('supplier/edit/' . $row->sID);?>"><?php echo $row->name; ?></a></td>
+									<td><a href="<?php echo site_url('suppliers/edit/' . $row->id);?>"><?php echo $row->sID; ?></a></td>
+									<td><a href="<?php echo site_url('suppliers/edit/' . $row->id);?>"><?php echo $row->name; ?></a></td>
 									<td class="text-center">
-										<a href="<?php echo site_url('supplier/edit/' . $row->sID);?>" class="btn btn-primary btn-sm">
+										<a href="<?php echo site_url('suppliers/edit/' . $row->id);?>" class="btn btn-primary btn-sm">
 											<i class="fa fa-pencil-square-o"></i> Edit
 										</a>
 										<button class="btn btn-danger btn-sm" onclick="delete_supplier(this, '<?=$row->sID;?>', '<?=$row->name;?>')">

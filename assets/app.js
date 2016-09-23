@@ -23,15 +23,14 @@ function form_in_default_values()
 	$('.form-control').each(function(index){
 		
 		if( $.trim( $(this).val() ) != '' ) // check if there are changes made
-		{
-			//console.log('not default');
+		{			
 			return_value = false;
 		}
 		else // if there are no changes
 		{
 			$(this).val(''); // clear whitespaces
 		}
-		//console.log( $(this).val() );
+		
 	});
 	
 	return return_value;

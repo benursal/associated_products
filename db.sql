@@ -177,16 +177,18 @@ insert  into `quotation`(`transNum`,`year`,`date`,`custID`,`subject`,`delivery`,
 DROP TABLE IF EXISTS `supplier`;
 
 CREATE TABLE `supplier` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `sID` varchar(10) NOT NULL,
   `name` varchar(50) NOT NULL,
   `address` varchar(150) DEFAULT NULL,
   `status` tinyint(1) DEFAULT '1',
-  PRIMARY KEY (`sID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`sID`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 /*Data for the table `supplier` */
 
-insert  into `supplier`(`sID`,`name`,`address`,`status`) values ('Aloyco','Aloyco International',NULL,1),('Arizona','Arizona Marketing Corp.',NULL,1),('aspen','aspen industrial sales corp','Metro Manila Philippines.',1),('Burkert','Burkert Contromatic Philippines','8467 West Service Road Km. 14 \r\nSouth Superhighway \r\nSunValley, Parañaque City \r\nPhilippines 1711',1),('Electrobus','Electrobus Inc.',NULL,1),('eurelyn','eurelyn electronics','Laguna',1),('festo','festo','Manila',1),('ic','innovative controls','Bacolod City',1),('innovative','innovative solutions','Bacolod City',1),('NEMA Elect','NEMA Electric',NULL,1),('newbridge','newbridge','Lacson street',1),('pcscale','pcscalelift','Manila',1),('Presidium','Presidium Controls',NULL,1),('RS','RS Components','Makati City',1),('tradepoint','tradepoints','Victoria St., Villamonte, Bacolod City',1),('YPI','Yokogawa Phils. Inc','Quezon City',1);
+insert  into `supplier`(`id`,`sID`,`name`,`address`,`status`) values (20,'abc','sdfsdf','fsdfsdf',1),(1,'Aloyco','Aloyco International',NULL,0),(2,'Arizona','Arizona Marketing Corp.',NULL,0),(3,'aspen','igit','igit',1),(19,'bpis','bank of the philippine islandsf','17th streets',1),(4,'Burkert','Burkert Contromatic Philippines','8467 West Service Road Km. 14 \r\nSouth Superhighway \r\nSunValley, Parañaque City \r\nPhilippines 1711',0),(5,'Electrobus','Electrobus Inc.',NULL,1),(6,'eurelyn','eurelyn electronics','Laguna',1),(7,'festo','festo','Manila',0),(21,'fffsdf','fsdfsdf','sdfsdf',0),(8,'ic','innovative controls','Bacolod City, Negros Occidental',1),(9,'innovative','innovative solutions','Bacolod City',1),(10,'NEMA Elect','NEMA Electric',NULL,1),(11,'newbridge','newbridge','Lacson street',1),(12,'pcscale','pcscalelift','Manila',1),(13,'Presidium','Presidium Controls',NULL,1),(14,'RS','RS Components','Makati City',1),(18,'sdfsdf','sdfsdf','sdfsdf',1),(22,'thesupplie','the supplier','sdfsdfsdf',1),(15,'tradepoint','tradepoints','Victoria St., Villamonte, Bacolod City',1),(17,'usls','university of st. la salle','this is the address',1),(16,'YPI','Yokogawa Phils. Inc','Quezon City',1);
 
 /*Table structure for table `terms` */
 
