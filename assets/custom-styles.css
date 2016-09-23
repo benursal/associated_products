@@ -13,6 +13,10 @@
 	text-align:right;
 }
 
+.vertical-align-middle{
+	vertical-align:middle !important;
+}
+
 /* padding */
 .padding-top-0{
 	padding-top:0 !important;
@@ -20,6 +24,10 @@
 
 .padding-top-10{
 	padding-top:10px !important;
+}
+
+.padding-top-20{
+	padding-top:20px !important;
 }
 
 .padding-20{
@@ -49,6 +57,10 @@
 
 .margin-top-50{
 	margin-top:50px;
+}
+
+.margin-bottom-0{
+	margin-bottom:0 !important;
 }
 
 /* text */
@@ -212,4 +224,44 @@
 
 .button-add:hover .fa{
 	color:#286090;
+}
+
+.button-remove .fa{
+	font-size:20px;
+	color:#d43f3a;
+	margin-top:5px;
+}
+
+.button-remove:hover .fa{
+	color:#c9302c;
+}
+
+/* the stuffs */
+.sub-form-headings{
+	padding-right:27px;
+}
+
+.sub-form-headings thead th{
+	font-size:12px;
+	font-weight:normal;
+	background-color:#2A3F54;
+	color:white;
+}
+
+.sub-form{
+	height:300px;
+	overflow:scroll;
+	padding-bottom:30px;
+}
+
+.sub-form tbody td{
+	font-size:12px;
+}
+
+.sub-form tbody td .form-control{
+	font-size:12px;
+}
+
+.td-actions a{
+	margin:0 2px;
 }

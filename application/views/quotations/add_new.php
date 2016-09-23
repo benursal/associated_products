@@ -13,9 +13,8 @@
 				</div>
 			</div>
 			<div class="x_content margin-top-20">
-				<div class="row">
-						
-					<form class="form-horizontal form-label-left input_mask margin-top-20" id="formNewQuotation">
+				<form class="form-horizontal form-label-left input_mask margin-top-20" id="formNewQuotation">
+					<div class="row">
 						<!-- left side -->
 						<div class="col-md-6">
 							<div class="form-group">
@@ -153,10 +152,72 @@
 							</div>
 						</div>
 						
-					</form>
-						
+					</div>
 					
-				</div>
+					<!-- list of items -->
+					<div class="row">
+						<div class="col-lg-12 margin-top-40 sub-form-headings">
+							<table class="table table-bordered margin-bottom-0">
+								<thead>
+									<tr>
+										<th class="text-center col-lg-1">Item No</th>
+										<th class="text-center col-lg-1">QTY</th>
+										<th class="text-center col-lg-1">Unit</th>
+										<th class=" col-lg-4">Description</th>
+										<th class=" col-lg-2">Unit Price</th>
+										<th class="text-center col-lg-2">Amount</th>
+										<th class="text-center col-lg-1">Actions</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 sub-form">
+							<table class="table table-bordered table-striped table-hover">
+								<tbody>
+									<?php for( $x = 0; $x < 20; $x++ ) : ?>
+									<tr>
+										<td class="text-center col-lg-1 padding-top-20"><?php echo $x; ?></td>
+										<td class="text-center col-lg-1"><input type="number" class="form-control qty" /></td>
+										<td class="text-center col-lg-1"><input type="text" class="form-control unit" /></td>
+										<td class="col-lg-4"><textarea class="form-control description" rows="2"></textarea></td>
+										<td class="col-lg-2"><input type="text" class="form-control price" /></td>
+										<td class="text-center col-lg-2 padding-top-20"><strong class="amount">P 2,000.00</strong></td>
+										<td class="text-center col-lg-1 td-actions">
+											<a href="javascript:void(0)" class="button-add">
+												<i class="fa fa-plus-circle" aria-hidden="true"></i>
+											</a> 
+											<a href="javascript:void(0)" class="button-remove">
+												<i class="fa fa-minus-circle" aria-hidden="true"></i>
+											</a>
+										</td>
+									</tr>
+									<?php endfor; ?>
+								</tbody>
+								
+							</table>
+						</div>
+					</div>
+					
+					<div class="row margin-top-20">
+						<div class="col-lg-11 text-right">
+							<p class="text-18">Price is 12% VAT Included: <strong class="text-20">P <span id="grandTotal">0.00</span></strong></p>
+						</div>
+					</div>
+					<div class="row margin-top-20">
+						<div class="col-lg-6 col-lg-offset-3">
+							<div class="row">
+								<div class="col-sm-6">
+									<a href="<?php echo site_url('quotations'); ?>" class="btn btn-default btn-block">Cancel</a>
+								</div>
+								<div class="col-sm-6">
+									<button type="submit" class="btn btn-success btn-block">Save Quotation</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
