@@ -202,3 +202,14 @@
 .ajax-loader img{
 	margin-top:20%;
 }
+
+/* button */
+.button-add .fa{
+	font-size:20px;
+	color:#337ab7;
+	margin-top:5px;
+}
+
+.button-add:hover .fa{
+	color:#286090;
+}
