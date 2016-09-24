@@ -36,6 +36,25 @@ function form_in_default_values()
 	return return_value;
 }
 
+function row_is_default( row_object )
+{
+	var return_value = true;
+	
+	row_object.find('.form-control').each(function(index){
+		
+		if( $.trim( $(this).val() ) != '' ) // check if there are changes made
+		{			
+			return_value = false;
+		}
+		else // if there are no changes
+		{
+			$(this).val(''); // clear whitespaces
+		}
+		
+	});
+	
+	return return_value;
+}
 
 // number formatting
 // Number Formatting Functions

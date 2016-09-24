@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<div class="x_content margin-top-20">
-				<form class="form-horizontal form-label-left input_mask margin-top-20" id="formNewQuotation">
+				<form class="form-horizontal form-label-left input_mask margin-top-20" id="formNewQuotation" method="post">
 					<div class="row">
 						<!-- left side -->
 						<div class="col-md-6">
@@ -152,6 +152,8 @@
 							</div>
 						</div>
 						
+						<!--<button onclick="removeAtt()">REmove this</button>-->
+						
 					</div>
 					
 					<!-- list of items -->
@@ -190,10 +192,10 @@
 											<input type="hidden" class="line-total" value="" />
 										</td>
 										<td class="text-center col-actions td-actions">
-											<a href="javascript:void(0)" class="button-add">
+											<a href="javascript:void(0)" class="button-add add-row">
 												<i class="fa fa-plus-circle" aria-hidden="true"></i>
 											</a> 
-											<a href="javascript:void(0)" class="button-remove">
+											<a href="javascript:void(0)" class="button-remove remove-row">
 												<i class="fa fa-minus-circle" aria-hidden="true"></i>
 											</a>
 										</td>
@@ -218,7 +220,7 @@
 									<a href="<?php echo site_url('quotations'); ?>" class="btn btn-default btn-block">Cancel</a>
 								</div>
 								<div class="col-sm-6">
-									<button type="submit" class="btn btn-success btn-block">Save Quotation</button>
+									<button type="submit" id="btnSaveQuotation" class="btn btn-success btn-block">Save Quotation</button>
 								</div>
 							</div>
 						</div>
@@ -228,7 +230,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-
-</script>
