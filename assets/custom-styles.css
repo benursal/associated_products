@@ -254,6 +254,10 @@
 	padding-bottom:30px;
 }
 
+.sub-form textarea.form-control{
+	resize:vertical;
+}
+
 .sub-form tbody td{
 	font-size:12px;
 }
@@ -264,4 +268,37 @@
 
 .td-actions a{
 	margin:0 2px;
+}
+
+/* columns */
+.col-item-no{
+	width:5%;
+}
+
+.col-qty{
+	width:7%;
+}
+
+.col-unit{
+	width:7%;
+}
+
+.col-description{
+	width:25%;
+}
+
+.col-s-price{
+	width:10%;
+}
+
+.col-unit-price{
+	width:10%;
+}
+
+.col-amount{
+	width:10%;
+}
+
+.col-actions{
+	width:7%;
 }

@@ -160,13 +160,14 @@
 							<table class="table table-bordered margin-bottom-0">
 								<thead>
 									<tr>
-										<th class="text-center col-lg-1">Item No</th>
-										<th class="text-center col-lg-1">QTY</th>
-										<th class="text-center col-lg-1">Unit</th>
-										<th class=" col-lg-4">Description</th>
-										<th class=" col-lg-2">Unit Price</th>
-										<th class="text-center col-lg-2">Amount</th>
-										<th class="text-center col-lg-1">Actions</th>
+										<th class="text-center col-item-no">Item No</th>
+										<th class="text-center col-qty">QTY</th>
+										<th class="text-center col-unit">Unit</th>
+										<th class="col-description">Description</th>
+										<th class="col-s-price">S-Price</th>
+										<th class="col-unit-price">Unit Price</th>
+										<th class="text-center col-amount">Amount</th>
+										<th class="text-center col-actions">Actions</th>
 									</tr>
 								</thead>
 							</table>
@@ -176,15 +177,19 @@
 						<div class="col-lg-12 sub-form">
 							<table class="table table-bordered table-striped table-hover">
 								<tbody>
-									<?php for( $x = 0; $x < 20; $x++ ) : ?>
+									<?php for( $x = 1; $x <= 4; $x++ ) : ?>
 									<tr>
-										<td class="text-center col-lg-1 padding-top-20"><?php echo $x; ?></td>
-										<td class="text-center col-lg-1"><input type="number" class="form-control qty" /></td>
-										<td class="text-center col-lg-1"><input type="text" class="form-control unit" /></td>
-										<td class="col-lg-4"><textarea class="form-control description" rows="2"></textarea></td>
-										<td class="col-lg-2"><input type="text" class="form-control price" /></td>
-										<td class="text-center col-lg-2 padding-top-20"><strong class="amount">P 2,000.00</strong></td>
-										<td class="text-center col-lg-1 td-actions">
+										<td class="text-center col-item-no padding-top-10"><?php echo $x; ?></td>
+										<td class="text-center col-qty"><input type="number" class="form-control qty" min="1" /></td>
+										<td class="text-center col-unit"><input type="text" class="form-control unit" /></td>
+										<td class="col-description"><textarea class="form-control description" rows="2"></textarea></td>
+										<td class="col-s-price"><input type="text" class="form-control s-price" /></td>
+										<td class="col-unit-price"><input type="text" class="form-control price" /></td>
+										<td class="text-center col-amount padding-top-10">
+											<strong>P <span class="amount">0.00</span></strong>
+											<input type="hidden" class="line-total" value="" />
+										</td>
+										<td class="text-center col-actions td-actions">
 											<a href="javascript:void(0)" class="button-add">
 												<i class="fa fa-plus-circle" aria-hidden="true"></i>
 											</a> 
@@ -203,6 +208,7 @@
 					<div class="row margin-top-20">
 						<div class="col-lg-11 text-right">
 							<p class="text-18">Price is 12% VAT Included: <strong class="text-20">P <span id="grandTotal">0.00</span></strong></p>
+							<input type="hidden" name="grandTotal" value="" />
 						</div>
 					</div>
 					<div class="row margin-top-20">
