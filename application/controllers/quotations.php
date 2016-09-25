@@ -75,23 +75,44 @@ class Quotations extends User_Controller
 	{
 		if( $this->is_ajax() )
 		{
-			/*$s = new Supplier();
-			$s->sID = $this->input->post('sID');
-			$s->name = $this->input->post('name');
-			$s->address = $this->input->post('address');
+			$q = new Quotation();
+		
+			$q->year = date('Y');
+			$q->date = date('Y-m-d');
+			$q->custID = $this->input->post('customer');
+			$q->subject = $this->input->post('subject');
+			$q->delivery = $this->input->post('delivery');
+			$q->validity = $this->input->post('validity');
+			$q->terms = $this->input->post('terms');
+			$q->attention = $this->input->post('attention');
+			$q->transDescript = 'a description';
+			$q->totalAmount = $this->input->post('grandTotal');
+			$q->prepared = 'Ben Ursal';
 			
-			if( $s->save() )
+			$is_saved = false;
+			
+			do{
+				// generate latest transaction number
+				$qo = new Quotation();
+				$q->transNum = $qo->generate_number(); // assign new number to transnum
+				
+				// attempt to save
+				$q->save();
+				$is_saved = $q->id;
+				
+				echo $q->transNum . '<br />';
+				
+			}while( !$is_saved );
+			
+			echo 'saved now';
+		
+			//$this->show_pre( $_POST );
+			$counter = 0;
+			foreach( $this->input->post('line-total') as $row )
 			{
-				echo $s->id;
+				echo $_POST['qty'][$counter] . ' - ' . $_POST['price'][$counter] . "<br />";
+				$counter++;
 			}
-			else
-			{
-				echo 'ERROR';
-			}*/
-			
-			
-			
-			$this->show_pre( $_POST );
 		}
 	}
 	
@@ -141,13 +162,24 @@ class Quotations extends User_Controller
 		}
 	}
 	
+	function igit()
+	{
+		echo '<iframe src="'.site_url('quotations/test').'" target="_blank"></iframe>';
+		echo '<iframe src="'.site_url('quotations/test2').'" target="_blank"></iframe>';
+		echo '<iframe src="'.site_url('quotations/test3').'" target="_blank"></iframe>';
+		echo '<iframe src="'.site_url('quotations/test4').'" target="_blank"></iframe>';
+		echo '<iframe src="'.site_url('quotations/test5').'" target="_blank"></iframe>';
+		
+		
+	}
+	
 	function test()
 	{
 		$q = new Quotation();
 		//echo $q->increment_transaction_number('213-2016');
 		
-		$q->transNum = '259-2010';
-		$q->year = '2010';
+		//$q->transNum = '005-2016';
+		$q->year = '2016';
 		$q->date = '2010-12-21';
 		$q->custID = 'dbi';
 		$q->subject = 'PR# 23572812';
@@ -160,8 +192,27 @@ class Quotations extends User_Controller
 		$q->prepared = 'Harold Dy';
 		
 		
-		echo $q->save();
-		$q->check_last_query();
+		//echo $q->save() .' - ' . $q->id;
+		//$q->check_last_query();
+		
+		$is_saved = false;
+		
+		do{
+			// generate latest transaction number
+			$qo = new Quotation();
+			$q->transNum = $qo->generate_number(); // assign new number to transnum
+			
+			// attempt to save
+			$q->save();
+			$is_saved = $q->id;
+			
+			echo $q->transNum . '<br />';
+			
+		}while( !$is_saved );
+		
+		echo 'saved now';
+		
+		$this->show_profiler();
 	}
 	
 	/* stateless */
@@ -196,5 +247,43 @@ class Quotations extends User_Controller
 		}
 	}
 	
+	function transfer()
+	{
+		$q = new Quotation();
+		$q->get();
+		
+		foreach( $q as $row )
+		{
+			$n = explode( '-', $row->transNum );
+			$row->number = (int)$n[0];
+			$row->save();
+			//$row->number = $q->
+		}
+		
+	}
+	
+	function foreign_key()
+	{
+		$o = new Orderline();
+		$o->where('type', 'quotation');
+		$o->where('transNum IS NULL');
+		$o->get();
+		
+		foreach( $o as $row )
+		{
+			//echo $row->num . '<br />';
+			
+			$q = new Quotation();
+			$q->where('transNum', $row->num);
+			$q->get();
+			
+			//echo '<h1>' . $q->id . '</h1>';
+			$row->transNum = $q->id;			
+			$row->save();
+		}
+		
+		$this->show_profiler();
+		
+	}
 }
 ?>

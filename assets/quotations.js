@@ -69,7 +69,7 @@ $(document).ready(function(){
 	$('#formNewQuotation').submit(function(){
 		$(this).serialize();
 		$.post( base_url + 'quotations/save', $( this ).serialize(), function( data ) {
-			alert('sdf');
+			//alert('sdf');
 			$( "#results" ).html( data );
 		});
 		
