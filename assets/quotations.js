@@ -67,7 +67,14 @@ $(document).ready(function(){
 	
 	// submit add new quotation form
 	$('#formNewQuotation').submit(function(){
-		//return false;
+		$(this).serialize();
+		$.post( base_url + 'quotations/save', $( this ).serialize(), function( data ) {
+			alert('sdf');
+			$( "#results" ).html( data );
+		});
+		
+		
+		return false;
 	});
 	
 });
@@ -153,14 +160,14 @@ function get_new_row_html()
 {
 	return '<tr>' + 
 				'<td class="text-center col-item-no padding-top-10"></td>' + 
-				'<td class="text-center col-qty"><input type="number" class="form-control qty" min="1" /></td>' + 
-				'<td class="text-center col-unit"><input type="text" class="form-control unit" /></td>' + 
-				'<td class="col-description"><textarea class="form-control description" rows="2"></textarea></td>' + 
-				'<td class="col-s-price"><input type="text" class="form-control s-price" /></td>' + 
-				'<td class="col-unit-price"><input type="text" class="form-control price" /></td>' + 
+				'<td class="text-center col-qty"><input type="number" class="form-control qty" name="qty[]" min="1" /></td>' + 
+				'<td class="text-center col-unit"><input type="text" class="form-control unit" name="unit[]" /></td>' + 
+				'<td class="col-description"><textarea class="form-control description" name="description[]" rows="2"></textarea></td>' + 
+				'<td class="col-s-price"><input type="text" class="form-control s-price" name="s-price[]" /></td>' + 
+				'<td class="col-unit-price"><input type="text" class="form-control price" name="price[]" /></td>' + 
 				'<td class="text-center col-amount padding-top-10">' + 
 					'<strong>P <span class="amount">0.00</span></strong>' + 
-					'<input type="hidden" class="line-total" value="" />' + 
+					'<input type="hidden" class="line-total" name="line-total[]" value="" />' + 
 				'</td>' + 
 				'<td class="text-center col-actions td-actions">' + 
 					'<a href="javascript:void(0)" class="button-add add-row">' + 

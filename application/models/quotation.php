@@ -18,23 +18,23 @@ class Quotation extends DataMapper
 		
 		if( $this->exists() && $this->transNum != '' ) // if there is an existing record
 		{
-			// get the latest transaction number
-			$lastTransNum = $this->transNum;
-			
-			$val = explode('-',$lastTransNum);
-			$newNum = $val[0]+1;
-			$newNum = trans_number_prefix( strlen( $newNum ), $newNum );
-			
-			return $newNum.'-'.date('Y');
-			
-			//echo "Old: $lastTransNum, New: $newNum";
+			return $this->increment_transaction_number( $this->transNum );			
 		}
 		else // if there are no existing records yet 
 		{
 			return '001-'.date('Y');
 		}
 		
+	}
+	
+	// increments transaction number by 1
+	function increment_transaction_number( $trans_number )
+	{
+		$val = explode('-',$trans_number);
+		$newNum = $val[0]+1;
+		$newNum = trans_number_prefix( strlen( $newNum ), $newNum );
 		
+		return $newNum.'-'.date('Y');
 	}
 }
 ?>

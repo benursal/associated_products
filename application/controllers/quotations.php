@@ -32,6 +32,7 @@ class Quotations extends User_Controller
 		$this->output('quotations/quotation_list', $data);
 	}
 	
+	
 	// add new
 	function add_new()
 	{
@@ -70,11 +71,11 @@ class Quotations extends User_Controller
 		$this->output('quotations/add_new', $data);
 	}
 	
-	function save_supplier()
+	function save()
 	{
 		if( $this->is_ajax() )
 		{
-			$s = new Supplier();
+			/*$s = new Supplier();
 			$s->sID = $this->input->post('sID');
 			$s->name = $this->input->post('name');
 			$s->address = $this->input->post('address');
@@ -86,7 +87,11 @@ class Quotations extends User_Controller
 			else
 			{
 				echo 'ERROR';
-			}
+			}*/
+			
+			
+			
+			$this->show_pre( $_POST );
 		}
 	}
 	
@@ -138,22 +143,25 @@ class Quotations extends User_Controller
 	
 	function test()
 	{
-		$supplier = new Supplier();
-		$supplier->where('sID', 'Arizona');
-		$supplier->get();
+		$q = new Quotation();
+		//echo $q->increment_transaction_number('213-2016');
 		
-		//$supplier->address = 'sdf';
+		$q->transNum = '259-2010';
+		$q->year = '2010';
+		$q->date = '2010-12-21';
+		$q->custID = 'dbi';
+		$q->subject = 'PR# 23572812';
+		$q->delivery = 2;
+		$q->validity = 2;
+		$q->terms = 1;
+		$q->attention = 'Mr. Joel Chan';
+		$q->transDescript = 'PR# 2357280 DBI RS';
+		$q->totalAmount = '30807.06';
+		$q->prepared = 'Harold Dy';
 		
-		//$supplier->update();
 		
-		/*echo $supplier->address . '<br />';
-		echo $supplier->sID . '<br />';
-		echo $supplier->name . '<br />';*/
-		
-		$supplier->status = 0;
-		$supplier->save();
-		
-		$this->show_profiler();
+		echo $q->save();
+		$q->check_last_query();
 	}
 	
 	/* stateless */
