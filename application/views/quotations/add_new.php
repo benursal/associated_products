@@ -227,8 +227,13 @@
 							</div>
 						</div>
 					</div>
+					
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script>
+var customers = <?php echo $customers->all_to_json(array('custID', 'address'), TRUE); ?>;
+</script>

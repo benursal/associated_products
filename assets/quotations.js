@@ -67,14 +67,52 @@ $(document).ready(function(){
 	
 	// submit add new quotation form
 	$('#formNewQuotation').submit(function(){
+		
+		show_loader();
+		
 		$(this).serialize();
 		$.post( base_url + 'quotations/save', $( this ).serialize(), function( data ) {
-			//alert('sdf');
-			$( "#results" ).html( data );
+			
+			hide_loader();
+			
+			if( data == '1' )
+			{
+				$.jGrowl(
+					'<strong>Quotation successfully created!', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-success'
+					}
+				);
+				
+				reset_form('#formNewQuotation');
+				// focus
+				$('select[name="customer"]').focus();
+				
+			}
 		});
 		
 		
 		return false;
+	});
+	
+	$('select[name="customer"]').change(function(){
+		
+		$('#customerAddress').val('');
+		
+		$.each(customers, function (index, value) {
+			
+			var customer = jQuery.parseJSON(value);
+			
+			// check by name
+			if( customer.custID == $('select[name="customer"]').val() )
+			{
+				$('#customerAddress').val( customer.address );
+			}
+			
+			
+		});
 	});
 	
 });

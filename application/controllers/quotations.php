@@ -100,20 +100,45 @@ class Quotations extends User_Controller
 				$q->save();
 				$is_saved = $q->id;
 				
-				echo $q->transNum . '<br />';
+				//echo $q->transNum . '<br />';
 				
 			}while( !$is_saved );
 			
-			echo 'saved now';
+			//echo 'saved now';
 		
 			//$this->show_pre( $_POST );
 			$counter = 0;
 			foreach( $this->input->post('line-total') as $row )
 			{
-				echo $_POST['qty'][$counter] . ' - ' . $_POST['price'][$counter] . "<br />";
-				$counter++;
+				if( $row != '' && $row > 0 )
+				{
+					// save orderline				
+					$o = new Orderline();
+					
+					$o->transNum = $q->id;
+					$o->type = 'quotation';
+					$o->itemNo = $counter + 1;
+					$o->qty = $_POST['qty'][$counter];
+					$o->unit = $_POST['unit'][$counter];
+					$o->descript = $_POST['description'][$counter];
+					$o->sPrice = $_POST['s-price'][$counter];
+					$o->unitPrice = $_POST['price'][$counter];
+					
+					$save = $o->save();
+					
+					//if( $save && $o->id )
+					
+					$counter++;
+				}
 			}
+			
+			echo 1;
 		}
+	}
+	
+	function save_orderline( $trans_id )
+	{
+		
 	}
 	
 	// edit
