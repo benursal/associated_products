@@ -16,7 +16,7 @@
 					<div class="col-lg-6 col-lg-offset-6 text-center">
 						<form action="<?php echo site_url('quotations/search'); ?>">
 							<div class="input-group">
-								<input type="text" name="keyword" class="form-control" placeholder="Search for..." value="<?php echo @$_GET['keyword'];?>">
+								<input type="text" name="keyword" class="form-control" placeholder="Search for quotations" value="<?php echo @$_GET['keyword'];?>">
 								<span class="input-group-btn">
 									<button class="btn btn-inverse" type="submit">SEARCH</button>
 								</span>

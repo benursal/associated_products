@@ -22,15 +22,15 @@ class Purchase_Orders extends User_Controller
 		// load pagination library
 		$this->load->library('ben_pagination');
 	
-		$data['page_title'] = 'List of Quotations';
+		$data['page_title'] = 'List of Purchase Orders';
 		
 		// query
-		$sql_string = 	"SELECT quotation.*, customer.id AS customer_id, customer.custName AS customer_custName 
-						FROM (quotation) 
-						LEFT JOIN customer ON quotation.custID = customer.custID 
-						WHERE quotation.transNum LIKE '%$keyword%' OR quotation.transDescript LIKE '%$keyword%' 
-						OR customer.custName LIKE '%$keyword%' 
-						ORDER BY quotation.id DESC";
+		$sql_string = 	"SELECT po.*, supplier.id AS supplier_id, supplier.name AS supplier_name  
+						FROM (po) 
+						LEFT JOIN supplier ON po.supplierID = supplier.sID 
+						WHERE po.transNum LIKE '%$keyword%' OR po.transDescript LIKE '%$keyword%' 
+						OR supplier.name LIKE '%$keyword%' 
+						ORDER BY supplier.id DESC";
 						
 		$query = $this->db->query($sql_string);
 		
@@ -39,7 +39,7 @@ class Purchase_Orders extends User_Controller
 		$this->ben_pagination->total_records = $query->num_rows();
 		$this->ben_pagination->records_per_page = RECORDS_PER_PAGE;
 		$this->ben_pagination->current_page = $page;
-		$this->ben_pagination->link_address = site_url() . 'quotations/search?keyword='.$keyword.'&page=';
+		$this->ben_pagination->link_address = site_url() . 'purchase_orders/search?keyword='.$keyword.'&page=';
 		$this->ben_pagination->links_to_display = 10;
 		
 		// get the actual string with LIMIT
@@ -51,10 +51,10 @@ class Purchase_Orders extends User_Controller
 		
 		// external js
 		$data['js_assets'] = array(
-			site_url('assets/quotations.js')
+			site_url('assets/po.js')
 		);
 		
-		$this->output('quotations/quotation_list', $data);
+		$this->output('purchase_orders/po_list', $data);
 		
 		//$this->show_profiler();
 	}
