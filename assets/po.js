@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$('select[name="customer"]').focus();
+	$('select[name="supplier"]').focus();
 	
 	// capture quantity
 	$(document).on('keyup', '.qty, .price', function(e){
@@ -63,15 +63,10 @@ $(document).ready(function(){
 	
 	$('#btnSaveQuotation').click(function(){
 		validate_rows();
-		
-	});
-	
-	$('#formNewQuotation').submit(function(){
-		return false;
 	});
 	
 	// submit add new quotation form
-	/*$('#formNewQuotation').submit(function(){
+	$('#formNew').submit(function(){
 		
 		show_loader();
 		
@@ -98,27 +93,27 @@ $(document).ready(function(){
 				$('input[type="checkbox"]').removeAttr('checked');
 				
 				// focus
-				$('select[name="customer"]').focus();
+				$('select[name="supplier"]').focus();
 				
 			}
 		});
 		
 		
 		return false;
-	});*/
+	});
 	
-	$('select[name="customer"]').change(function(){
+	$('select[name="supplier"]').change(function(){
 		
-		$('#customerAddress').val('');
+		$('#supplierAddress').val('');
 		
-		$.each(customers, function (index, value) {
+		$.each(suppliers, function (index, value) {
 			
-			var customer = jQuery.parseJSON(value);
+			var supplier = jQuery.parseJSON(value);
 			
 			// check by name
-			if( customer.custID == $('select[name="customer"]').val() )
+			if( supplier.sID == $('select[name="supplier"]').val() )
 			{
-				$('#customerAddress').val( customer.address );
+				$('#supplierAddress').val( supplier.address );
 			}
 			
 			
@@ -133,13 +128,11 @@ $(document).ready(function(){
 			$('#input_discount').css('visibility', 'visible'); // 
 			$('input[name="discount_rate"]').removeAttr('disabled');
 			$('input[name="discount_rate"]').focus();
-			$('input[name="discount_rate"]').attr('required', '');
 		}
 		else
 		{
 			$('#input_discount').css('visibility', 'hidden');
 			$('input[name="discount_rate"]').attr('disabled','');
-			$('input[name="discount_rate"]').removeAttr('required');
 		}
 	});
 	
@@ -160,6 +153,7 @@ function validate_rows()
 		if( row_is_default( $(this) ) )
 		{
 			$(this).find('.form-control').removeAttr('required');
+			
 			//console.log( (index + 1) + " default");
 		}
 		else
@@ -167,9 +161,9 @@ function validate_rows()
 			$(this).find('.form-control').attr('required', 'required');
 			has_row_with_value = true;
 			
-			//console.log('may ara');
 			//console.log( (index + 1) + " not default");
 		}
+		
 	});
 	
 	if( !has_row_with_value ) //  if there is not at least ONE row
@@ -178,9 +172,9 @@ function validate_rows()
 	}
 }
 
-function modal_add_new_customer()
+function modal_add_new_supplier()
 {
-	alert('add new customer');
+	alert('add new supplier');
 }
 
 function refresh_item_no()
@@ -238,7 +232,6 @@ function get_new_row_html()
 				'<td class="text-center col-qty"><input type="number" class="form-control qty" name="qty[]" min="1" /></td>' + 
 				'<td class="text-center col-unit"><input type="text" class="form-control unit" name="unit[]" /></td>' + 
 				'<td class="col-description"><textarea class="form-control description" name="description[]" rows="2"></textarea></td>' + 
-				'<td class="col-s-price"><input type="text" class="form-control s-price" name="s-price[]" /></td>' + 
 				'<td class="col-unit-price"><input type="text" class="form-control price" name="price[]" /></td>' + 
 				'<td class="text-center col-amount padding-top-10">' + 
 					'<strong>P <span class="amount">0.00</span></strong>' + 
