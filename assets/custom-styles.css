@@ -1,4 +1,11 @@
 /* my custom styles **/
+.dropdown-menu li{
+	padding:5px;
+}
+
+.dropdown-menu li.divider{
+	padding:0;
+}
 
 /* alignments */
 .text-left{
@@ -38,7 +45,19 @@
 	padding:40px;
 }
 
+.padding-bottom-30{
+	padding-bottom:30px;
+}
+
 /* margin */
+.margin-top-0{
+	margin-top:0px;
+}
+
+.margin-top-5{
+	margin-top:5px;
+}
+
 .margin-top-10{
 	margin-top:10px;
 }
@@ -63,7 +82,29 @@
 	margin-bottom:0 !important;
 }
 
+/* border */
+.border-top-0{
+	border-top:0 !important;
+}
+
 /* text */
+.text-bold{
+	font-weight:bold !important;
+}
+
+.text-light{
+	font-weight:normal !important;
+}
+
+.text-italic{
+	font-style:italic !important;
+}
+
+.text-12{
+	font-size:12px !important;
+	line-height:20px !important;
+}
+
 .text-18{
 	font-size:18px !important;
 	line-height:35px !important;
@@ -190,6 +231,49 @@
 	font-size:16px;
 }
 
+.table.text-14 th,
+.table.text-14 td{
+	font-size:14px;
+}
+
+.table.text-12 th,
+.table.text-12 td{
+	font-size:12px;
+}
+
+.table td a.text-link{
+	text-decoration:underline;
+	color:#337ab7
+}
+
+.table td a.text-link:hover{
+	text-decoration:none;
+}
+
+.table.border-top-0 td{
+	border-top:0px !important
+}
+
+.table.padding-5 td{
+	padding:5px;
+}
+
+.table.printable{
+	border:1px solid gray;
+	min-height:250px;
+	border-radius:5px;
+	padding:10px;
+}
+
+.table.printable thead th
+{
+	border-bottom:1px solid gray;
+}
+
+.table.printable td{
+	border:0;
+}
+
 /* message */
 .jGrowl-notification{
 	width:500px;
@@ -301,4 +385,16 @@
 
 .col-actions{
 	width:7%;
+}
+
+
+p.signature{
+	border-bottom:1px solid black;
+	height:70px;
+	margin-bottom:0;
+}
+
+
+#input_discount{
+	visibility:hidden;
 }

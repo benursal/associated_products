@@ -39,7 +39,10 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 /* End of file constants.php */
 
-define('RECORDS_PER_PAGE', 10);
+define('VAT_RATE', 12);
+
+
+define('RECORDS_PER_PAGE', 6);
 //Site Path
 define('SITE_PATH', '/associated_products/');
 define('REAL_PATH', $_SERVER['DOCUMENT_ROOT'].SITE_PATH);

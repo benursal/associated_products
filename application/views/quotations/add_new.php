@@ -11,9 +11,20 @@
 				<div class="col-md-12">
 					<h1 class="text-large"><?php echo $page_title; ?></h1>
 				</div>
+				
 			</div>
-			<div class="x_content margin-top-20">
-				<form class="form-horizontal form-label-left input_mask margin-top-20" id="formNewQuotation" method="post">
+			<hr />
+			<form class="form-horizontal form-label-left input_mask margin-top-20" id="formNewQuotation" method="post">
+				<div class="row">
+					<div class="col-md-2">
+						<label class="margin-top-10">Short Description:</label>
+					</div>
+					<div class="col-md-5">
+						<input type="text" name="transaction_description" required="required" class="form-control col-md-8 col-xs-12" placeholder="Enter a short description for this Quotation">
+					</div>
+				</div>
+				<hr />
+				<div class="x_content">
 					<div class="row">
 						<!-- left side -->
 						<div class="col-md-6">
@@ -45,7 +56,7 @@
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
 									<textarea type="text" name="customerAddress" id="customerAddress" required="required" 
-									class="form-control input-sm col-md-7 col-xs-12" rows="3"></textarea>
+									class="form-control input-sm col-md-7 col-xs-12" rows="3" readonly></textarea>
 								</div>
 							</div>
 							
@@ -210,12 +221,52 @@
 					<div id="results"></div>
 					
 					<div class="row margin-top-20">
-						<div class="col-lg-11 text-right">
-							<p class="text-18">Price is 12% VAT Included: <strong class="text-20">P <span id="grandTotal">0.00</span></strong></p>
+						<div class="col-md-5">
+							<div class="row">
+								<div class="col-md-12">
+									<strong>VAT & Discount : </strong>
+									<div class="margin-top-10">
+										<div class="form-group">
+											<div class="checkbox col-md-4">
+												<label>
+													<input type="checkbox" name="cb_add_vat" value="<?php echo VAT_RATE;?>"> Add VAT
+												</label>
+											</div> 
+										</div>
+										<div class="form-group">
+											<div class="checkbox col-md-4">
+												<label>
+													<input type="checkbox" name="cb_add_discount" value="40"> Add Discount 
+												</label>
+											</div>
+											<div class="col-md-5">
+												<div class="input-group" id="input_discount"> 
+													<input type="number" class="form-control input-sm" placeholder="Enter Rate" aria-describedby="basic-addon2" max="100" name="discount_rate" required /> 
+													<span class="input-group-addon" id="basic-addon2">%</span> 
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 text-right">
+							<p class="text-18">Price is 12% VAT </p>
+						</div>
+						<div class="col-md-3 text-right">
+							<select class="form-control input-sm" name="vat_inclusion" style="display:inline-block">
+								<option value="inclusive">Inclusive</option>
+								<option value="exclusive">Exclusive</option>
+							</select> 
+						</div>
+						<div class="col-md-2">
+							<strong class="text-20">P <span id="grandTotal">0.00</span></strong>
 							<input type="hidden" name="grandTotal" value="" />
 						</div>
 					</div>
-					<div class="row margin-top-20">
+					
+					<div class="row margin-top-40">
 						<div class="col-lg-6 col-lg-offset-3">
 							<div class="row">
 								<div class="col-sm-6">
@@ -227,9 +278,8 @@
 							</div>
 						</div>
 					</div>
-					
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

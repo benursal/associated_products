@@ -20,7 +20,7 @@ if ( ! function_exists('datetime_db_to_app'))
 
 if ( ! function_exists('date_db_to_app'))
 {
-    function date_db_to_app($date_time, $format = "F d, Y")
+    function date_db_to_app($date_time, $format = "M d, Y")
 	{
 		$CI =& get_instance();
 		

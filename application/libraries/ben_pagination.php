@@ -61,7 +61,12 @@ class Ben_Pagination{
 				if($x == $this->current_page)
 					$this->str_links .= '<li class="active"><a href="#">'. ($x) .'</a></li>';
 				else
-					$this->str_links .= '<li><a href="'.$this->link_address.$x.'">'. ($x).'</a></li>';
+				{
+					if( $x > 0 )
+					{
+						$this->str_links .= '<li><a href="'.$this->link_address.$x.'">'. ($x).'</a></li>';
+					}
+				}
 			}
 			
 			if($this->current_page < $num_total_links ){

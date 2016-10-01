@@ -87,6 +87,9 @@ $(document).ready(function(){
 				);
 				
 				reset_form('#formNewQuotation');
+				// set VAT Inclusion to default value (Inclusive)
+				$('select[name="vat_inclusion"]').val('inclusive');
+				
 				// focus
 				$('select[name="customer"]').focus();
 				
@@ -113,6 +116,22 @@ $(document).ready(function(){
 			
 			
 		});
+	});
+	
+	// discount checkbox
+	$('input[name="cb_add_discount"]').click(function(){
+		
+		if( $(this).prop('checked') ) // if checked
+		{
+			$('#input_discount').css('visibility', 'visible'); // 
+			$('input[name="discount_rate"]').removeAttr('disabled');
+			$('input[name="discount_rate"]').focus();
+		}
+		else
+		{
+			$('#input_discount').css('visibility', 'hidden');
+			$('input[name="discount_rate"]').attr('disabled','');
+		}
 	});
 	
 });

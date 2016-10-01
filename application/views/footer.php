@@ -42,7 +42,7 @@
 	<?php 
 	// Load additional external javascripts
 	
-	if( is_array( $js_assets ) && count( $js_assets ) > 0 )
+	if( isset( $js_assets ) && is_array( $js_assets ) && count( $js_assets ) > 0 )
 	{
 		foreach( $js_assets as $js )
 		{

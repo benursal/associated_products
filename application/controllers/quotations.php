@@ -15,21 +15,48 @@ class Quotations extends User_Controller
 	// search
 	function search()
 	{
-		$data['page_title'] = 'List of Suppliers';
+		// current page
+		$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+		$keyword = (isset($_GET['keyword'])) ? $_GET['keyword'] : '';
 		
-		// get details
-		$q = new Supplier();
-		$q->where('status', 1);
-		$q->get();
+		// load pagination library
+		$this->load->library('ben_pagination');
+	
+		$data['page_title'] = 'List of Quotations';
 		
-		$data['rows'] = $q;
+		// query
+		$sql_string = 	"SELECT quotation.*, customer.id AS customer_id, customer.custName AS customer_custName 
+						FROM (quotation) 
+						LEFT JOIN customer ON quotation.custID = customer.custID 
+						WHERE quotation.transNum LIKE '%$keyword%' OR quotation.transDescript LIKE '%$keyword%' 
+						OR customer.custName LIKE '%$keyword%' 
+						ORDER BY quotation.id DESC";
+						
+		$query = $this->db->query($sql_string);
+		
+		
+		// set pagination
+		$this->ben_pagination->total_records = $query->num_rows();
+		$this->ben_pagination->records_per_page = RECORDS_PER_PAGE;
+		$this->ben_pagination->current_page = $page;
+		$this->ben_pagination->link_address = site_url() . 'quotations/search?keyword='.$keyword.'&page=';
+		$this->ben_pagination->links_to_display = 10;
+		
+		// get the actual string with LIMIT
+		$sql_string .= " LIMIT " . RECORDS_PER_PAGE . " OFFSET " . ($page - 1) * RECORDS_PER_PAGE;
+		$query2 = $this->db->query($sql_string);
+		
+		$data['rows'] = $query2->result();
+		$data['pagination'] = $this->ben_pagination->get_page_links();
 		
 		// external js
 		$data['js_assets'] = array(
-			site_url('assets/suppliers.js')
+			site_url('assets/quotations.js')
 		);
 		
 		$this->output('quotations/quotation_list', $data);
+		
+		//$this->show_profiler();
 	}
 	
 	
@@ -71,6 +98,54 @@ class Quotations extends User_Controller
 		$this->output('quotations/add_new', $data);
 	}
 	
+	function print_view( $id )
+	{
+		$sql_string = 	"SELECT quotation.*, 
+						validity.valName AS validity_name, 
+						customer.custName AS customer_name,
+						customer.address AS customer_address,
+						terms.termName as term_name, 
+						delivery.delName as delivery_name 
+						FROM (quotation) 
+						LEFT JOIN customer ON quotation.custID = customer.custID 
+						LEFT JOIN terms ON quotation.terms = terms.termNum 
+						LEFT JOIN validity ON quotation.validity = validity.valNum 
+						LEFT JOIN delivery ON quotation.delivery = delivery.delNum 
+						WHERE quotation.id = '$id'";
+						
+		$query = $this->db->query($sql_string);
+		
+		if( $query->num_rows() > 0 )
+		{
+			
+			$result = $query->row();
+			
+			$data['page_title'] = 'Printable View of Quotation [' . $result->transNum . ']';
+			$data['row'] = $result;
+			
+			// get orderline
+			$o = new Orderline();
+			$o->where('type', 'quotation');
+			$o->where('transNum', $result->id);
+			$o->get();
+			
+			$data['orderline'] = $o;
+			
+			// set header and footer files
+			$this->header_file = 'print_header';
+			$this->footer_file = 'print_footer';
+			
+			$this->output('quotations/print_view', $data);
+		}
+		else
+		{
+			echo '<h3 class="text-center">This Quotation does not exist</h3>';
+		}
+		
+		
+		//$this->show_profiler();
+	}
+	
 	function save()
 	{
 		if( $this->is_ajax() )
@@ -85,7 +160,7 @@ class Quotations extends User_Controller
 			$q->validity = $this->input->post('validity');
 			$q->terms = $this->input->post('terms');
 			$q->attention = $this->input->post('attention');
-			$q->transDescript = 'a description';
+			$q->transDescript = $this->input->post('transaction_description');
 			$q->totalAmount = $this->input->post('grandTotal');
 			$q->prepared = 'Ben Ursal';
 			
@@ -108,16 +183,18 @@ class Quotations extends User_Controller
 		
 			//$this->show_pre( $_POST );
 			$counter = 0;
+			$item_number = 1;
+			
 			foreach( $this->input->post('line-total') as $row )
 			{
-				if( $row != '' && $row > 0 )
+				if( $row != '' && (double)$row > 0 )
 				{
 					// save orderline				
 					$o = new Orderline();
 					
 					$o->transNum = $q->id;
 					$o->type = 'quotation';
-					$o->itemNo = $counter + 1;
+					$o->itemNo = $item_number;
 					$o->qty = $_POST['qty'][$counter];
 					$o->unit = $_POST['unit'][$counter];
 					$o->descript = $_POST['description'][$counter];
@@ -126,19 +203,29 @@ class Quotations extends User_Controller
 					
 					$save = $o->save();
 					
-					//if( $save && $o->id )
 					
-					$counter++;
+					// increment item number only on fields that have value	
+					$item_number++;
 				}
+				
+				$counter++;
 			}
+			
+			// save vat inclusion
+			$d = new Discount();
+			$d->transNum = $q->transNum;
+			$d->inclusion = $this->input->post('vat_inclusion');
+			$d->vat = 0;
+			$d->rate = 0;
+			$d->save();
 			
 			echo 1;
 		}
 	}
 	
-	function save_orderline( $trans_id )
+	function baho()
 	{
-		
+		$this->show_pre( $_POST );
 	}
 	
 	// edit
@@ -162,29 +249,6 @@ class Quotations extends User_Controller
 		$data['row'] = $s;
 		
 		$this->output('suppliers/edit_supplier', $data);
-	}
-	
-	function update_supplier()
-	{
-		if( $this->is_ajax() )
-		{
-			$s = new Supplier();
-			$s->where('id', $this->input->post('id'));
-			$s->get();
-			
-			$s->sID = $this->input->post('sID');
-			$s->name = $this->input->post('name');
-			$s->address = $this->input->post('address');
-			
-			if( $s->save() )
-			{
-				echo $s->id;
-			}
-			else
-			{
-				echo 'ERROR';
-			}
-		}
 	}
 	
 	function igit()
