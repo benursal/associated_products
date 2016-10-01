@@ -89,6 +89,8 @@ $(document).ready(function(){
 				reset_form('#formNewQuotation');
 				// set VAT Inclusion to default value (Inclusive)
 				$('select[name="vat_inclusion"]').val('inclusive');
+				// uncheck the checkboxes
+				$('input[type="checkbox"]').removeAttr('checked');
 				
 				// focus
 				$('select[name="customer"]').focus();

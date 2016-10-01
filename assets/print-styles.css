@@ -1,6 +1,6 @@
 @media print {
 body, p, td, h3, .text-bold{
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Open Sans', sans-serif !important;
 }
 
 .hidden-in-print{

@@ -68,15 +68,23 @@
 				</thead>
 				<tbody>
 				<?php if( $orderline->exists() ) : ?>
-				<?php $min_rows = 7; ?>
+				<?php 
+					$min_rows = 7; 
+					$gross_total = 0; // gross total amount
+					
+				?>
 				<?php foreach( $orderline as $o ) : ?>
+				<?php
+					$line_total = $o->qty * $o->unitPrice;
+					$gross_total += $line_total;
+				?>
 					<tr>
 						<td class="text-center"><?php echo $o->itemNo; ?></td>
 						<td class="text-center"><?php echo $o->qty; ?></td>
 						<td class="text-center"><?php echo $o->unit; ?></td>
 						<td class=""><?php echo $o->descript; ?></td>
 						<td class="text-right">P <?php echo $o->unitPrice; ?></td>
-						<td class="text-right text-bold">P <?php echo number_format(($o->qty * $o->unitPrice), 2); ?></td>
+						<td class="text-right text-bold">P <?php echo number_format( $line_total, 2); ?></td>
 					</tr>
 				<?php $min_rows--; ?>
 				<?php endforeach; ?>
@@ -88,6 +96,32 @@
 				<?php endfor; ?>
 				</tbody>
 			</table>
+			
+			<div class="row">
+				<div class="col-lg-6 col-lg-offset-6 text-right">
+					<div class="row">
+						<div class="col-lg-4 col-lg-offset-4 text-12">Gross Price</div>
+						<div class="col-lg-4 text-12 text-right">P <?php echo number_format( $gross_total, 2 ); ?></div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 col-lg-offset-4 text-12"><?php echo $row->vat; ?>% VAT</div>
+						<div class="col-lg-4 text-12 text-right">11,799.74</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 col-lg-offset-4 text-12">&nbsp;</div>
+						<div class="col-lg-4 text-12 text-right">110,130.94</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 col-lg-offset-4 text-12">less <?php echo $row->rate; ?>% disc</div>
+						<div class="col-lg-4 text-12 text-right">48,457.62</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 text-12 text-right text-bold">
+							Net Price (12% VAT <?php echo ucwords($row->inclusion); ?>)  <u class="margin-left-20">PHP 61,673.33</u>
+						</div>
+					</div>
+				</div>
+			</div>
 			
 			<div class="row margin-top-10">
 				<div class="col-lg-1 text-12 text-bold">Delivery:</div>

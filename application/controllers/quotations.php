@@ -105,12 +105,14 @@ class Quotations extends User_Controller
 						customer.custName AS customer_name,
 						customer.address AS customer_address,
 						terms.termName as term_name, 
-						delivery.delName as delivery_name 
+						delivery.delName as delivery_name, 
+						discounts.* 
 						FROM (quotation) 
 						LEFT JOIN customer ON quotation.custID = customer.custID 
 						LEFT JOIN terms ON quotation.terms = terms.termNum 
 						LEFT JOIN validity ON quotation.validity = validity.valNum 
 						LEFT JOIN delivery ON quotation.delivery = delivery.delNum 
+						LEFT JOIN discounts ON quotation.transNum = discounts.transNum 
 						WHERE quotation.id = '$id'";
 						
 		$query = $this->db->query($sql_string);
@@ -215,8 +217,8 @@ class Quotations extends User_Controller
 			$d = new Discount();
 			$d->transNum = $q->transNum;
 			$d->inclusion = $this->input->post('vat_inclusion');
-			$d->vat = 0;
-			$d->rate = 0;
+			$d->vat = $this->input->post('cb_add_vat');
+			$d->rate = $this->input->post('discount_rate');
 			$d->save();
 			
 			echo 1;
