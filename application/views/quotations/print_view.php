@@ -8,20 +8,20 @@
 					<table class="table border-top-0 text-12 padding-5">
 						<tbody>
 							<tr>
-								<td class="col-md-3 text-bold">Customer :</td>
-								<td class="col-md-10"><?php echo ucwords($row->customer_name); ?></td>
+								<td class="col-lg-3 text-bold">Customer :</td>
+								<td class="col-lg-10"><?php echo ucwords($row->customer_name); ?></td>
 							</tr>
 							<tr>
-								<td class="col-md-2 text-bold">Address :</td>
-								<td class="col-md-10"><?php echo ucwords($row->customer_address); ?></td>
+								<td class="col-lg-2 text-bold">Address :</td>
+								<td class="col-lg-10"><?php echo ucwords($row->customer_address); ?></td>
 							</tr>
 							<tr>
-								<td class="col-md-2 text-bold">Attention :</td>
-								<td class="col-md-10"><?php echo ucwords($row->attention); ?></td>
+								<td class="col-lg-2 text-bold">Attention :</td>
+								<td class="col-lg-10"><?php echo ucwords($row->attention); ?></td>
 							</tr>
 							<tr>
-								<td class="col-md-2 text-bold">Subject :</td>
-								<td class="col-md-10"><?php echo $row->subject; ?></td>
+								<td class="col-lg-2 text-bold">Subject :</td>
+								<td class="col-lg-10"><?php echo $row->subject; ?></td>
 							</tr>
 						</tbody>
 					</table>
@@ -67,12 +67,11 @@
 					</tr>
 				</thead>
 				<tbody>
-				<?php if( $orderline->exists() ) : ?>
 				<?php 
 					$min_rows = 7; 
 					$grand_total = 0; // gross total amount
-					
 				?>
+				<?php if( $orderline->exists() ) : ?>
 				<?php foreach( $orderline as $o ) : ?>
 				<?php
 					$line_total = $o->qty * $o->unitPrice;

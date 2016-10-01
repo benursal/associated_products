@@ -1,7 +1,6 @@
 <div class="container">
 	<div class="row margin-top-20">
 		<div class="col-md-8 col-md-offset-2">
-			<img src="<?php echo site_url('assets/images/letterhead.gif'); ?>" />
 			
 			<h4 class="text-center text-bold text-16 margin-top-20"><u>Purchase Order</u></h4>
 			

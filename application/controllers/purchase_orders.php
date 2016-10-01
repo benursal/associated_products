@@ -110,20 +110,16 @@ class Purchase_Orders extends User_Controller
 	
 	function print_view( $id )
 	{
-		$sql_string = 	"SELECT quotation.*, 
-						validity.valName AS validity_name, 
-						customer.custName AS customer_name,
-						customer.address AS customer_address,
+		$sql_string = 	"SELECT po.*, 
+						supplier.name AS supplier_name,
+						supplier.address AS supplier_address,
 						terms.termName as term_name, 
-						delivery.delName as delivery_name, 
-						discounts.* 
-						FROM (quotation) 
-						LEFT JOIN customer ON quotation.custID = customer.custID 
-						LEFT JOIN terms ON quotation.terms = terms.termNum 
-						LEFT JOIN validity ON quotation.validity = validity.valNum 
-						LEFT JOIN delivery ON quotation.delivery = delivery.delNum 
-						LEFT JOIN discounts ON quotation.transNum = discounts.transNum 
-						WHERE quotation.id = '$id'";
+						delivery.delName as delivery_name 
+						FROM (po) 
+						LEFT JOIN supplier ON po.supplierID = supplier.sID 
+						LEFT JOIN terms ON po.terms = terms.termNum 
+						LEFT JOIN delivery ON po.delivery = delivery.delNum 
+						WHERE po.id = '$id'";
 						
 		$query = $this->db->query($sql_string);
 		
@@ -132,12 +128,12 @@ class Purchase_Orders extends User_Controller
 			
 			$result = $query->row();
 			
-			$data['page_title'] = 'Printable View of Quotation [' . $result->transNum . ']';
+			$data['page_title'] = 'Printable View of PO [' . $result->transNum . ']';
 			$data['row'] = $result;
 			
 			// get orderline
 			$o = new Orderline();
-			$o->where('type', 'quotation');
+			$o->where('type', 'po');
 			$o->where('transNum', $result->id);
 			$o->get();
 			
@@ -147,7 +143,7 @@ class Purchase_Orders extends User_Controller
 			$this->header_file = 'print_header';
 			$this->footer_file = 'print_footer';
 			
-			$this->output('quotations/print_view', $data);
+			$this->output('purchase_orders/print_view', $data);
 		}
 		else
 		{
@@ -360,7 +356,7 @@ class Purchase_Orders extends User_Controller
 	function foreign_key()
 	{
 		$o = new Orderline();
-		$o->where('type', 'quotation');
+		$o->where('type', 'po');
 		$o->where('transNum IS NULL');
 		$o->get();
 		
@@ -368,7 +364,7 @@ class Purchase_Orders extends User_Controller
 		{
 			//echo $row->num . '<br />';
 			
-			$q = new Quotation();
+			$q = new Purchase_Order();
 			$q->where('transNum', $row->num);
 			$q->get();
 			
