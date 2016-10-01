@@ -28,7 +28,7 @@
 									
 				</div>
 				<div class="col-lg-6">
-					<table class="table border-top-0 text-12">
+					<table class="table border-top-0 text-12" style="margin-left:60px;">
 						<tbody>
 							<tr>
 								<td class="text-right text-bold">Date :</td>

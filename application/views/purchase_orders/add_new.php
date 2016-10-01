@@ -267,5 +267,6 @@
 </div>
 
 <script>
+var transaction_id = 0;
 var suppliers = <?php echo $suppliers->all_to_json(array('sID', 'address'), TRUE); ?>;
 </script>

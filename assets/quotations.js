@@ -63,22 +63,34 @@ $(document).ready(function(){
 	
 	$('#btnSaveQuotation').click(function(){
 		validate_rows();
+		//alert( transaction_id )
 	});
 	
 	// submit add new quotation form
 	$('#formNewQuotation').submit(function(){
-		
+
 		show_loader();
 		
+		if( transaction_id == 0 ) // this happens if the operation is ADD NEW
+		{
+			var post_url = 'quotations/save';
+			var success_message = '<strong>Quotation successfully created!</strong>';
+		}
+		else // this happens if the operation is EDIT
+		{
+			var post_url = 'quotations/update/' + transaction_id;
+			var success_message = '<strong>Quotation successfully updated!</strong>';
+		}
+		
 		$(this).serialize();
-		$.post( base_url + 'quotations/save', $( this ).serialize(), function( data ) {
+		$.post( base_url + post_url, $( this ).serialize(), function( data ) {
 			
 			hide_loader();
 			
 			if( data != 'ERROR' )
 			{
 				$.jGrowl(
-					'<strong>Quotation successfully created!', 
+					success_message, 
 					{ 
 						life: 5000,
 						position: 'center', 
@@ -86,20 +98,25 @@ $(document).ready(function(){
 					}
 				);
 				
-				reset_form('#formNewQuotation');
-				// set VAT Inclusion to default value (Inclusive)
-				$('select[name="vat_inclusion"]').val('inclusive');
-				// uncheck the checkboxes
-				$('input[type="checkbox"]').removeAttr('checked');
-				
-				// focus
-				$('select[name="customer"]').focus();
-				
-				// new quotation number
-				$('input[name="quotationNumber"]').val( data );
-				$('input[name="date"]').val( current_date );
+				if( transaction_id == 0 ) // this happens if the operation is ADD NEW
+				{
+					reset_form('#formNewQuotation');
+					// set VAT Inclusion to default value (Inclusive)
+					$('select[name="vat_inclusion"]').val('inclusive');
+					// uncheck the checkboxes
+					$('input[type="checkbox"]').removeAttr('checked');
+					
+					// focus
+					$('select[name="customer"]').focus();
+					
+					// new quotation number
+					$('input[name="quotationNumber"]').val( data );
+					$('input[name="date"]').val( current_date );
+				}
 				
 			}
+			
+			//$('#results').html(data);
 		});
 		
 		

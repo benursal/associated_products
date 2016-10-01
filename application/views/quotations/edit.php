@@ -20,7 +20,7 @@
 						<label class="margin-top-10">Short Description:</label>
 					</div>
 					<div class="col-md-5">
-						<input type="text" name="transaction_description" required="required" class="form-control col-md-8 col-xs-12" placeholder="Enter a short description for this Quotation">
+						<input type="text" name="transaction_description" required="required" class="form-control col-md-8 col-xs-12" placeholder="Enter a short description for this Quotation" value="<?php echo $row->transDescript; ?>">
 					</div>
 				</div>
 				<hr />
@@ -38,7 +38,10 @@
 										<option value="">[Select Customer]</option>
 										<?php if( $customers->exists() ) : ?>
 										<?php foreach( $customers as $c ) : ?>
-										<option value="<?php echo $c->custID;?>"><?php echo ucwords($c->custName);?></option>
+										<?php $selected = ( $c->custID == $row->customer_id ) ? ' selected' : ''; ?>
+										<option value="<?php echo $c->custID;?>"<?php echo $selected;?>>
+											<?php echo ucwords($c->custName);?>
+										</option>
 										<?php endforeach; ?>
 										<?php endif; ?>
 									</select>
@@ -56,7 +59,7 @@
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
 									<textarea type="text" name="customerAddress" id="customerAddress" required="required" 
-									class="form-control input-sm col-md-7 col-xs-12" rows="3" readonly></textarea>
+									class="form-control input-sm col-md-7 col-xs-12" rows="3" readonly><?php echo $row->customer_address; ?></textarea>
 								</div>
 							</div>
 							
@@ -65,7 +68,8 @@
 									Attention
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" name="attention" required="required" class="form-control input-sm col-md-7 col-xs-12">
+									<input type="text" name="attention" required="required" class="form-control input-sm col-md-7 col-xs-12" 
+									value="<?php echo $row->attention; ?>">
 								</div>
 							</div>
 							
@@ -74,7 +78,8 @@
 									Subject
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" name="subject" required="required" class="form-control input-sm col-md-7 col-xs-12">
+									<input type="text" name="subject" required="required" class="form-control input-sm col-md-7 col-xs-12" 
+									value="<?php echo $row->subject; ?>">
 								</div>
 							</div>
 							
@@ -88,7 +93,8 @@
 									Date Created
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" name="date" required="required" class="form-control input-sm col-md-7 col-xs-12" value="<?php echo date('d-M-y');?>" readonly />
+									<input type="text" name="date" required="required" class="form-control input-sm col-md-7 col-xs-12" 
+									value="<?php echo date_db_to_app($row->date, 'd-M-y'); ?>" readonly />
 								</div>
 							</div>
 							<div class="form-group">
@@ -96,7 +102,8 @@
 									Quotation #
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" name="quotationNumber" required="required" class="form-control input-sm col-md-7 col-xs-12" value="<?php echo $quotation_number;?>" readonly />
+									<input type="text" name="quotationNumber" required="required" class="form-control input-sm col-md-7 col-xs-12" 
+									value="<?php echo $row->transNum;?>" readonly />
 								</div>
 							</div>
 							<div class="form-group">
@@ -108,7 +115,8 @@
 										<option value="">[Select Payment Terms]</option>
 										<?php if( $terms->exists() ) : ?>
 										<?php foreach( $terms as $t ) : ?>
-										<option value="<?php echo $t->termNum;?>"><?php echo ucwords($t->termName);?></option>
+										<?php $selected = ( $t->termNum == $row->term_id ) ? ' selected' : ''; ?>
+										<option value="<?php echo $t->termNum;?>"<?php echo $selected;?>><?php echo ucwords($t->termName);?></option>
 										<?php endforeach; ?>
 										<?php endif; ?>
 									</select>
@@ -129,7 +137,8 @@
 										<option value="">[Select Delivery Terms]</option>
 										<?php if( $deliveries->exists() ) : ?>
 										<?php foreach( $deliveries as $d ) : ?>
-										<option value="<?php echo $d->delNum;?>"><?php echo ucwords($d->delName);?></option>
+										<?php $selected = ( $d->delNum == $row->delivery_id ) ? ' selected' : ''; ?>
+										<option value="<?php echo $d->delNum;?>"<?php echo $selected;?>><?php echo ucwords($d->delName);?></option>
 										<?php endforeach; ?>
 										<?php endif; ?>
 									</select>
@@ -150,7 +159,8 @@
 										<option value="">[Select Validity]</option>
 										<?php if( $validities->exists() ) : ?>
 										<?php foreach( $validities as $v ) : ?>
-										<option value="<?php echo $v->valNum;?>"><?php echo ucwords($v->valName);?></option>
+										<?php $selected = ( $v->valNum == $row->validity_id ) ? ' selected' : ''; ?>
+										<option value="<?php echo $v->valNum;?>"<?php echo $selected; ?>><?php echo ucwords($v->valName);?></option>
 										<?php endforeach; ?>
 										<?php endif; ?>
 									</select>
@@ -190,17 +200,37 @@
 						<div class="col-lg-12 sub-form">
 							<table class="table table-bordered table-striped table-hover">
 								<tbody>
-									<?php for( $x = 1; $x <= 4; $x++ ) : ?>
+									<?php $grand_total = 0; ?>
+									<?php $counter = 1; ?>
+									<?php if( $orderline->exists() ) : ?>
+									<?php foreach( $orderline as $o ) : ?>
 									<tr>
-										<td class="text-center col-item-no padding-top-10"><?php echo $x; ?></td>
-										<td class="text-center col-qty"><input type="number" class="form-control qty" name="qty[]" min="1" /></td>
-										<td class="text-center col-unit"><input type="text" class="form-control unit" name="unit[]" /></td>
-										<td class="col-description"><textarea class="form-control description" name="description[]" rows="2"></textarea></td>
-										<td class="col-s-price"><input type="text" class="form-control s-price" name="s-price[]" /></td>
-										<td class="col-unit-price"><input type="text" class="form-control price" name="price[]" /></td>
+										<td class="text-center col-item-no padding-top-10">
+											<?php echo $counter; ?>
+										</td>
+										<td class="text-center col-qty">
+											<input type="number" class="form-control qty" name="qty[]" min="1" value="<?php echo $o->qty; ?>" />
+											<input type="hidden" name="ol-id[]" value="<?php echo $o->id;?>" />
+										</td>
+										<td class="text-center col-unit">
+											<input type="text" class="form-control unit" name="unit[]" value="<?php echo $o->unit; ?>" />
+										</td>
+										<td class="col-description">
+											<textarea class="form-control description" name="description[]" rows="2"><?php echo $o->descript; ?></textarea>
+										</td>
+										<td class="col-s-price">
+											<input type="text" class="form-control s-price" name="s-price[]" value="<?php echo $o->sPrice; ?>" />
+										</td>
+										<td class="col-unit-price">
+											<input type="text" class="form-control price" name="price[]" value="<?php echo $o->unitPrice; ?>" />
+										</td>
 										<td class="text-center col-amount padding-top-10">
-											<strong>P <span class="amount">0.00</span></strong>
-											<input type="hidden" class="line-total" name="line-total[]" value="" />
+											<?php 
+												$line_total = $o->qty * $o->unitPrice; 
+												$grand_total += $line_total;
+											?>
+											<strong>P <span class="amount"><?php echo number_format( $line_total, 2); ?></span></strong>
+											<input type="hidden" class="line-total" name="line-total[]" value="<?php echo $line_total; ?>" />
 										</td>
 										<td class="text-center col-actions td-actions">
 											<a href="javascript:void(0)" class="button-add add-row">
@@ -211,7 +241,9 @@
 											</a>
 										</td>
 									</tr>
-									<?php endfor; ?>
+									<?php $counter++; ?>
+									<?php endforeach; ?>
+									<?php endif; ?>
 								</tbody>
 								
 							</table>
@@ -229,19 +261,31 @@
 										<div class="form-group">
 											<div class="checkbox col-md-4">
 												<label>
-													<input type="checkbox" name="cb_add_vat" value="<?php echo VAT_RATE;?>"> Add VAT
+												<?php $checked = ( $row->vat > 0 ) ? ' checked' : ''; ?>
+													<input type="checkbox" name="cb_add_vat" value="<?php echo VAT_RATE;?>"<?=$checked;?>> Add VAT
 												</label>
 											</div> 
 										</div>
+										<?php
+											if( $row->rate > 0 ) // if there is a discount rate
+											{
+												$checked = 'checked';
+												$input_style = 'style="visibility:visible"';
+											}
+											else
+											{
+												$checked = '';
+											}
+										?>
 										<div class="form-group">
 											<div class="checkbox col-md-4">
 												<label>
-													<input type="checkbox" name="cb_add_discount" value="40"> Add Discount 
+													<input type="checkbox" name="cb_add_discount" value="40"<?=$checked;?>> Add Discount 
 												</label>
 											</div>
 											<div class="col-md-5">
-												<div class="input-group" id="input_discount"> 
-													<input type="number" class="form-control input-sm" placeholder="Enter Rate" aria-describedby="basic-addon2" max="100" name="discount_rate" /> 
+												<div class="input-group" id="input_discount"<?=@$input_style;?>> 
+													<input type="number" class="form-control input-sm" placeholder="Enter Rate" aria-describedby="basic-addon2" max="100" name="discount_rate" value="<?=$row->rate;?>" /> 
 													<span class="input-group-addon" id="basic-addon2">%</span> 
 												</div>
 											</div>
@@ -256,12 +300,13 @@
 						</div>
 						<div class="col-md-3 text-right">
 							<select class="form-control input-sm" name="vat_inclusion" style="display:inline-block">
-								<option value="inclusive">Inclusive</option>
-								<option value="exclusive">Exclusive</option>
+								<option value="inclusive" selected>Inclusive</option>
+								<?php $selected = ( $row->inclusion == 'exclusive' ) ? ' selected' : ''; ?>
+								<option value="exclusive"<?=$selected; ?>>Exclusive</option>
 							</select> 
 						</div>
 						<div class="col-md-2">
-							<strong class="text-20">P <span id="grandTotal">0.00</span></strong>
+							<strong class="text-20">P <span id="grandTotal"><?php echo number_format( $grand_total, 2 ); ?></span></strong>
 							<input type="hidden" name="grandTotal" value="" />
 						</div>
 					</div>
@@ -270,7 +315,7 @@
 						<div class="col-lg-6 col-lg-offset-3">
 							<div class="row">
 								<div class="col-sm-6">
-									<a href="<?php echo site_url('quotations'); ?>" class="btn btn-default btn-block">Cancel</a>
+									<a href="<?php echo site_url('quotations'); ?>" class="btn btn-default btn-block">Discard Changes</a>
 								</div>
 								<div class="col-sm-6">
 									<button type="submit" id="btnSaveQuotation" class="btn btn-success btn-block">Save Quotation</button>
@@ -283,7 +328,8 @@
 		</div>
 	</div>
 </div>
+
 <script>
-var transaction_id = 0;
+var transaction_id = <?php echo $row->quotation_id;?>;
 var customers = <?php echo $customers->all_to_json(array('custID', 'address'), TRUE); ?>;
 </script>

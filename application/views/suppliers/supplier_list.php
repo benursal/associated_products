@@ -25,8 +25,8 @@
 							<tbody>
 								<?php foreach( $rows as $row ) : ?>
 								<tr id="row<?php echo $row->sID;?>">
-									<td><a href="<?php echo site_url('suppliers/edit/' . $row->id);?>"><?php echo $row->sID; ?></a></td>
-									<td><a href="<?php echo site_url('suppliers/edit/' . $row->id);?>"><?php echo $row->name; ?></a></td>
+									<td><a href="<?php echo site_url('suppliers/edit/' . $row->id);?>" class="text-link"><?php echo $row->sID; ?></a></td>
+									<td><a href="<?php echo site_url('suppliers/edit/' . $row->id);?>" class="text-link"><?php echo $row->name; ?></a></td>
 									<td class="text-center">
 										<a href="<?php echo site_url('suppliers/edit/' . $row->id);?>" class="btn btn-info btn-sm">
 											<i class="fa fa-pencil-square-o"></i> Edit

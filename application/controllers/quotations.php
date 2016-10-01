@@ -226,6 +226,117 @@ class Quotations extends User_Controller
 		}
 	}
 	
+	function test_delete()
+	{
+		$arr = array('8835', '8837');
+		$o = new Orderline();
+		$o->where('type', 'quotation');
+		$o->where('transNum', '10638');
+		$o->where_not_in('id', $arr);
+		$o->get();
+		
+		$o->delete_all();
+		
+		$this->show_profiler();
+	}
+	
+	function update( $trans_id = '' )
+	{
+		if( $this->is_ajax() && $trans_id != '' )
+		{
+			$q = new Quotation();
+			$q->where('id', $trans_id);
+			$q->get();
+		
+			$q->custID = $this->input->post('customer');
+			$q->subject = $this->input->post('subject');
+			$q->delivery = $this->input->post('delivery');
+			$q->validity = $this->input->post('validity');
+			$q->terms = $this->input->post('terms');
+			$q->attention = $this->input->post('attention');
+			$q->transDescript = $this->input->post('transaction_description');
+			$q->totalAmount = $this->input->post('grandTotal');
+			//$q->prepared = 'Ben Ursal';
+			
+			$q->save();
+			
+			
+			$counter = 0;
+			$item_number = 1;
+			
+			$retaind_ids = array();// this array contains orderlin IDs that will be retained
+			
+			foreach( $this->input->post('line-total') as $row )
+			{
+				if( $row != '' && (double)$row > 0 )
+				{
+					// get orderline				
+					$o = new Orderline();
+					
+					if( isset($_POST['ol-id'][$counter]) ) // if there is an orderline ID (this means it's an existing record)
+					{
+						$o->where('id', $_POST['ol-id'][$counter]);
+						$o->get();
+						
+						// add to retained rows
+						//$retaind_ids[] = $_POST['ol-id'][$counter];
+					}
+					
+					// edit
+					$o->type = 'quotation';
+					$o->itemNo = $item_number;
+					$o->transNum = $q->id;
+					$o->qty = $_POST['qty'][$counter];
+					$o->unit = $_POST['unit'][$counter];
+					$o->descript = $_POST['description'][$counter];
+					$o->sPrice = $_POST['s-price'][$counter];
+					$o->unitPrice = $_POST['price'][$counter];
+					
+					// update / add new
+					$o->save();
+					
+					// add to retained rows
+					$retaind_ids[] = $o->id;
+					
+					// increment item number only on fields that have value	
+					$item_number++;
+				}
+				
+				$counter++;
+			}
+			
+			// delete rows that have been removed
+			$o = new Orderline();
+			$o->where('type', 'quotation');
+			$o->where('transNum', $trans_id);
+			$o->where_not_in('id', $retaind_ids);
+			$o->get();
+			
+			$o->delete_all();
+			
+			// get discount
+			$d = new Discount();
+			$d->where('transNum', $q->transNum);
+			$d->get();
+			
+			// edit
+			$d->inclusion = $this->input->post('vat_inclusion');
+			$d->vat = $this->input->post('cb_add_vat');
+			$d->rate = $this->input->post('discount_rate');
+			
+			// update
+			$d->save();
+			
+			echo 1;
+		}
+		else
+		{
+			echo 'ERROR';
+		}
+		
+		#$this->show_profiler();
+	}
+	
 	function baho()
 	{
 		$this->show_pre( $_POST );
@@ -234,24 +345,74 @@ class Quotations extends User_Controller
 	// edit
 	function edit( $id )
 	{
-		// get details
-		$s = new Supplier();		
-		$s->where('id', $id);
-		$s->where('status', 1);
-		$s->get();
+		$sql_string = 	"SELECT quotation.*, quotation.id as quotation_id,
+						validity.valNum AS validity_id, 
+						customer.custID AS customer_id,
+						customer.address AS customer_address,
+						terms.termNum as term_id, 
+						delivery.delNum as delivery_id, 
+						discounts.* 
+						FROM (quotation) 
+						LEFT JOIN customer ON quotation.custID = customer.custID 
+						LEFT JOIN terms ON quotation.terms = terms.termNum 
+						LEFT JOIN validity ON quotation.validity = validity.valNum 
+						LEFT JOIN delivery ON quotation.delivery = delivery.delNum 
+						LEFT JOIN discounts ON quotation.transNum = discounts.transNum 
+						WHERE quotation.id = '$id'";
+						
+		$query = $this->db->query($sql_string);
 		
-		// page title
-		$data['page_title'] = 'Edit Supplier "' . $s->name . '"';
+		if( $query->num_rows() > 0 )
+		{
+			
+			$result = $query->row();
+			
+			$data['page_title'] = 'Edit Quotation [' . $result->transNum . ']';
+			$data['row'] = $result;
+			
+			// get orderline
+			$o = new Orderline();
+			$o->where('type', 'quotation');
+			$o->where('transNum', $result->quotation_id);
+			$o->order_by('itemNo', 'ASC');
+			$o->get();
+			
+			$data['orderline'] = $o;
+			
+			// get list of customers
+			$c = new Customer();
+			$c->get();
+			$data['customers'] = $c;
+			
+			// get list of terms
+			$t = new Term();
+			$t->get();
+			$data['terms'] = $t;
+			
+			// get list of delivery
+			$d = new Delivery();
+			$d->get();
+			$data['deliveries'] = $d;
+			
+			// get list of validity
+			$v = new Validity();
+			//$c->where('status', 1);
+			$v->get();
+			$data['validities'] = $v;
+			
+			// external js
+			$data['js_assets'] = array(
+				site_url('assets/quotations.js')
+			);
+			
+			$this->output('quotations/edit', $data);
+		}
+		else
+		{
+			echo '<h3 class="text-center">This Quotation does not exist</h3>';
+		}
 		
-		// external js
-		$data['js_assets'] = array(
-			site_url('assets/suppliers.js')
-		);
-		
-		// the row
-		$data['row'] = $s;
-		
-		$this->output('suppliers/edit_supplier', $data);
+		#$this->show_profiler();
 	}
 	
 	function igit()
