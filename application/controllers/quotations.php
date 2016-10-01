@@ -221,7 +221,8 @@ class Quotations extends User_Controller
 			$d->rate = $this->input->post('discount_rate');
 			$d->save();
 			
-			echo 1;
+			$new = new Quotation();
+			echo $new->generate_number();
 		}
 	}
 	

@@ -96,7 +96,7 @@
 									PO #
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" name="quotationNumber" required="required" class="form-control input-sm col-md-7 col-xs-12" value="<?php echo $po_number;?>" readonly />
+									<input type="text" name="po_number" required="required" class="form-control input-sm col-md-7 col-xs-12" value="<?php echo $po_number;?>" readonly />
 								</div>
 							</div>
 							<div class="form-group">
@@ -168,7 +168,48 @@
 						<div class="col-lg-12 sub-form">
 							<table class="table table-bordered table-striped table-hover">
 								<tbody>
-									<?php for( $x = 1; $x <= 4; $x++ ) : ?>
+									<?php $loop_start = 1; ?>
+									<?php $grand_total = 0; ?>
+									<?php if( isset( $rows ) ) : ?>
+									<?php $loop_start += $rows->result_count(); ?>
+									<?php foreach( $rows as $row ) : ?>
+									
+									<tr>
+										<td class="text-center col-item-no padding-top-10"><?php echo $row->itemNo; ?></td>
+										<td class="text-center col-qty">
+											<input type="number" class="form-control qty" name="qty[]" min="1" value="<?php echo $row->qty; ?>" />
+										</td>
+										<td class="text-center col-unit">
+											<input type="text" class="form-control unit" name="unit[]" value="<?php echo $row->unit; ?>" />
+										</td>
+										<td class="col-description">
+											<textarea class="form-control description" name="description[]" rows="2"><?php echo $row->descript; ?></textarea>
+										</td>
+										<td class="col-unit-price">
+											<input type="text" class="form-control price" name="price[]" value="<?php echo $row->unitPrice; ?>" />
+										</td>
+										<td class="text-center col-amount padding-top-10">
+											<?php 
+												$line_total = $row->qty * $row->unitPrice; 
+												$grand_total += $line_total;
+											?>
+											<strong>P <span class="amount"><?php echo number_format( $line_total, 2); ?></span></strong>
+											<input type="hidden" class="line-total" name="line-total[]" value="<?php echo $line_total; ?>" />
+										</td>
+										<td class="text-center col-actions td-actions">
+											<a href="javascript:void(0)" class="button-add add-row">
+												<i class="fa fa-plus-circle" aria-hidden="true"></i>
+											</a> 
+											<a href="javascript:void(0)" class="button-remove remove-row">
+												<i class="fa fa-minus-circle" aria-hidden="true"></i>
+											</a>
+										</td>
+									</tr>
+									
+									<?php endforeach; ?>
+									<?php endif; ?>
+									
+									<?php for( $x = $loop_start; $x <= 4; $x++ ) : ?>
 									<tr>
 										<td class="text-center col-item-no padding-top-10"><?php echo $x; ?></td>
 										<td class="text-center col-qty"><input type="number" class="form-control qty" name="qty[]" min="1" /></td>
@@ -202,8 +243,8 @@
 							<p class="text-18">Price is 12% VAT Included: </p>
 						</div>
 						<div class="col-md-2">
-							<strong class="text-20">P <span id="grandTotal">0.00</span></strong>
-							<input type="hidden" name="grandTotal" value="" />
+							<strong class="text-20">P <span id="grandTotal"><?php echo number_format($grand_total,2); ?></span></strong>
+							<input type="hidden" name="grandTotal" value="<?php echo $grand_total; ?>" />
 						</div>
 					</div>
 					
@@ -214,7 +255,7 @@
 									<a href="<?php echo site_url('purchase_orders'); ?>" class="btn btn-default btn-block">Cancel</a>
 								</div>
 								<div class="col-sm-6">
-									<button type="submit" id="btnSaveQuotation" class="btn btn-success btn-block">Save Purchase Order</button>
+									<button type="submit" id="btnSave" class="btn btn-success btn-block">Save Purchase Order</button>
 								</div>
 							</div>
 						</div>

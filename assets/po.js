@@ -16,7 +16,7 @@ $(document).ready(function(){
 		{
 			
 			$.jGrowl(
-				'<strong>You cannot delete this row</strong> because you need at least one row in a quotation.', 
+				'<strong>You cannot delete this row</strong> because you need at least one row in a purchase order.', 
 				{ 
 					life: 5000,
 					position: 'center', 
@@ -61,24 +61,24 @@ $(document).ready(function(){
 		row.next('tr').find('.qty').focus();
 	});
 	
-	$('#btnSaveQuotation').click(function(){
+	$('#btnSave').click(function(){
 		validate_rows();
 	});
 	
-	// submit add new quotation form
+	// submit add new purchase order form
 	$('#formNew').submit(function(){
 		
 		show_loader();
 		
 		$(this).serialize();
-		$.post( base_url + 'quotations/save', $( this ).serialize(), function( data ) {
+		$.post( base_url + 'purchase_orders/save', $( this ).serialize(), function( data ) {
 			
 			hide_loader();
 			
-			if( data == '1' )
+			if( data != 'ERROR' )
 			{
 				$.jGrowl(
-					'<strong>Quotation successfully created!', 
+					'<strong>Purchase Order successfully created!', 
 					{ 
 						life: 5000,
 						position: 'center', 
@@ -86,15 +86,12 @@ $(document).ready(function(){
 					}
 				);
 				
-				reset_form('#formNewQuotation');
-				// set VAT Inclusion to default value (Inclusive)
-				$('select[name="vat_inclusion"]').val('inclusive');
-				// uncheck the checkboxes
-				$('input[type="checkbox"]').removeAttr('checked');
-				
+				reset_form('#formNew');
 				// focus
 				$('select[name="supplier"]').focus();
-				
+				// new po number
+				$('input[name="po_number"]').val( data );
+				$('input[name="date"]').val( current_date ); // e
 			}
 		});
 		

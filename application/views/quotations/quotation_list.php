@@ -79,7 +79,7 @@
 												</li>
 												
 												<li>
-													<a href="<?php echo site_url('quotations/create_po/' . $row->id); ?>">
+													<a href="<?php echo site_url('purchase_orders/add_new/' . $row->id); ?>">
 														<i class="fa fa-list-alt" aria-hidden="true"></i> Create PO
 													</a>
 												</li>

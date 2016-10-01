@@ -53,6 +53,7 @@
 	
 	<script>
 		var base_url = '<?php echo site_url(); ?>';
+		var current_date = '<?php echo date('d-M-y'); ?>';
 	</script>
 	
   </body>

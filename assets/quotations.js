@@ -63,15 +63,10 @@ $(document).ready(function(){
 	
 	$('#btnSaveQuotation').click(function(){
 		validate_rows();
-		
-	});
-	
-	$('#formNewQuotation').submit(function(){
-		return false;
 	});
 	
 	// submit add new quotation form
-	/*$('#formNewQuotation').submit(function(){
+	$('#formNewQuotation').submit(function(){
 		
 		show_loader();
 		
@@ -80,7 +75,7 @@ $(document).ready(function(){
 			
 			hide_loader();
 			
-			if( data == '1' )
+			if( data != 'ERROR' )
 			{
 				$.jGrowl(
 					'<strong>Quotation successfully created!', 
@@ -100,12 +95,16 @@ $(document).ready(function(){
 				// focus
 				$('select[name="customer"]').focus();
 				
+				// new quotation number
+				$('input[name="quotationNumber"]').val( data );
+				$('input[name="date"]').val( current_date );
+				
 			}
 		});
 		
 		
 		return false;
-	});*/
+	});
 	
 	$('select[name="customer"]').change(function(){
 		

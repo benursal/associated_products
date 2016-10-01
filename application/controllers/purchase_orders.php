@@ -61,7 +61,7 @@ class Purchase_Orders extends User_Controller
 	
 	
 	// add new
-	function add_new()
+	function add_new( $quotation_id = '' ) // $quotation_id is used to create PO from Quotation
 	{
 		$data['page_title'] = 'Create New Purchase Order';
 		
@@ -84,6 +84,20 @@ class Purchase_Orders extends User_Controller
 		$d->get();
 		$data['deliveries'] = $d;
 		
+		// check if there is a quotation ID
+		if( $quotation_id != '' )
+		{
+			$r = new Orderline();
+			$r->where('type', 'quotation');
+			$r->where('transNum', $quotation_id);
+			$r->order_by('itemNo', 'ASC');
+			$r->get();
+			
+			if( $r->exists() )
+			{
+				$data['rows'] = $r;
+			}
+		}
 		
 		// external js
 		$data['js_assets'] = array(
@@ -91,6 +105,7 @@ class Purchase_Orders extends User_Controller
 		);
 		
 		$this->output('purchase_orders/add_new', $data);
+		$this->show_profiler();
 	}
 	
 	function print_view( $id )
@@ -147,14 +162,13 @@ class Purchase_Orders extends User_Controller
 	{
 		if( $this->is_ajax() )
 		{
-			$q = new Quotation();
+			$q = new Purchase_Order();
 		
 			$q->year = date('Y');
 			$q->date = date('Y-m-d');
-			$q->custID = $this->input->post('customer');
-			$q->subject = $this->input->post('subject');
+			$q->supplierID = $this->input->post('supplier');
+			$q->refNo = $this->input->post('ref_no');
 			$q->delivery = $this->input->post('delivery');
-			$q->validity = $this->input->post('validity');
 			$q->terms = $this->input->post('terms');
 			$q->attention = $this->input->post('attention');
 			$q->transDescript = $this->input->post('transaction_description');
@@ -165,7 +179,7 @@ class Purchase_Orders extends User_Controller
 			
 			do{
 				// generate latest transaction number
-				$qo = new Quotation();
+				$qo = new Purchase_Order();
 				$q->transNum = $qo->generate_number(); // assign new number to transnum
 				
 				// attempt to save
@@ -190,12 +204,11 @@ class Purchase_Orders extends User_Controller
 					$o = new Orderline();
 					
 					$o->transNum = $q->id;
-					$o->type = 'quotation';
+					$o->type = 'po';
 					$o->itemNo = $item_number;
 					$o->qty = $_POST['qty'][$counter];
 					$o->unit = $_POST['unit'][$counter];
 					$o->descript = $_POST['description'][$counter];
-					$o->sPrice = $_POST['s-price'][$counter];
 					$o->unitPrice = $_POST['price'][$counter];
 					
 					$save = $o->save();
@@ -208,16 +221,12 @@ class Purchase_Orders extends User_Controller
 				$counter++;
 			}
 			
-			// save vat inclusion
-			$d = new Discount();
-			$d->transNum = $q->transNum;
-			$d->inclusion = $this->input->post('vat_inclusion');
-			$d->vat = $this->input->post('cb_add_vat');
-			$d->rate = $this->input->post('discount_rate');
-			$d->save();
 			
-			echo 1;
+			$new = new Purchase_Order();
+			echo $new->generate_number();
 		}
+		
+		//$this->show_profiler();
 	}
 	
 	function baho()
