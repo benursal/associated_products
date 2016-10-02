@@ -2,45 +2,19 @@
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="<?php echo site_url('quotations'); ?>">&laquo; Back to Quotation List</a>
+				<a href="<?php echo site_url('purchase_orders'); ?>">&laquo; Back to Purchase Order List</a>
 			</div>
 		</div>
 		
 		<div class="x_panel margin-top-10 padding-40 padding-top-10">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<h1 class="text-large"><?php echo $page_title; ?></h1>
-				</div>
-				<div class="col-md-5 text-right">
-					<div class="btn-group margin-top-10">
-						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-							<i class="fa fa-cog" aria-hidden="true"></i> Options <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li>
-								<a href="<?php echo site_url('purchase_orders/add_new/' . $row->quotation_id); ?>">
-									<i class="fa fa-list-alt" aria-hidden="true"></i> Create PO
-								</a>
-							</li>
-							<li>
-								<a href="<?php echo site_url('quotations/print_view/' . $row->quotation_id); ?>">
-									<i class="fa fa-print" aria-hidden="true"></i> Printable View
-								</a>
-							</li>
-							<li class="divider"></li>
-
-							<li>
-								<a href="javascript:void(0)" onclick="delete_quotation('<?php echo $row->transNum; ?>', <?=$row->quotation_id;?>, this, 'self');">
-									<i class="fa fa-trash" aria-hidden="true"></i> Delete
-								</a>
-							</li>
-						</ul>
-					</div>
 				</div>
 				
 			</div>
 			<hr />
-			<form class="form-horizontal form-label-left input_mask margin-top-20" id="formNewQuotation" method="post">
+			<form class="form-horizontal form-label-left input_mask margin-top-20" id="formNew" method="post">
 				<div class="row">
 					<div class="col-md-2">
 						<label class="margin-top-10">Short Description:</label>
@@ -56,36 +30,34 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-									Customer
+									Supplier
 								</label>
 								<div class="col-md-7 col-sm-8 col-xs-12">
 									
-									<select name="customer" required="required" class="form-control input-sm col-md-8 col-xs-12">
-										<option value="">[Select Customer]</option>
-										<?php if( $customers->exists() ) : ?>
-										<?php foreach( $customers as $c ) : ?>
-										<?php $selected = ( $c->custID == $row->customer_id ) ? ' selected' : ''; ?>
-										<option value="<?php echo $c->custID;?>"<?php echo $selected;?>>
-											<?php echo ucwords($c->custName);?>
-										</option>
+									<select name="supplier" required="required" class="form-control input-sm col-md-8 col-xs-12">
+										<option value="">[Select Supplier]</option>
+										<?php if( $suppliers->exists() ) : ?>
+										<?php foreach( $suppliers as $c ) : ?>
+										<?php $selected = ($row->supplier_id == $c->sID) ? ' selected' : ''; ?>
+										<option value="<?php echo $c->sID;?>"<?php echo $selected; ?>><?php echo ucwords($c->name);?></option>
 										<?php endforeach; ?>
 										<?php endif; ?>
 									</select>
 									
 								</div>
 								<div class="col-md-1">
-									<a href="javascript:void(0)" class="button-add" data-toggle="tooltip" data-placement="top" title="Add new customer" onclick="modal_add_new_customer()">
+									<a href="javascript:void(0)" class="button-add" data-toggle="tooltip" data-placement="top" title="Add new supplier" onclick="modal_add_new_supplier()">
 										<i class="fa fa-plus-circle" aria-hidden="true"></i>
 									</a>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12">
 									Address
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<textarea type="text" name="customerAddress" id="customerAddress" required="required" 
-									class="form-control input-sm col-md-7 col-xs-12" rows="3" readonly><?php echo $row->customer_address; ?></textarea>
+									<textarea type="text" name="supplierAddress" id="supplierAddress" required="required" 
+									class="form-control input-sm col-md-7 col-xs-12" rows="3" readonly><?php echo $row->supplier_address; ?></textarea>
 								</div>
 							</div>
 							
@@ -101,11 +73,11 @@
 							
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-									Subject
+									Reference No.
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" name="subject" required="required" class="form-control input-sm col-md-7 col-xs-12" 
-									value="<?php echo $row->subject; ?>">
+									<input type="text" name="ref_no" required="required" class="form-control input-sm col-md-7 col-xs-12" 
+									value="<?php echo $row->refNo; ?>">
 								</div>
 							</div>
 							
@@ -176,27 +148,6 @@
 								</div>
 							</div>
 							
-							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-									Validity
-								</label>
-								<div class="col-md-7 col-sm-8 col-xs-12">
-									<select name="validity" required="required" class="form-control input-sm col-md-8 col-xs-12">
-										<option value="">[Select Validity]</option>
-										<?php if( $validities->exists() ) : ?>
-										<?php foreach( $validities as $v ) : ?>
-										<?php $selected = ( $v->valNum == $row->validity_id ) ? ' selected' : ''; ?>
-										<option value="<?php echo $v->valNum;?>"<?php echo $selected; ?>><?php echo ucwords($v->valName);?></option>
-										<?php endforeach; ?>
-										<?php endif; ?>
-									</select>
-								</div>
-								<div class="col-md-1">
-									<a href="javascript:void(0)" class="button-add" data-toggle="tooltip" data-placement="top" title="Add new Validity" onclick="modal_add_new_validity()">
-										<i class="fa fa-plus-circle" aria-hidden="true"></i>
-									</a>
-								</div>
-							</div>
 						</div>
 						
 						<!--<button onclick="removeAtt()">REmove this</button>-->
@@ -213,7 +164,6 @@
 										<th class="text-center col-qty">QTY</th>
 										<th class="text-center col-unit">Unit</th>
 										<th class="col-description">Description</th>
-										<th class="col-s-price">S-Price</th>
 										<th class="col-unit-price">Unit Price</th>
 										<th class="text-center col-amount">Amount</th>
 										<th class="text-center col-actions">Actions</th>
@@ -243,9 +193,6 @@
 										</td>
 										<td class="col-description">
 											<textarea class="form-control description" name="description[]" rows="2"><?php echo $o->descript; ?></textarea>
-										</td>
-										<td class="col-s-price">
-											<input type="text" class="form-control s-price" name="s-price[]" value="<?php echo $o->sPrice; ?>" />
 										</td>
 										<td class="col-unit-price">
 											<input type="text" class="form-control price" name="price[]" value="<?php echo $o->unitPrice; ?>" />
@@ -279,77 +226,27 @@
 					<div id="results"></div>
 					
 					<div class="row margin-top-20">
-						<div class="col-md-5">
-							<div class="row">
-								<div class="col-md-12">
-									<strong>VAT & Discount : </strong>
-									<div class="margin-top-10">
-										<div class="form-group">
-											<div class="checkbox col-md-4">
-												<label>
-												<?php $checked = ( $row->vat > 0 ) ? ' checked' : ''; ?>
-													<input type="checkbox" name="cb_add_vat" value="<?php echo VAT_RATE;?>"<?=$checked;?>> Add VAT
-												</label>
-											</div> 
-										</div>
-										<?php
-											if( $row->rate > 0 ) // if there is a discount rate
-											{
-												$checked = 'checked';
-												$input_style = 'style="visibility:visible"';
-											}
-											else
-											{
-												$checked = '';
-											}
-										?>
-										<div class="form-group">
-											<div class="checkbox col-md-4">
-												<label>
-													<input type="checkbox" name="cb_add_discount" value="40"<?=$checked;?>> Add Discount 
-												</label>
-											</div>
-											<div class="col-md-5">
-												<div class="input-group" id="input_discount"<?=@$input_style;?>> 
-													<input type="number" class="form-control input-sm" placeholder="Enter Rate" aria-describedby="basic-addon2" max="100" name="discount_rate" value="<?=$row->rate;?>" /> 
-													<span class="input-group-addon" id="basic-addon2">%</span> 
-												</div>
-											</div>
-										</div>
-										
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-2 text-right">
-							<p class="text-18">Price is 12% VAT </p>
-						</div>
-						<div class="col-md-3 text-right">
-							<select class="form-control input-sm" name="vat_inclusion" style="display:inline-block">
-								<option value="inclusive" selected>Inclusive</option>
-								<?php $selected = ( $row->inclusion == 'exclusive' ) ? ' selected' : ''; ?>
-								<option value="exclusive"<?=$selected; ?>>Exclusive</option>
-							</select> 
+						<div class="col-md-4 col-md-offset-6 text-right">
+							<p class="text-18">Price is 12% VAT Included: </p>
 						</div>
 						<div class="col-md-2">
-							<strong class="text-20">P <span id="grandTotal"><?php echo number_format( $grand_total, 2 ); ?></span></strong>
-							<input type="hidden" name="grandTotal" value="" />
+							<strong class="text-20">P <span id="grandTotal"><?php echo number_format($grand_total,2); ?></span></strong>
+							<input type="hidden" name="grandTotal" value="<?php echo $grand_total; ?>" />
 						</div>
 					</div>
 					
 					<div class="row margin-top-40">
-						<div class="col-md-6 col-md-offset-3">
+						<div class="col-lg-6 col-lg-offset-3">
 							<div class="row">
 								<div class="col-sm-6">
-									<a href="<?php echo site_url('quotations'); ?>" class="btn btn-default btn-block">Discard Changes</a>
+									<a href="<?php echo site_url('purchase_orders'); ?>" class="btn btn-default btn-block">Discard Changes</a>
 								</div>
 								<div class="col-sm-6">
-									<button type="submit" id="btnSaveQuotation" class="btn btn-success btn-block">Update Quotation</button>
+									<button type="submit" id="btnSave" class="btn btn-success btn-block">Update Purchase Order</button>
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</form>
 		</div>
@@ -357,6 +254,6 @@
 </div>
 
 <script>
-var transaction_id = <?php echo $row->quotation_id;?>;
-var customers = <?php echo $customers->all_to_json(array('custID', 'address'), TRUE); ?>;
+var transaction_id = <?php echo $row->po_id;?>;
+var suppliers = <?php echo $suppliers->all_to_json(array('sID', 'address'), TRUE); ?>;
 </script>

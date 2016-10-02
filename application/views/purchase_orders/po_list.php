@@ -41,12 +41,12 @@
 								<?php foreach( $rows as $row ) : ?>
 								<tr>
 									<td>
-										<a href="<?php echo site_url('purchase_orders/view/' . $row->id);?>" class="text-link">
+										<a href="<?php echo site_url('purchase_orders/edit/' . $row->id);?>" class="text-link">
 											<?php echo $row->transNum; ?>
 										</a>
 									</td>
 									<td>
-										<a href="<?php echo site_url('purchase_orders/view/' . $row->id);?>">
+										<a href="<?php echo site_url('purchase_orders/edit/' . $row->id);?>" class="text-link">
 											<?php echo $row->transDescript; ?>
 										</a>
 									</td>
@@ -62,11 +62,6 @@
 												<i class="fa fa-cog" aria-hidden="true"></i> <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu pull-right" role="menu">
-												<li>
-													<a href="<?php echo site_url('purchase_orders/view/' . $row->id); ?>">
-														<i class="fa fa-eye" aria-hidden="true"></i> View Details
-													</a>
-												</li>
 												<li>
 													<a href="<?php echo site_url('purchase_orders/edit/' . $row->id); ?>">
 														<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit

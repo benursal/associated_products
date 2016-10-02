@@ -82,7 +82,7 @@
 						<td class="text-center"><?php echo $o->qty; ?></td>
 						<td class="text-center"><?php echo $o->unit; ?></td>
 						<td class=""><?php echo $o->descript; ?></td>
-						<td class="text-right">P <?php echo $o->unitPrice; ?></td>
+						<td class="text-right">P <?php echo number_format($o->unitPrice, 2); ?></td>
 						<td class="text-right text-bold">P <?php echo number_format( $line_total, 2); ?></td>
 					</tr>
 				<?php $min_rows--; ?>

@@ -29,7 +29,7 @@
 									
 				</div>
 				<div class="col-lg-6">
-					<table class="table border-top-0 text-12 margin-left-30">
+					<table class="table border-top-0 text-12" style="margin-left:60px">
 						<tbody>
 							<tr>
 								<td class="text-right text-bold">Date :</td>
@@ -72,7 +72,7 @@
 				</thead>
 				<tbody>
 				<?php 
-					$min_rows = 7; 
+					$min_rows = 10; 
 					$grand_total = 0; // gross total amount
 				?>
 				<?php if( $orderline->exists() ) : ?>
@@ -86,7 +86,7 @@
 						<td class="text-center"><?php echo $o->qty; ?></td>
 						<td class="text-center"><?php echo $o->unit; ?></td>
 						<td class=""><?php echo $o->descript; ?></td>
-						<td class="text-right">P <?php echo $o->unitPrice; ?></td>
+						<td class="text-right">P <?php echo number_format($o->unitPrice,2); ?></td>
 						<td class="text-right text-bold">P <?php echo number_format( $line_total, 2); ?></td>
 					</tr>
 				<?php $min_rows--; ?>

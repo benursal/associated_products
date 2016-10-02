@@ -70,15 +70,26 @@ $(document).ready(function(){
 		
 		show_loader();
 		
+		if( transaction_id == 0 ) // this happens if the operation is ADD NEW
+		{
+			var post_url = 'purchase_orders/save';
+			var success_message = '<strong>Purchase Order successfully created!</strong>';
+		}
+		else // this happens if the operation is EDIT
+		{
+			var post_url = 'purchase_orders/update/' + transaction_id;
+			var success_message = '<strong>Purchase Order successfully updated!</strong>';
+		}
+		
 		$(this).serialize();
-		$.post( base_url + 'purchase_orders/save', $( this ).serialize(), function( data ) {
+		$.post( base_url + post_url, $( this ).serialize(), function( data ) {
 			
 			hide_loader();
 			
 			if( data != 'ERROR' )
 			{
 				$.jGrowl(
-					'<strong>Purchase Order successfully created!', 
+					success_message, 
 					{ 
 						life: 5000,
 						position: 'center', 
@@ -86,13 +97,19 @@ $(document).ready(function(){
 					}
 				);
 				
-				reset_form('#formNew');
-				// focus
-				$('select[name="supplier"]').focus();
-				// new po number
-				$('input[name="po_number"]').val( data );
-				$('input[name="date"]').val( current_date ); // e
+				if( transaction_id == 0 ) // this happens if the operation is ADD NEW
+				{
+					reset_form('#formNew');
+					// focus
+					$('select[name="supplier"]').focus();
+					// new po number
+					$('input[name="po_number"]').val( data );
+					$('input[name="date"]').val( current_date ); // e
+				}
+				
 			}
+			
+			//$('#results').html(data);
 		});
 		
 		

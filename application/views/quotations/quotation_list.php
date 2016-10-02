@@ -82,7 +82,7 @@
 												<li class="divider"></li>
 
 												<li>
-													<a href="javascript:void(0)" onclick="delete_quotation('<?php echo $row->transNum; ?>', this);">
+													<a href="javascript:void(0)" onclick="delete_quotation('<?php echo $row->transNum; ?>', <?=$row->id;?>, this, 'list');">
 														<i class="fa fa-trash" aria-hidden="true"></i> Delete
 													</a>
 												</li>

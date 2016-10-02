@@ -28,8 +28,9 @@ class Quotations extends User_Controller
 		$sql_string = 	"SELECT quotation.*, customer.id AS customer_id, customer.custName AS customer_custName 
 						FROM (quotation) 
 						LEFT JOIN customer ON quotation.custID = customer.custID 
-						WHERE quotation.transNum LIKE '%$keyword%' OR quotation.transDescript LIKE '%$keyword%' 
-						OR customer.custName LIKE '%$keyword%' 
+						WHERE (quotation.transNum LIKE '%$keyword%' OR quotation.transDescript LIKE '%$keyword%' 
+						OR customer.custName LIKE '%$keyword%')  
+						AND quotation.status = 1 
 						ORDER BY quotation.id DESC";
 						
 		$query = $this->db->query($sql_string);
@@ -100,7 +101,7 @@ class Quotations extends User_Controller
 	
 	function print_view( $id )
 	{
-		$sql_string = 	"SELECT quotation.*, 
+		$sql_string = 	"SELECT quotation.*, quotation.id as quotation_id,  
 						validity.valName AS validity_name, 
 						customer.custName AS customer_name,
 						customer.address AS customer_address,
@@ -113,7 +114,7 @@ class Quotations extends User_Controller
 						LEFT JOIN validity ON quotation.validity = validity.valNum 
 						LEFT JOIN delivery ON quotation.delivery = delivery.delNum 
 						LEFT JOIN discounts ON quotation.transNum = discounts.transNum 
-						WHERE quotation.id = '$id'";
+						WHERE quotation.id = '$id' AND quotation.status = 1";
 						
 		$query = $this->db->query($sql_string);
 		
@@ -128,7 +129,7 @@ class Quotations extends User_Controller
 			// get orderline
 			$o = new Orderline();
 			$o->where('type', 'quotation');
-			$o->where('transNum', $result->id);
+			$o->where('transNum', $result->quotation_id);
 			$o->get();
 			
 			$data['orderline'] = $o;
@@ -358,7 +359,7 @@ class Quotations extends User_Controller
 						LEFT JOIN validity ON quotation.validity = validity.valNum 
 						LEFT JOIN delivery ON quotation.delivery = delivery.delNum 
 						LEFT JOIN discounts ON quotation.transNum = discounts.transNum 
-						WHERE quotation.id = '$id'";
+						WHERE quotation.id = '$id' AND quotation.status = 1";
 						
 		$query = $this->db->query($sql_string);
 		
@@ -474,16 +475,16 @@ class Quotations extends User_Controller
 		if( $this->is_ajax() )
 		{
 
-			$supplier = new Supplier();
-			$supplier->where('sID', $id);
-			$supplier->get();
+			$row = new Quotation();
+			$row->where('id', $id);
+			$row->get();
 			
-			if( $supplier->exists() )
+			if( $row->exists() )
 			{
 				
-				$supplier->status = 0;
+				$row->status = 0;
 				
-				if( $supplier->save() )
+				if( $row->save() )
 				{
 					echo 1;
 				}
