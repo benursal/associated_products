@@ -8,10 +8,28 @@
 		
 		<div class="x_panel margin-top-10 padding-40 padding-top-10">
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<h1 class="text-large"><?php echo $page_title; ?></h1>
 				</div>
-				
+				<div class="col-md-5 text-right">
+					<div class="btn-group margin-top-10">
+						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+							<i class="fa fa-cog" aria-hidden="true"></i> Options <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a href="<?php echo site_url('purchase_orders/print_view/' . $row->po_id); ?>">
+									<i class="fa fa-print" aria-hidden="true"></i> Printable View
+								</a>
+							</li>
+							<li>
+								<a href="javascript:void(0)" onclick="delete_po('<?php echo $row->transNum; ?>', <?=$row->po_id;?>, this, 'self');">
+									<i class="fa fa-trash" aria-hidden="true"></i> Delete
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 			<hr />
 			<form class="form-horizontal form-label-left input_mask margin-top-20" id="formNew" method="post">

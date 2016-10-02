@@ -261,3 +261,68 @@ function get_new_row_html()
 				'</td>' + 
 			'</tr>';
 }
+
+function delete_po(trans_num, id, object, source)
+{
+	if( confirm('Are you sure you want to delete purchase order "' + trans_num + '"?') )
+	{
+		var obj = $(object).parent().parent().parent().parent().parent();
+		
+		//alert( base_url + 'suppliers/remove/' + id);
+		
+		// show the loader
+		show_loader();
+		// do the ajax
+		$.ajax({url: base_url + "purchase_orders/remove/" + id, success: function(result){
+			
+			//alert( result );
+			
+			if( result == '1' )
+			{
+				$.jGrowl(
+					'You have successfully deleted <strong>' + trans_num + '</strong>', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-success'
+					}
+				);
+				
+				if( source == 'self' ) // in edit
+				{
+					$.jGrowl(
+						'Redirecting...', 
+						{ 
+							life: 5000,
+							position: 'center', 
+							theme: 'alert alert-success'
+						}
+					);
+					// redirect
+					document.location = base_url + 'purchase_orders';
+				}
+				else if( source == 'list' ) // in the list
+				{
+					obj.fadeOut('slow', function(){
+						$(this).remove();
+					});
+				}
+			}
+			else
+			{
+				$.jGrowl(
+					'An error has occured while deleting record.', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			
+			hide_loader();
+			
+		}});
+		
+	}
+}

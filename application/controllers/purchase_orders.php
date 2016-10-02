@@ -28,8 +28,8 @@ class Purchase_Orders extends User_Controller
 		$sql_string = 	"SELECT po.*, supplier.id AS supplier_id, supplier.name AS supplier_name  
 						FROM (po) 
 						LEFT JOIN supplier ON po.supplierID = supplier.sID 
-						WHERE po.transNum LIKE '%$keyword%' OR po.transDescript LIKE '%$keyword%' 
-						OR supplier.name LIKE '%$keyword%' 
+						WHERE (po.transNum LIKE '%$keyword%' OR po.transDescript LIKE '%$keyword%' 
+						OR supplier.name LIKE '%$keyword%') AND po.status = 1 
 						ORDER BY po.id DESC";
 						
 		$query = $this->db->query($sql_string);
@@ -119,7 +119,7 @@ class Purchase_Orders extends User_Controller
 						LEFT JOIN supplier ON po.supplierID = supplier.sID 
 						LEFT JOIN terms ON po.terms = terms.termNum 
 						LEFT JOIN delivery ON po.delivery = delivery.delNum 
-						WHERE po.id = '$id'";
+						WHERE po.id = '$id' AND po.status = 1 ";
 						
 		$query = $this->db->query($sql_string);
 		
@@ -147,7 +147,7 @@ class Purchase_Orders extends User_Controller
 		}
 		else
 		{
-			echo '<h3 class="text-center">This Quotation does not exist</h3>';
+			echo '<h3 class="text-center">This Purchase Order does not exist</h3>';
 		}
 		
 		
@@ -325,7 +325,7 @@ class Purchase_Orders extends User_Controller
 						LEFT JOIN supplier ON po.supplierID = supplier.sID 
 						LEFT JOIN terms ON po.terms = terms.termNum 
 						LEFT JOIN delivery ON po.delivery = delivery.delNum 
-						WHERE po.id = '$id'";
+						WHERE po.id = '$id' AND po.status = 1 ";
 						
 		$query = $this->db->query($sql_string);
 		
@@ -433,16 +433,16 @@ class Purchase_Orders extends User_Controller
 		if( $this->is_ajax() )
 		{
 
-			$supplier = new Supplier();
-			$supplier->where('sID', $id);
-			$supplier->get();
+			$row = new Purchase_Order();
+			$row->where('id', $id);
+			$row->get();
 			
-			if( $supplier->exists() )
+			if( $row->exists() )
 			{
 				
-				$supplier->status = 0;
+				$row->status = 0;
 				
-				if( $supplier->save() )
+				if( $row->save() )
 				{
 					echo 1;
 				}
