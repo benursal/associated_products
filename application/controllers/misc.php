@@ -14,12 +14,62 @@ class Misc extends User_Controller // Miscellaneous (terms, delivery, validity)
 	
 	function save_term()
 	{
+		$val = $this->input->post('term_name');
 		
+		$r = new Term();
+		$r->where('termName', $val);
+		$r->get();
+		
+		if( !$r->exists() )
+		{
+			$a = new Term();
+			$a->termName = $val;
+			$save = $a->save();
+			
+			if( $save )
+			{
+				//$a->get();
+				echo $a->id;
+			}
+			else
+			{
+				echo 'ERROR';
+			}
+		}
+		else
+		{
+			echo 'EXISTS';
+		}
 	}
 	
 	function save_delivery()
 	{
+		$val = $this->input->post('delivery_name');
 		
+		$r = new Delivery();
+		$r->where('delName', $val);
+		$r->get();
+		
+		if( !$r->exists() )
+		{
+			$a = new Delivery();
+			$a->delName = $val;
+			$save = $a->save();
+			
+			if( $save )
+			{
+				//$a->get();
+				echo $a->id;
+			}
+			else
+			{
+				echo 'ERROR';
+			}
+		}
+		else
+		{
+			echo 'EXISTS';
+		}
 	}
 	
 	function save_validity()

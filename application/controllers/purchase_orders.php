@@ -105,7 +105,7 @@ class Purchase_Orders extends User_Controller
 		);
 		
 		$this->output('purchase_orders/add_new', $data);
-		$this->show_profiler();
+		#$this->show_profiler();
 	}
 	
 	function print_view( $id )
@@ -117,8 +117,8 @@ class Purchase_Orders extends User_Controller
 						delivery.delName as delivery_name 
 						FROM (po) 
 						LEFT JOIN supplier ON po.supplierID = supplier.sID 
-						LEFT JOIN terms ON po.terms = terms.termNum 
-						LEFT JOIN delivery ON po.delivery = delivery.delNum 
+						LEFT JOIN terms ON po.terms = terms.id 
+						LEFT JOIN delivery ON po.delivery = delivery.id 
 						WHERE po.id = '$id' AND po.status = 1 ";
 						
 		$query = $this->db->query($sql_string);
@@ -319,12 +319,12 @@ class Purchase_Orders extends User_Controller
 		$sql_string = 	"SELECT po.*, po.id as po_id, 
 						supplier.sID AS supplier_id,
 						supplier.address AS supplier_address,
-						terms.termNum as term_id, 
-						delivery.delNum as delivery_id 
+						terms.id as term_id, 
+						delivery.id as delivery_id 
 						FROM (po) 
 						LEFT JOIN supplier ON po.supplierID = supplier.sID 
-						LEFT JOIN terms ON po.terms = terms.termNum 
-						LEFT JOIN delivery ON po.delivery = delivery.delNum 
+						LEFT JOIN terms ON po.terms = terms.id 
+						LEFT JOIN delivery ON po.delivery = delivery.id 
 						WHERE po.id = '$id' AND po.status = 1 ";
 						
 		$query = $this->db->query($sql_string);
@@ -424,7 +424,7 @@ class Purchase_Orders extends User_Controller
 		
 		echo 'saved now';
 		
-		$this->show_profiler();
+		#$this->show_profiler();
 	}
 	
 	/* stateless */

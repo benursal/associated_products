@@ -51,10 +51,127 @@ $(document).ready(function(){
 				$('#txtValidityName').val('');
 			}
 			
-			$('#results').html( data );
+			//$('#results').html( data );
 			
 		});
 		
+		
+		return false;
+	});
+	
+	
+	$('#formNewTerm').submit(function(){
+		
+		show_loader();
+		
+		$.post( base_url + 'misc/save_term', $( this ).serialize(), function( data ) {
+			
+			var term_name = $('#txtTermName').val().trim();
+			
+			hide_loader();
+			
+			if( data == 'EXISTS' )
+			{
+				$.jGrowl(
+					'This term description already exists', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else if( data == 'ERROR' )
+			{
+				$.jGrowl(
+					'An error has occured. Please try again.', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else
+			{
+				$.jGrowl(
+					'New term added successfully', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-success'
+					}
+				);
+				
+				// hide 
+				$('#modalNewTerm .btn-close').trigger('click');
+				// add new to Select
+				$('select[name="terms"]').append('<option value="' + data + '">' + term_name + '</option>');
+				// clear value 
+				$('#txtTermName').val('');
+			}
+			
+			
+			
+		});
+		
+		return false;
+	});
+	
+	// delivery
+	$('#formNewDelivery').submit(function(){
+		
+		show_loader();
+		
+		$.post( base_url + 'misc/save_delivery', $( this ).serialize(), function( data ) {
+			
+			var delivery_name = $('#txtDeliveryName').val().trim();
+			
+			hide_loader();
+			
+			if( data == 'EXISTS' )
+			{
+				$.jGrowl(
+					'This delivery description already exists', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else if( data == 'ERROR' )
+			{
+				$.jGrowl(
+					'An error has occured. Please try again.', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else
+			{
+				$.jGrowl(
+					'New delivery added successfully', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-success'
+					}
+				);
+				
+				// hide 
+				$('#modalNewDelivery .btn-close').trigger('click');
+				// add new to Select
+				$('select[name="delivery"]').append('<option value="' + data + '">' + delivery_name + '</option>');
+				// clear value 
+				$('#txtDeliveryName').val('');
+			}
+			
+			$('#results').html(data);
+		});
 		
 		return false;
 	});

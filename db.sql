@@ -63,14 +63,14 @@ insert  into `customer`(`custID`,`custName`,`address`,`status`) values ('agp','a
 DROP TABLE IF EXISTS `delivery`;
 
 CREATE TABLE `delivery` (
-  `delNum` int(2) NOT NULL AUTO_INCREMENT,
+  `id` int(2) NOT NULL AUTO_INCREMENT,
   `delName` varchar(50) NOT NULL,
-  PRIMARY KEY (`delNum`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 /*Data for the table `delivery` */
 
-insert  into `delivery`(`delNum`,`delName`) values (1,'4 - 6 WEEKS'),(2,'5 - 8 DAYS'),(3,'6 - 8 WEEKS'),(4,'8 - 12 WEEKS'),(5,'2 weeks'),(6,'3 days'),(7,'urgent'),(8,'ex stock manila'),(9,'60 to 90 days'),(10,'50% down, balance progress billing'),(11,'12 to 16 weeks'),(12,'15 days from receipt of notice of award.'),(13,'3 weeks'),(14,'75 days  upon receipt of notice of award'),(15,'5 - 6 weeks'),(16,'12 to 14 weeks'),(17,'to be scheduled'),(18,'4 weeks'),(19,'8 to 10 weeks'),(20,'delivered'),(21,'ex-stock'),(22,'10 to 12 weeks'),(23,'90 days upod reciept of notice of award'),(24,'17 to 24 weeks'),(25,'2-3 weeks'),(26,'various delivery'),(27,'5 to 6 weeks'),(28,'5 to 7 weeks'),(29,'20 to 22 weeks'),(30,'1pc ex-stock balance 4 to 6 weeks');
+insert  into `delivery`(`id`,`delName`) values (1,'4 - 6 WEEKS'),(2,'5 - 8 DAYS'),(3,'6 - 8 WEEKS'),(4,'8 - 12 WEEKS'),(5,'2 weeks'),(6,'3 days'),(7,'urgent'),(8,'ex stock manila'),(9,'60 to 90 days'),(10,'50% down, balance progress billing'),(11,'12 to 16 weeks'),(12,'15 days from receipt of notice of award.'),(13,'3 weeks'),(14,'75 days  upon receipt of notice of award'),(15,'5 - 6 weeks'),(16,'12 to 14 weeks'),(17,'to be scheduled'),(18,'4 weeks'),(19,'8 to 10 weeks'),(20,'delivered'),(21,'ex-stock'),(22,'10 to 12 weeks'),(23,'90 days upod reciept of notice of award'),(24,'17 to 24 weeks'),(25,'2-3 weeks'),(26,'various delivery'),(27,'5 to 6 weeks'),(28,'5 to 7 weeks'),(29,'20 to 22 weeks'),(30,'1pc ex-stock balance 4 to 6 weeks');
 
 /*Table structure for table `discounts` */
 
@@ -198,14 +198,14 @@ insert  into `supplier`(`id`,`sID`,`name`,`address`,`status`) values (20,'abc','
 DROP TABLE IF EXISTS `terms`;
 
 CREATE TABLE `terms` (
-  `termNum` int(2) NOT NULL AUTO_INCREMENT,
+  `id` int(2) NOT NULL AUTO_INCREMENT,
   `termName` varchar(50) NOT NULL,
-  PRIMARY KEY (`termNum`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 /*Data for the table `terms` */
 
-insert  into `terms`(`termNum`,`termName`) values (1,'30 DAYS'),(2,'45 DAYS'),(3,'60 DAYS PDC'),(4,'cash'),(5,'30% down, balance c.o.d'),(6,'30% down, balance 30 days'),(7,'15 days pdc'),(8,'15 days'),(9,'50% down, balance 30 days'),(10,'30%downpayment, balance after delivery'),(11,'30% downpayment, balance after delivery'),(12,'30%down, balance after delivery'),(13,'50% downpayment, balance progress billing'),(14,'50% down, balance progress billing'),(15,'c.o.d'),(16,'60 days'),(17,'50% 15days after inst. and config'),(18,'50% 15 days after config, balance 30days after 1st'),(19,'50% 15 days after inst. and config, bal. 30 days a'),(20,'demo to sale'),(21,'25% downpayment, balance 30 days'),(22,'50% down, balance 30 days with pdc'),(23,'30 days with pdc'),(24,'30% down, balance after commissioning'),(25,'30% down balance after commissioning');
+insert  into `terms`(`id`,`termName`) values (1,'30 DAYS'),(2,'45 DAYS'),(3,'60 DAYS PDC'),(4,'cash'),(5,'30% down, balance c.o.d'),(6,'30% down, balance 30 days'),(7,'15 days pdc'),(8,'15 days'),(9,'50% down, balance 30 days'),(10,'30%downpayment, balance after delivery'),(11,'30% downpayment, balance after delivery'),(12,'30%down, balance after delivery'),(13,'50% downpayment, balance progress billing'),(14,'50% down, balance progress billing'),(15,'c.o.d'),(16,'60 days'),(17,'50% 15days after inst. and config'),(18,'50% 15 days after config, balance 30days after 1st'),(19,'50% 15 days after inst. and config, bal. 30 days a'),(20,'demo to sale'),(21,'25% downpayment, balance 30 days'),(22,'50% down, balance 30 days with pdc'),(23,'30 days with pdc'),(24,'30% down, balance after commissioning'),(25,'30% down balance after commissioning');
 
 /*Table structure for table `validity` */
 

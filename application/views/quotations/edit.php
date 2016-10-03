@@ -141,8 +141,8 @@
 										<option value="">[Select Payment Terms]</option>
 										<?php if( $terms->exists() ) : ?>
 										<?php foreach( $terms as $t ) : ?>
-										<?php $selected = ( $t->termNum == $row->term_id ) ? ' selected' : ''; ?>
-										<option value="<?php echo $t->termNum;?>"<?php echo $selected;?>><?php echo ucwords($t->termName);?></option>
+										<?php $selected = ( $t->id == $row->term_id ) ? ' selected' : ''; ?>
+										<option value="<?php echo $t->id;?>"<?php echo $selected;?>><?php echo ucwords($t->termName);?></option>
 										<?php endforeach; ?>
 										<?php endif; ?>
 									</select>
@@ -163,8 +163,8 @@
 										<option value="">[Select Delivery Terms]</option>
 										<?php if( $deliveries->exists() ) : ?>
 										<?php foreach( $deliveries as $d ) : ?>
-										<?php $selected = ( $d->delNum == $row->delivery_id ) ? ' selected' : ''; ?>
-										<option value="<?php echo $d->delNum;?>"<?php echo $selected;?>><?php echo ucwords($d->delName);?></option>
+										<?php $selected = ( $d->id == $row->delivery_id ) ? ' selected' : ''; ?>
+										<option value="<?php echo $d->id;?>"<?php echo $selected;?>><?php echo ucwords($d->delName);?></option>
 										<?php endforeach; ?>
 										<?php endif; ?>
 									</select>
