@@ -188,7 +188,12 @@ function validate_rows()
 
 function modal_add_new_supplier()
 {
-	alert('add new supplier');
+	// show modal
+	$('#modalNewSupplier').modal('show');
+	// focus
+	$('#modalNewSupplier').on('shown.bs.modal', function () {
+		$('#txtSupplierName').focus()
+	});
 }
 
 function refresh_item_no()

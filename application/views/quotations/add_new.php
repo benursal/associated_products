@@ -150,7 +150,7 @@
 										<option value="">[Select Validity]</option>
 										<?php if( $validities->exists() ) : ?>
 										<?php foreach( $validities as $v ) : ?>
-										<option value="<?php echo $v->valNum;?>"><?php echo ucwords($v->valName);?></option>
+										<option value="<?php echo $v->id;?>"><?php echo ucwords($v->valName);?></option>
 										<?php endforeach; ?>
 										<?php endif; ?>
 									</select>
@@ -278,11 +278,14 @@
 							</div>
 						</div>
 					</div>
+					
+					
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+
 <script>
 var transaction_id = 0;
 var customers = <?php echo $customers->all_to_json(array('custID', 'address'), TRUE); ?>;

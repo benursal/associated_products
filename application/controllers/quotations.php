@@ -111,7 +111,7 @@ class Quotations extends User_Controller
 						FROM (quotation) 
 						LEFT JOIN customer ON quotation.custID = customer.custID 
 						LEFT JOIN terms ON quotation.terms = terms.termNum 
-						LEFT JOIN validity ON quotation.validity = validity.valNum 
+						LEFT JOIN validity ON quotation.validity = validity.id 
 						LEFT JOIN delivery ON quotation.delivery = delivery.delNum 
 						LEFT JOIN discounts ON quotation.transNum = discounts.transNum 
 						WHERE quotation.id = '$id' AND quotation.status = 1";
@@ -346,17 +346,19 @@ class Quotations extends User_Controller
 	// edit
 	function edit( $id )
 	{
-		$sql_string = 	"SELECT quotation.*, quotation.id as quotation_id,
-						validity.valNum AS validity_id, 
+		$sql_string = 	"SELECT quotation.*, quotation.id as quotation_id, 
+						validity.id AS validity_id, 
 						customer.custID AS customer_id,
 						customer.address AS customer_address,
 						terms.termNum as term_id, 
 						delivery.delNum as delivery_id, 
-						discounts.* 
+						discounts.inclusion, 
+						discounts.vat, 
+						discounts.rate 
 						FROM (quotation) 
 						LEFT JOIN customer ON quotation.custID = customer.custID 
 						LEFT JOIN terms ON quotation.terms = terms.termNum 
-						LEFT JOIN validity ON quotation.validity = validity.valNum 
+						LEFT JOIN validity ON quotation.validity = validity.id 
 						LEFT JOIN delivery ON quotation.delivery = delivery.delNum 
 						LEFT JOIN discounts ON quotation.transNum = discounts.transNum 
 						WHERE quotation.id = '$id' AND quotation.status = 1";

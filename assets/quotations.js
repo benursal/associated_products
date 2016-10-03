@@ -196,7 +196,13 @@ function validate_rows()
 
 function modal_add_new_customer()
 {
-	alert('add new customer');
+	// show modal
+	$('#modalNewCustomer').modal('show');
+	// focus
+	$('#modalNewCustomer').on('shown.bs.modal', function () {
+		$('#txtCustomerName').focus()
+	});
+	
 }
 
 function refresh_item_no()

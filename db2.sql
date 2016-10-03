@@ -185,7 +185,7 @@ CREATE TABLE `quotation` (
   KEY `terms` (`terms`),
   CONSTRAINT `quotation_ibfk_1` FOREIGN KEY (`custID`) REFERENCES `customer` (`custID`),
   CONSTRAINT `quotation_ibfk_2` FOREIGN KEY (`delivery`) REFERENCES `delivery` (`delNum`),
-  CONSTRAINT `quotation_ibfk_3` FOREIGN KEY (`validity`) REFERENCES `validity` (`valNum`),
+  CONSTRAINT `quotation_ibfk_3` FOREIGN KEY (`validity`) REFERENCES `validity` (`id`),
   CONSTRAINT `quotation_ibfk_4` FOREIGN KEY (`terms`) REFERENCES `terms` (`termNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6111 DEFAULT CHARSET=utf8;
 
@@ -230,15 +230,15 @@ insert  into `terms`(`termNum`,`termName`) values (1,'30 DAYS'),(2,'45 DAYS'),(3
 DROP TABLE IF EXISTS `validity`;
 
 CREATE TABLE `validity` (
-  `valNum` int(5) NOT NULL AUTO_INCREMENT,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `valName` varchar(50) NOT NULL,
-  PRIMARY KEY (`valNum`),
-  CONSTRAINT `validity_ibfk_1` FOREIGN KEY (`valNum`) REFERENCES `quotation` (`validity`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT `validity_ibfk_1` FOREIGN KEY (`id`) REFERENCES `quotation` (`validity`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `validity` */
 
-insert  into `validity`(`valNum`,`valName`) values (1,'1 week'),(2,'15 days'),(3,'subject to availability of stock'),(4,'90 days'),(5,'45 days'),(6,'30 days');
+insert  into `validity`(`id`,`valName`) values (1,'1 week'),(2,'15 days'),(3,'subject to availability of stock'),(4,'90 days'),(5,'45 days'),(6,'30 days');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

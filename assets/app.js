@@ -1,4 +1,71 @@
 /* app */
+$(document).ready(function(){
+	$('#formNewValidity').submit(function(){
+		
+		show_loader();
+		
+		$.post( base_url + 'misc/save_validity', $( this ).serialize(), function( data ) {
+			
+			var validity_name = $('#txtValidityName').val().trim();
+			
+			hide_loader();
+			
+			if( data == 'EXISTS' )
+			{
+				$.jGrowl(
+					'This validity description already exists', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else if( data == 'ERROR' )
+			{
+				$.jGrowl(
+					'An error has occured. Please try again.', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else
+			{
+				$.jGrowl(
+					'New validity added successfully', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-success'
+					}
+				);
+				
+				// hide validity
+				$('#modalNewValidity .btn-close').trigger('click');
+				// add new validity to Select
+				$('select[name="validity"]').append('<option value="' + data + '">' + validity_name + '</option>');
+				// clear value 
+				$('#txtValidityName').val('');
+			}
+			
+			$('#results').html( data );
+			
+		});
+		
+		
+		return false;
+	});
+});
+
+function igit()
+{
+	$('#modalNewValidity').modal('hide');
+	e.stopPropagation(); //This line would take care of it
+}
+
 function show_loader()
 {
 	$('.ajax-loader').show();
@@ -88,4 +155,34 @@ function format_currency(num) { // this adds comma and a two digit decimal numbe
 	num = num.substring(0,num.length-(4*i+3))+','+
 	num.substring(num.length-(4*i+3));
 	return (((sign)?'':'-') + num + '.' + cents);
+}
+
+function modal_add_new_term()
+{
+	// show modal
+	$('#modalNewTerm').modal('show');
+	// focus
+	$('#modalNewTerm').on('shown.bs.modal', function () {
+		$('#txtTermName').focus()
+	});
+}
+
+function modal_add_new_delivery()
+{
+	// show modal
+	$('#modalNewDelivery').modal('show');
+	// focus
+	$('#modalNewDelivery').on('shown.bs.modal', function () {
+		$('#txtDeliveryName').focus()
+	});
+}
+
+function modal_add_new_validity()
+{
+	// show modal
+	$('#modalNewValidity').modal('show');
+	// focus
+	$('#modalNewValidity').on('shown.bs.modal', function () {
+		$('#txtValidityName').focus()
+	});
 }

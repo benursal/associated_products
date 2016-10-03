@@ -185,8 +185,8 @@
 										<option value="">[Select Validity]</option>
 										<?php if( $validities->exists() ) : ?>
 										<?php foreach( $validities as $v ) : ?>
-										<?php $selected = ( $v->valNum == $row->validity_id ) ? ' selected' : ''; ?>
-										<option value="<?php echo $v->valNum;?>"<?php echo $selected; ?>><?php echo ucwords($v->valName);?></option>
+										<?php $selected = ( $v->id == $row->validity_id ) ? ' selected' : ''; ?>
+										<option value="<?php echo $v->id;?>"<?php echo $selected; ?>><?php echo ucwords($v->valName);?></option>
 										<?php endforeach; ?>
 										<?php endif; ?>
 									</select>
