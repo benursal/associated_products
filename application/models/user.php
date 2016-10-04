@@ -7,5 +7,11 @@ class User extends DataMapper
     {
         parent::__construct($id);
     }
+	
+	function convert_password( $raw_pw )
+	{
+		$password = md5( SALT . $raw_pw . SALT );
+		return substr($password, 0, 32);
+	}
 }
 ?>

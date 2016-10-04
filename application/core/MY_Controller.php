@@ -3,6 +3,7 @@ class MY_Controller extends CI_Controller
 {
 	var $header_file = 'header';
 	var $footer_file = 'footer';
+	var $header_data = array();
 	var $footer_data = array();
 	
 	function __construct()
@@ -13,6 +14,14 @@ class MY_Controller extends CI_Controller
 	
 	function output( $view, $data = array() )
 	{
+		if( count( $this->header_data ) > 0 )
+		{
+			foreach( $this->header_data as $key => $val )
+			{
+				$data[$key] = $val;
+			}
+		}
+		
 		$this->load->view( $this->header_file, $data );//Load Header
 		$this->load->view($view, $data);//Load actual view
 		$this->load->view( $this->footer_file, $this->footer_data );//Load Footer

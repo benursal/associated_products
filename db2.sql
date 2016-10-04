@@ -54,11 +54,11 @@ CREATE TABLE `customer` (
   `status` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`custID`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
 
 /*Data for the table `customer` */
 
-insert  into `customer`(`id`,`custID`,`custName`,`address`,`status`) values (1,'agp','agp construction and engineering services','Jdi Building Galo Street, Bacolod City',1),(2,'alta','alta negros','Bata, Bacolod City',1),(3,'arizona','arizona marketing corp.','Cubao Quezon City',1),(4,'baciwa','bacolod city water district','bacolod',1),(5,'biscom','binabagan isabela sugar company','Binalbagan negros Occidental',1),(6,'bsg','bsg industrial supplies and services','Talisay City Negros Occ.',1),(7,'caci','cac,inc','La Carlota City',1),(8,'ccbpi','coca cola  bottlers phils. inc','Barangay Mansilingan, Bacolod city',1),(9,'ccbpiz','coca cola bottlers phil inc zamboanga','Zamboanga City',1),(10,'cipsi','cems industrial products','2nd Flr Tipolo Square, Lopez Jaena St Tipolo, Mandaue City 6014, Cebu',1),(11,'coke','ccbpi','Fatima Village Tacloban City',1),(12,'ctr','compress tech. resources','Malate, Manila',1),(13,'dbi','disterleria bago inc.','13.5 Taloc, bago City',1),(14,'ducom','dumaguete coconut mills, inc','San Miguel, Bacong, Negros oriental',1),(15,'Fabcon','Fabcon Philippines, Inc','12/F Jollibee Centre Bldg.\r\nPasig City',1),(16,'ffhco','first farmers holding corp','Talisay City',1),(17,'gbp','global business corporation','Makati City',1),(18,'hpco','hawaiian phils co.','Silay City',1),(19,'hygrade','hygrade marketing','Bacolod City',1),(20,'jmj','jmj','Brgy. Bata, Bacolod City',1),(21,'juntee','juntee','2/F Door 7 Villa Angela Arcade Burgos St.cor Circumferential Rd Villamonte, Bacolod City 6100',1),(22,'Kuntel','Kuntel','Bacolod City',1),(23,'le price','le price','Manila',1),(24,'lsc','lopez sugar corp','Sagay City',1),(25,'mpsw','murcia purified spring water','Brgy. Pandanon Murcia Negros Occ.',1),(26,'ngsc','negros general services coproration.','Negros Occidental',1),(27,'option','option-mpc','Sagay City',1),(28,'pandanun','pandanun mineral water','Murcia Neg Occ.',1),(29,'pcscale','pc scalelift sales','Mandalagan, Bacolod City',1),(30,'pepsi','pepsi','Brgy Bata, Negros Occidental',1),(31,'richville','richville industrial sales','Pasay city',1),(32,'robinson','robinsons place bacolod','Bacolod City',1),(33,'roxol','roxol bionergy','La Carlota City',1),(34,'rs','rs components','Makati City',1),(35,'scbi','san carlos bioenergy inc.','San Carlos City',1),(36,'sci','sagay central incorporated','Sagay City',1),(37,'smbi','san miguel brewery, inc.','Santa fe, Bacolod City',1),(38,'tanduay','tanduay distillers','Murcia, Negros Occ.',1),(39,'tradepoint','tradepoints','Victoria St. Villamonte, Bacolod City',1),(40,'viwad','victorias city water district','Victorias City',1),(41,'vmc','victoriasl milling company','Victorias City',1),(42,'vresco','vresco','Victorias City',1),(43,'ypi','yokogawa philippines inc.','Quezon City',1);
+insert  into `customer`(`id`,`custID`,`custName`,`address`,`status`) values (55,'ACP7a31','ABC Company Philippines','This Is Where You Live',0),(1,'agp','agp construction and engineering services','Jdi Building Galo Street, Bacolod City',0),(2,'alta','alta negros','Bata, Bacolod City',0),(57,'APP0bc3','Associated Products Philippines','Galo St., Bacolod City',1),(3,'arizona','arizona marketing corp.tae','Bacolod',1),(54,'ATe32c','ABC TAE','Fsdfsdf',1),(4,'baciwa','bacolod city water district','bacolod',1),(5,'biscom','binabagan isabela sugar company','Binalbagan negros Occidental',1),(60,'BLd10e','Bruce Lee','Sdfsdf',0),(6,'bsg','bsg industrial supplies and services','Talisay City Negros Occ.',1),(53,'BWS6472','Ben\'s Web Solutions','Ffsdfsdfsdf Sdf Sdf ',1),(7,'caci','cac,inc','La Carlota City',1),(8,'ccbpi','coca cola  bottlers phils. inc','Barangay Mansilingan, Bacolod city',1),(9,'ccbpiz','coca cola bottlers phil inc zamboanga','Zamboanga City',1),(10,'cipsi','cems industrial products','2nd Flr Tipolo Square, Lopez Jaena St Tipolo, Mandaue City 6014, Cebu',1),(11,'coke','ccbpi','Fatima Village Tacloban City',1),(12,'ctr','compress tech. resources','Malate, Manila',1),(13,'dbi','disterleria bago inc.','13.5 Taloc, bago City',1),(14,'ducom','dumaguete coconut mills, inc','San Miguel, Bacong, Negros oriental',1),(15,'Fabcon','Fabcon Philippines, Inc','12/F Jollibee Centre Bldg.\r\nPasig City',1),(56,'Fb1cb','Fsdf',' Sdfsdf',1),(44,'FFF','shit','bisan diin',1),(16,'ffhco','first farmers holding corp','Talisay City',1),(17,'gbp','global business corporation','Makati City',1),(18,'hpco','hawaiian phils co.','Silay City',1),(19,'hygrade','hygrade marketing','Bacolod City',1),(59,'JCb266','Jackie Chan','Fsdf',1),(20,'jmj','jmj','Brgy. Bata, Bacolod City',1),(21,'juntee','juntee','2/F Door 7 Villa Angela Arcade Burgos St.cor Circumferential Rd Villamonte, Bacolod City 6100',1),(22,'Kuntel','Kuntel','Bacolod City',1),(23,'le price','le price','Manila',1),(24,'lsc','lopez sugar corp','Sagay City',1),(25,'mpsw','murcia purified spring water','Brgy. Pandanon Murcia Negros Occ.',1),(26,'ngsc','negros general services coproration.','Negros Occidental',1),(27,'option','option-mpc','Sagay City',1),(28,'pandanun','pandanun mineral water','Murcia Neg Occ.',1),(29,'pcscale','pc scalelift sales','Mandalagan, Bacolod City',1),(30,'pepsi','pepsi','Brgy Bata, Negros Occidental',1),(31,'richville','richville industrial sales','Pasay city',1),(32,'robinson','robinsons place bacolod','Bacolod City',1),(33,'roxol','roxol bionergy','La Carlota City',1),(34,'rs','rs components','Makati City',1),(35,'scbi','san carlos bioenergy inc.','San Carlos City',1),(36,'sci','sagay central incorporated','Sagay City',1),(37,'smbi','san miguel brewery, inc.','Santa fe, Bacolod City',1),(38,'tanduay','tanduay distillers','Murcia, Negros Occ.',1),(61,'TM22b3','Tae Mo','Fsdf',1),(39,'tradepoint','tradepoints','Victoria St. Villamonte, Bacolod City',1),(52,'TTPI0503','Tech Trabaho Philippines Inc.','Ara Sa Kay Morita',1),(40,'viwad','victorias city water district','Victorias City',1),(41,'vmc','victoriasl milling company','Victorias City',1),(42,'vresco','vresco','Victorias City',1),(43,'ypi','yokogawa philippines inc.','Quezon City',1);
 
 /*Table structure for table `delivery` */
 
@@ -68,11 +68,11 @@ CREATE TABLE `delivery` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `delName` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
 /*Data for the table `delivery` */
 
-insert  into `delivery`(`id`,`delName`) values (1,'4 - 6 WEEKS'),(2,'5 - 8 DAYS'),(3,'6 - 8 WEEKS'),(4,'8 - 12 WEEKS'),(5,'2 weeks'),(6,'3 days'),(7,'urgent'),(8,'ex stock manila'),(9,'60 to 90 days'),(10,'50% down, balance progress billing'),(11,'12 to 16 weeks'),(12,'15 days from receipt of notice of award.'),(13,'3 weeks'),(14,'75 days  upon receipt of notice of award'),(15,'5 - 6 weeks'),(16,'12 to 14 weeks'),(17,'to be scheduled'),(18,'4 weeks'),(19,'8 to 10 weeks'),(20,'delivered'),(21,'ex-stock'),(22,'10 to 12 weeks'),(23,'90 days upod reciept of notice of award'),(24,'17 to 24 weeks'),(25,'2-3 weeks'),(26,'various delivery'),(27,'5 to 6 weeks'),(28,'5 to 7 weeks'),(29,'20 to 22 weeks'),(30,'1pc ex-stock balance 4 to 6 weeks'),(31,'tae'),(32,'fff'),(33,'1 days'),(34,'2 day');
+insert  into `delivery`(`id`,`delName`) values (1,'4 - 6 WEEKS'),(2,'5 - 8 DAYS'),(3,'6 - 8 WEEKS'),(4,'8 - 12 WEEKS'),(5,'2 weeks'),(6,'3 days'),(7,'urgent'),(8,'ex stock manila'),(9,'60 to 90 days'),(10,'50% down, balance progress billing'),(11,'12 to 16 weeks'),(12,'15 days from receipt of notice of award.'),(13,'3 weeks'),(14,'75 days  upon receipt of notice of award'),(15,'5 - 6 weeks'),(16,'12 to 14 weeks'),(17,'to be scheduled'),(18,'4 weeks'),(19,'8 to 10 weeks'),(20,'delivered'),(21,'ex-stock'),(22,'10 to 12 weeks'),(23,'90 days upod reciept of notice of award'),(24,'17 to 24 weeks'),(25,'2-3 weeks'),(26,'various delivery'),(27,'5 to 6 weeks'),(28,'5 to 7 weeks'),(29,'20 to 22 weeks'),(30,'1pc ex-stock balance 4 to 6 weeks'),(31,'tae'),(32,'fff'),(33,'1 days'),(34,'2 day'),(35,'eat shit');
 
 /*Table structure for table `discounts` */
 
@@ -153,16 +153,18 @@ insert  into `po`(`id`,`transNum`,`year`,`date`,`refNo`,`supplierID`,`delivery`,
 DROP TABLE IF EXISTS `preparer`;
 
 CREATE TABLE `preparer` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
   `fname` char(30) NOT NULL,
   `lname` char(30) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(150) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`username`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `preparer` */
 
-insert  into `preparer`(`fname`,`lname`,`username`,`password`) values ('Alex','Porras','app','e638e8b85feea1126862786c7e929fb0'),('edward ursal','ursal','benursal','6008e34c6d6c4130300ae54b11b3a204'),('Harold','Dy','hud','e638e8b85feea1126862786c7e929fb0'),('John Christopher','Porras','jcp','');
+insert  into `preparer`(`id`,`fname`,`lname`,`username`,`password`) values (1,'Alex','Porras','app','98375bd39148b95b790b0efda6072a16'),(2,'edward benedict','ursal','benursal','98375bd39148b95b790b0efda6072a16'),(3,'Harold','Dy','hud','98375bd39148b95b790b0efda6072a16'),(4,'John Christopher','Porras','jcp','98375bd39148b95b790b0efda6072a16');
 
 /*Table structure for table `quotation` */
 
@@ -212,11 +214,11 @@ CREATE TABLE `supplier` (
   `status` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`sID`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 /*Data for the table `supplier` */
 
-insert  into `supplier`(`id`,`sID`,`name`,`address`,`status`) values (20,'abc','sdfsdf','fsdfsdf',1),(1,'Aloyco','Aloyco International',NULL,0),(2,'Arizona','Arizona Marketing Corp.',NULL,0),(3,'aspen','igit','igit',1),(19,'bpis','bank of the philippine islandsf','17th streets',0),(4,'Burkert','Burkert Contromatic Philippines','8467 West Service Road Km. 14 \r\nSouth Superhighway \r\nSunValley, Parañaque City \r\nPhilippines 1711',0),(5,'Electrobus','Electrobus Inc.',NULL,1),(6,'eurelyn','eurelyn electronics','Laguna',1),(7,'festo','festo','Manila',0),(21,'fffsdf','fsdfsdf','sdfsdf',0),(8,'ic','innovative controls','Bacolod City, Negros Occidental',1),(9,'innovative','innovative solutions','Bacolod City',1),(10,'NEMA Elect','NEMA Electric',NULL,1),(11,'newbridge','newbridge','Lacson street',1),(12,'pcscale','pcscalelift','Manila',1),(13,'Presidium','Presidium Controls',NULL,1),(14,'RS','RS Components','Makati City',1),(18,'sdfsdf','sdfsdf','sdfsdf',1),(22,'thesupplie','the supplier','sdfsdfsdf',1),(15,'tradepoint','tradepoints','Victoria St., Villamonte, Bacolod City',1),(17,'usls','university of st. la salle','this is the address',1),(16,'YPI','Yokogawa Phils. Inc','Quezon City',1);
+insert  into `supplier`(`id`,`sID`,`name`,`address`,`status`) values (20,'abc','sdfsdf','fsdfsdf',1),(1,'Aloyco','Aloyco International',NULL,0),(2,'Arizona','Arizona Marketing Corp.',NULL,0),(3,'aspen','igit','igit',1),(29,'BLe136','Bruce Lee','Sdfsdfsd Sdf Sd',1),(19,'bpis','bank of the philippine islands','17th streets',1),(4,'Burkert','Burkert Contromatic Philippines','8467 West Service Road Km. 14 \r\nSouth Superhighway \r\nSunValley, Parañaque City \r\nPhilippines 1711',0),(25,'bWs97c5','ben\'s Web solutions','ara sa imo buli',1),(24,'cbcc4c3','coca-cola butler\'s company','bacolod city, Negros occidental',1),(5,'Electrobus','electrobus Inc.','baho ka tae',1),(6,'eurelyn','eurelyn electronics','Laguna',1),(7,'festo','festo','Manila',0),(21,'fffsdf','fsdfsdf','sdfsdf',0),(8,'ic','innovative controls','Bacolod City, Negros Occidental',0),(9,'innovative','innovative solutions','Bacolod City',1),(28,'JC8c81','Jackie Chan','Sfsdfsdf Sdf Sdf Sdf Sd Fsd Fds Ds ',1),(10,'NEMA Elect','NEMA Electric',NULL,1),(11,'newbridge','newbridge','Lacson street',1),(12,'pcscale','pcscalelift','Manila',1),(13,'Presidium','Presidium Controls',NULL,1),(14,'RS','RS Components','Makati City',1),(18,'sdfsdf','sdfsdf','sdfsdf',1),(22,'thesupplie','the supplier','sdfsdfsdf',1),(15,'tradepoint','tradepoints','Victoria St., Villamonte, Bacolod City',1),(23,'TTPIb283','Tech Trabaho Philippines Inc.','Ara Kay Morita',1),(17,'usls','university of st. la salle','this is the address',1),(16,'YPI','Yokogawa Phils. Inc','Quezon City',1);
 
 /*Table structure for table `terms` */
 
@@ -226,11 +228,11 @@ CREATE TABLE `terms` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `termName` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 /*Data for the table `terms` */
 
-insert  into `terms`(`id`,`termName`) values (1,'30 DAYS'),(2,'45 DAYS'),(3,'60 DAYS PDC'),(4,'cash'),(5,'30% down, balance c.o.d'),(6,'30% down, balance 30 days'),(7,'15 days pdc'),(8,'15 days'),(9,'50% down, balance 30 days'),(10,'30%downpayment, balance after delivery'),(11,'30% downpayment, balance after delivery'),(12,'30%down, balance after delivery'),(13,'50% downpayment, balance progress billing'),(14,'50% down, balance progress billing'),(15,'c.o.d'),(16,'60 days'),(17,'50% 15days after inst. and config'),(18,'50% 15 days after config, balance 30days after 1st'),(19,'50% 15 days after inst. and config, bal. 30 days a'),(20,'demo to sale'),(21,'25% downpayment, balance 30 days'),(22,'50% down, balance 30 days with pdc'),(23,'30 days with pdc'),(24,'30% down, balance after commissioning'),(25,'30% down balance after commissioning'),(27,'1 day'),(28,'2 days'),(29,'5 seconds'),(30,'ass whip'),(31,'oooo');
+insert  into `terms`(`id`,`termName`) values (1,'30 DAYS'),(2,'45 DAYS'),(3,'60 DAYS PDC'),(4,'cash'),(5,'30% down, balance c.o.d'),(6,'30% down, balance 30 days'),(7,'15 days pdc'),(8,'15 days'),(9,'50% down, balance 30 days'),(10,'30%downpayment, balance after delivery'),(11,'30% downpayment, balance after delivery'),(12,'30%down, balance after delivery'),(13,'50% downpayment, balance progress billing'),(14,'50% down, balance progress billing'),(15,'c.o.d'),(16,'60 days'),(17,'50% 15days after inst. and config'),(18,'50% 15 days after config, balance 30days after 1st'),(19,'50% 15 days after inst. and config, bal. 30 days a'),(20,'demo to sale'),(21,'25% downpayment, balance 30 days'),(22,'50% down, balance 30 days with pdc'),(23,'30 days with pdc'),(24,'30% down, balance after commissioning'),(25,'30% down balance after commissioning'),(27,'1 day'),(28,'2 days'),(29,'5 seconds'),(30,'ass whip'),(31,'oooo'),(32,'eat shit'),(33,'1 second'),(34,'fsdfsafd');
 
 /*Table structure for table `validity` */
 
@@ -240,11 +242,11 @@ CREATE TABLE `validity` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `valName` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 /*Data for the table `validity` */
 
-insert  into `validity`(`id`,`valName`) values (1,'1 week'),(2,'15 days'),(3,'subject to availability of stock'),(4,'90 days'),(5,'45 days'),(6,'30 days'),(25,'2 weks'),(26,'3 weeks'),(34,'qqq'),(35,'aa'),(36,'2 weeks'),(37,'6 weeks'),(38,'weekless'),(39,'shit ass'),(40,'shit ass hole');
+insert  into `validity`(`id`,`valName`) values (1,'1 week'),(2,'15 days'),(3,'subject to availability of stock'),(4,'90 days'),(5,'45 days'),(6,'30 days'),(25,'2 weks'),(26,'3 weeks'),(34,'qqq'),(35,'aa'),(36,'2 weeks'),(37,'6 weeks'),(38,'weekless'),(39,'shit ass'),(40,'shit ass hole'),(41,'invalid shit');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
