@@ -65,7 +65,7 @@
 									Attention
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" name="attention" required="required" class="form-control input-sm col-md-7 col-xs-12">
+									<input type="text" name="attention" required="required" class="form-control input-sm col-md-7 col-xs-12 text-capitalize">
 								</div>
 							</div>
 							
@@ -74,7 +74,7 @@
 									Subject
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" name="subject" required="required" class="form-control input-sm col-md-7 col-xs-12">
+									<input type="text" name="subject" required="required" class="form-control input-sm col-md-7 col-xs-12 text-capitalize">
 								</div>
 							</div>
 							

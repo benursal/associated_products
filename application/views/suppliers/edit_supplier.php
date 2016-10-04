@@ -18,21 +18,12 @@
 						
 						<form class="form-horizontal form-label-left input_mask margin-top-20" id="formEditSupplier">
 							<input type="hidden" id="theID" value="<?php echo $row->id; ?>" />
-							
-							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-									Supplier ID <span class="required">*</span>
-								</label>
-								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" name="supplier-ID" id="supplierID" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $row->sID; ?>" readonly />
-								</div>
-							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
 									Supplier Name <span class="required">*</span>
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" name="supplier-ID" id="supplierName" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $row->name; ?>">
+									<input type="text" name="supplier_name" id="supplierName" required="required" class="form-control col-md-7 col-xs-12 text-capitalize" value="<?php echo $row->name; ?>">
 								</div>
 							</div>
 							<div class="form-group">
@@ -40,8 +31,8 @@
 									Address <span class="required">*</span>
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<textarea type="text" name="supplier-ID" id="supplierAddress" required="required" 
-									class="form-control col-md-7 col-xs-12" rows="5"><?php echo $row->address; ?></textarea>
+									<textarea type="text" name="supplier_address" id="supplierAddress" required="required" 
+									class="form-control col-md-7 col-xs-12 text-capitalize" rows="5"><?php echo $row->address; ?></textarea>
 								</div>
 							</div>
 							<div class="ln_solid"></div>

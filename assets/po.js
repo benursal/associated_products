@@ -156,7 +156,7 @@ $(document).ready(function(){
 		
 		show_loader();
 		
-		$.post( base_url + 'suppliers/save_supplier_popup', $( this ).serialize(), function( data ) {
+		$.post( base_url + 'suppliers/save_supplier', $( this ).serialize(), function( data ) {
 			
 			var name = $('#txtSupplierName').val().trim();
 			var address = $('#txtSupplierAddress').val().trim();

@@ -15,14 +15,42 @@ class Suppliers extends User_Controller
 	// search
 	function search()
 	{
+		// load pagination library
+		$this->load->library('ben_pagination');
+		
+		$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+		$keyword = (isset($_GET['keyword'])) ? $_GET['keyword'] : '';
+		
 		$data['page_title'] = 'List of Suppliers';
 		
 		// get details
 		$suppliers = new Supplier();
+		$suppliers->group_start();
+		$suppliers->like('name', $keyword);
+		$suppliers->or_like('address', $keyword);
+		$suppliers->or_like('sID', $keyword);
+		$suppliers->group_end();
 		$suppliers->where('status', 1);
-		$suppliers->get();
 		
-		$data['rows'] = $suppliers;
+		// clone first for later use
+		$s = $suppliers->get_clone();
+		
+		$suppliers->get();		
+		
+		// set pagination
+		$this->ben_pagination->total_records = $suppliers->result_count();
+		$this->ben_pagination->records_per_page = RECORDS_PER_PAGE;
+		$this->ben_pagination->current_page = $page;
+		$this->ben_pagination->link_address = site_url() . 'suppliers/search?keyword='.$keyword.'&page=';
+		$this->ben_pagination->links_to_display = 10;
+		
+		// query with limit
+		$s->order_by('name', 'ASC');
+		$s->limit(RECORDS_PER_PAGE, (($page - 1) * RECORDS_PER_PAGE));
+		$s->get();
+		
+		$data['rows'] = $s;
+		$data['pagination'] = $this->ben_pagination->get_page_links();
 		
 		// external js
 		$data['js_assets'] = array(
@@ -30,6 +58,8 @@ class Suppliers extends User_Controller
 		);
 		
 		$this->output('suppliers/supplier_list', $data);
+		
+		$this->show_profiler();
 	}
 	
 	// add new
@@ -51,12 +81,12 @@ class Suppliers extends User_Controller
 		$this->output('suppliers/add_new', $data);
 	}
 	
-	function save_supplier()
+	/*function save_supplier()
 	{
 		if( $this->is_ajax() )
 		{
 			$s = new Supplier();
-			$s->sID = $this->input->post('sID');
+			$s->sID = $this->create_code( $this->input->post('name') );
 			$s->name = $this->input->post('name');
 			$s->address = $this->input->post('address');
 			
@@ -69,41 +99,43 @@ class Suppliers extends User_Controller
 				echo 'ERROR';
 			}
 		}
-	}
+	}*/
 	
-	function save_supplier_popup()
+	function save_supplier()
 	{
-		$val = ucwords( $this->input->post('supplier_name') );
-		
-		$r = new Supplier();
-		$r->where('name', $val);
-		$r->get();
-		
-		if( !$r->exists() )
+		if( $this->is_ajax() )
 		{
-			$sID = $this->create_code($val);
+			$val = ucwords( $this->input->post('supplier_name') );
 			
-			$a = new Supplier();
-			$a->sID = $sID;
-			$a->name = $val;
-			$a->address = ucwords( $this->input->post('supplier_address') );
+			$r = new Supplier();
+			$r->where('name', $val);
+			$r->get();
 			
-			$save = $a->save();
-			
-			if( $save )
+			if( !$r->exists() )
 			{
-				echo $a->sID;
+				$sID = $this->create_code($val);
+				
+				$a = new Supplier();
+				$a->sID = $sID;
+				$a->name = $val;
+				$a->address = ucwords( $this->input->post('supplier_address') );
+				
+				$save = $a->save();
+				
+				if( $save )
+				{
+					echo $a->sID;
+				}
+				else
+				{
+					echo 'ERROR';
+				}
 			}
 			else
 			{
-				echo 'ERROR';
+				echo 'EXISTS';
 			}
 		}
-		else
-		{
-			echo 'EXISTS';
-		}
-		
 		//$this->show_profiler();
 	}
 	
@@ -144,26 +176,52 @@ class Suppliers extends User_Controller
 		$this->output('suppliers/edit_supplier', $data);
 	}
 	
+	function igits()
+	{
+		$s = new Supplier();
+		$s->where('name', 'Jackie Chan');
+		$s->where('id !=', 28);
+		$s->get();
+		
+		$this->show_profiler();
+	}
+	
 	function update_supplier()
 	{
 		if( $this->is_ajax() )
 		{
+			$id = $this->input->post('id');
+			$name = $this->input->post('name');
+			
+			// check if it exists
 			$s = new Supplier();
-			$s->where('id', $this->input->post('id'));
+			$s->where('name', $name);
+			$s->where('id !=', $id);
 			$s->get();
 			
-			$s->sID = $this->input->post('sID');
-			$s->name = $this->input->post('name');
-			$s->address = $this->input->post('address');
-			
-			if( $s->save() )
+			if( $s->exists() ) // 
 			{
-				echo $s->id;
+				echo 'EXISTS';
 			}
 			else
 			{
-				echo 'ERROR';
+				$s = new Supplier();
+				$s->where('id', $id);
+				$s->get();
+				
+				$s->name = $name;
+				$s->address = $this->input->post('address');
+				
+				if( $s->save() )
+				{
+					echo $s->id;
+				}
+				else
+				{
+					echo 'ERROR';
+				}
 			}
+			
 		}
 	}
 	

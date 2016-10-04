@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$('#supplierID').focus();
+	$('#supplierName').focus();
 	
 	// save new supplier
 	$('#formNewSupplier').submit(function(){
@@ -7,16 +7,38 @@ $(document).ready(function(){
 		show_loader();
 		
 		$.post( base_url + "suppliers/save_supplier",
-		{
-			sID: $('#supplierID').val(),
-			name: $('#supplierName').val(),
-			address: $('#supplierAddress').val()
-		},
+		$( '#formNewSupplier' ).serialize(),
 		function(data, status){
+			
+			var name = $('#supplierName').val().trim();
+			var address = $('#supplierAddress').val().trim();
 			
 			hide_loader();
 			
-			if( status == 'success' && data != 'ERROR' )
+			if( data == 'ERROR' )
+			{
+				// error message
+				$.jGrowl(
+					'An error has occured while adding a new supplier.', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else if( data == 'EXISTS' )
+			{
+				$.jGrowl(
+					'Supplier <strong class="text-capitalize">' + name + '</strong> already exists', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else // error
 			{
 				// show success message
 				$.jGrowl(
@@ -32,18 +54,7 @@ $(document).ready(function(){
 				reset_form('#formNewSupplier');
 				
 				// focus on sID
-				$('#supplierID').focus();
-			}
-			else // error
-			{
-				$.jGrowl(
-					'An error has occured while adding a new supplier.', 
-					{ 
-						life: 5000,
-						position: 'center', 
-						theme: 'alert alert-danger'
-					}
-				);
+				$('#supplierName').focus();
 			}
 		});
 		
@@ -58,7 +69,6 @@ $(document).ready(function(){
 		$.post( base_url + "suppliers/update_supplier",
 		{
 			id: $('#theID').val(),
-			sID: $('#supplierID').val(),
 			name: $('#supplierName').val(),
 			address: $('#supplierAddress').val()
 		},
@@ -66,7 +76,32 @@ $(document).ready(function(){
 			
 			hide_loader();
 			
-			if( status == 'success' && data != 'ERROR' )
+			var name = $('#supplierName').val().trim();
+			
+			if( data == 'ERROR' )
+			{
+				// error message
+				$.jGrowl(
+					'An error has occured while updating supplier record.', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else if( data == 'EXISTS' )
+			{
+				$.jGrowl(
+					'Supplier <strong class="text-capitalize">' + name + '</strong> already exists', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else
 			{
 				// show success message
 				$.jGrowl(
@@ -81,17 +116,7 @@ $(document).ready(function(){
 				// update title
 				$('#pageTitle').text('Edit Supplier "' + $('#supplierName').val() + '"');
 			}
-			else // error
-			{
-				$.jGrowl(
-					'An error has occured while updating supplier record.', 
-					{ 
-						life: 5000,
-						position: 'center', 
-						theme: 'alert alert-danger'
-					}
-				);
-			}
+			
 		});
 		
 		return false;
