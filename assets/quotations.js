@@ -165,7 +165,7 @@ $(document).ready(function(){
 		
 		show_loader();
 		
-		$.post( base_url + 'customers/save_customer_popup', $( this ).serialize(), function( data ) {
+		$.post( base_url + 'customers/save_customer', $( this ).serialize(), function( data ) {
 			
 			var name = $('#txtCustomerName').val().trim();
 			var address = $('#txtCustomerAddress').val().trim();

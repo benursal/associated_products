@@ -15,48 +15,78 @@ class Customers extends User_Controller
 	// search
 	function search()
 	{
-		$data['page_title'] = 'List of Suppliers';
+		// load pagination library
+		$this->load->library('ben_pagination');
+		
+		$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+		$keyword = (isset($_GET['keyword'])) ? $_GET['keyword'] : '';
+		
+		$data['page_title'] = 'List of Customers';
 		
 		// get details
-		$suppliers = new Supplier();
-		$suppliers->where('status', 1);
-		$suppliers->get();
+		$customers = new Customer();
+		$customers->group_start();
+		$customers->like('custName', $keyword);
+		$customers->or_like('address', $keyword);
+		$customers->or_like('custID', $keyword);
+		$customers->group_end();
+		$customers->where('status', 1);
 		
-		$data['rows'] = $suppliers;
+		// clone first for later use
+		$s = $customers->get_clone();
+		
+		$customers->get();		
+		
+		// set pagination
+		$this->ben_pagination->total_records = $customers->result_count();
+		$this->ben_pagination->records_per_page = RECORDS_PER_PAGE;
+		$this->ben_pagination->current_page = $page;
+		$this->ben_pagination->link_address = site_url() . 'customers/search?keyword='.$keyword.'&page=';
+		$this->ben_pagination->links_to_display = 10;
+		
+		// query with limit
+		$s->order_by('custName', 'ASC');
+		$s->limit(RECORDS_PER_PAGE, (($page - 1) * RECORDS_PER_PAGE));
+		$s->get();
+		
+		$data['rows'] = $s;
+		$data['pagination'] = $this->ben_pagination->get_page_links();
 		
 		// external js
 		$data['js_assets'] = array(
-			site_url('assets/suppliers.js')
+			site_url('assets/customers.js')
 		);
 		
-		$this->output('suppliers/supplier_list', $data);
+		$this->output('customers/customer_list', $data);
+		
+		$this->show_profiler();
 	}
 	
 	// add new
 	function add_new()
 	{
-		$data['page_title'] = 'Add New Supplier';
+		$data['page_title'] = 'Add New Customer';
 		
 		// get details
-		$suppliers = new Supplier();
-		$suppliers->get();
+		$customers = new Customer();
+		$customers->get();
 		
-		$data['rows'] = $suppliers;
+		$data['rows'] = $customers;
 		
 		// external js
 		$data['js_assets'] = array(
-			site_url('assets/suppliers.js')
+			site_url('assets/customers.js')
 		);
 		
-		$this->output('suppliers/add_new', $data);
+		$this->output('customers/add_new', $data);
 	}
 	
-	function save_supplier()
+	/*function save_customer()
 	{
 		if( $this->is_ajax() )
 		{
-			$s = new Supplier();
-			$s->sID = $this->input->post('sID');
+			$s = new Customer();
+			$s->custID = $this->input->post('custID');
 			$s->name = $this->input->post('name');
 			$s->address = $this->input->post('address');
 			
@@ -69,41 +99,43 @@ class Customers extends User_Controller
 				echo 'ERROR';
 			}
 		}
-	}
+	}*/
 	
-	function save_customer_popup()
+	function save_customer()
 	{
-		$val = ucwords( $this->input->post('customer_name') );
-		
-		$r = new Customer();
-		$r->where('custName', $val);
-		$r->get();
-		
-		if( !$r->exists() )
+		if( $this->is_ajax() )
 		{
-			$custID = $this->create_code($val);
+			$val = ucwords( $this->input->post('customer_name') );
 			
-			$a = new Customer();
-			$a->custID = $custID;
-			$a->custName = $val;
-			$a->address = ucwords( $this->input->post('customer_address') );
+			$r = new Customer();
+			$r->where('custName', $val);
+			$r->get();
 			
-			$save = $a->save();
-			
-			if( $save )
+			if( !$r->exists() )
 			{
-				echo $a->custID;
+				$custID = $this->create_code($val);
+				
+				$a = new Customer();
+				$a->custID = $custID;
+				$a->custName = $val;
+				$a->address = ucwords( $this->input->post('customer_address') );
+				
+				$save = $a->save();
+				
+				if( $save )
+				{
+					echo $a->custID;
+				}
+				else
+				{
+					echo 'ERROR';
+				}
 			}
 			else
 			{
-				echo 'ERROR';
+				echo 'EXISTS';
 			}
 		}
-		else
-		{
-			echo 'EXISTS';
-		}
-		
 		//$this->show_profiler();
 	}
 	
@@ -125,64 +157,80 @@ class Customers extends User_Controller
 	function edit( $id )
 	{
 		// get details
-		$s = new Supplier();		
+		$s = new Customer();		
 		$s->where('id', $id);
 		$s->where('status', 1);
 		$s->get();
 		
 		// page title
-		$data['page_title'] = 'Edit Supplier "' . $s->name . '"';
+		$data['page_title'] = 'Edit Customer "' . $s->custName . '"';
 		
 		// external js
 		$data['js_assets'] = array(
-			site_url('assets/suppliers.js')
+			site_url('assets/customers.js')
 		);
 		
 		// the row
 		$data['row'] = $s;
 		
-		$this->output('suppliers/edit_supplier', $data);
+		$this->output('customers/edit_customer', $data);
 	}
 	
-	function update_supplier()
+	function update_customer()
 	{
 		if( $this->is_ajax() )
 		{
-			$s = new Supplier();
-			$s->where('id', $this->input->post('id'));
+			$id = $this->input->post('id');
+			$name = $this->input->post('name');
+			
+			// check if it exists
+			$s = new Customer();
+			$s->where('custName', $name);
+			$s->where('id !=', $id);
 			$s->get();
 			
-			$s->sID = $this->input->post('sID');
-			$s->name = $this->input->post('name');
-			$s->address = $this->input->post('address');
-			
-			if( $s->save() )
+			if( $s->exists() ) // 
 			{
-				echo $s->id;
+				echo 'EXISTS';
 			}
 			else
 			{
-				echo 'ERROR';
+				$s = new Customer();
+				$s->where('id', $id);
+				$s->get();
+				
+				$s->custName = $name;
+				$s->address = $this->input->post('address');
+				
+				if( $s->save() )
+				{
+					echo $s->id;
+				}
+				else
+				{
+					echo 'ERROR';
+				}
 			}
+			
 		}
 	}
 	
 	function test()
 	{
-		$supplier = new Supplier();
-		$supplier->where('sID', 'Arizona');
-		$supplier->get();
+		$customer = new Customer();
+		$customer->where('custID', 'Arizona');
+		$customer->get();
 		
-		//$supplier->address = 'sdf';
+		//$customer->address = 'sdf';
 		
-		//$supplier->update();
+		//$customer->update();
 		
-		/*echo $supplier->address . '<br />';
-		echo $supplier->sID . '<br />';
-		echo $supplier->name . '<br />';*/
+		/*echo $customer->address . '<br />';
+		echo $customer->custID . '<br />';
+		echo $customer->name . '<br />';*/
 		
-		$supplier->status = 0;
-		$supplier->save();
+		$customer->status = 0;
+		$customer->save();
 		
 		$this->show_profiler();
 	}
@@ -193,16 +241,16 @@ class Customers extends User_Controller
 		if( $this->is_ajax() )
 		{
 
-			$supplier = new Supplier();
-			$supplier->where('sID', $id);
-			$supplier->get();
+			$customer = new Customer();
+			$customer->where('custID', $id);
+			$customer->get();
 			
-			if( $supplier->exists() )
+			if( $customer->exists() )
 			{
 				
-				$supplier->status = 0;
+				$customer->status = 0;
 				
-				if( $supplier->save() )
+				if( $customer->save() )
 				{
 					echo 1;
 				}
