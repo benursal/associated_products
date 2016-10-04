@@ -46,7 +46,7 @@ $(document).ready(function(){
 				// hide validity
 				$('#modalNewValidity .btn-close').trigger('click');
 				// add new validity to Select
-				$('select[name="validity"]').append('<option value="' + data + '">' + validity_name + '</option>');
+				$('select[name="validity"]').append('<option value="' + data + '" selected>' + validity_name + '</option>');
 				// clear value 
 				$('#txtValidityName').val('');
 			}
@@ -106,7 +106,7 @@ $(document).ready(function(){
 				// hide 
 				$('#modalNewTerm .btn-close').trigger('click');
 				// add new to Select
-				$('select[name="terms"]').append('<option value="' + data + '">' + term_name + '</option>');
+				$('select[name="terms"]').append('<option value="' + data + '" selected>' + term_name + '</option>');
 				// clear value 
 				$('#txtTermName').val('');
 			}
@@ -165,7 +165,7 @@ $(document).ready(function(){
 				// hide 
 				$('#modalNewDelivery .btn-close').trigger('click');
 				// add new to Select
-				$('select[name="delivery"]').append('<option value="' + data + '">' + delivery_name + '</option>');
+				$('select[name="delivery"]').append('<option value="' + data + '" selected>' + delivery_name + '</option>');
 				// clear value 
 				$('#txtDeliveryName').val('');
 			}

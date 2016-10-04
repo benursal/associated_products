@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Suppliers extends User_Controller
+class Customers extends User_Controller
 {
 	function __construct()
 	{
@@ -71,28 +71,28 @@ class Suppliers extends User_Controller
 		}
 	}
 	
-	function save_supplier_popup()
+	function save_customer_popup()
 	{
-		$val = ucwords( $this->input->post('supplier_name') );
+		$val = ucwords( $this->input->post('customer_name') );
 		
-		$r = new Supplier();
-		$r->where('name', $val);
+		$r = new Customer();
+		$r->where('custName', $val);
 		$r->get();
 		
 		if( !$r->exists() )
 		{
-			$sID = $this->create_code($val);
+			$custID = $this->create_code($val);
 			
-			$a = new Supplier();
-			$a->sID = $sID;
-			$a->name = $val;
-			$a->address = ucwords( $this->input->post('supplier_address') );
+			$a = new Customer();
+			$a->custID = $custID;
+			$a->custName = $val;
+			$a->address = ucwords( $this->input->post('customer_address') );
 			
 			$save = $a->save();
 			
 			if( $save )
 			{
-				echo $a->sID;
+				echo $a->custID;
 			}
 			else
 			{

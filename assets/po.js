@@ -150,6 +150,70 @@ $(document).ready(function(){
 		}
 	});
 	
+	
+	// customer
+	$('#formNewSupplier').submit(function(){
+		
+		show_loader();
+		
+		$.post( base_url + 'suppliers/save_supplier_popup', $( this ).serialize(), function( data ) {
+			
+			var name = $('#txtSupplierName').val().trim();
+			var address = $('#txtSupplierAddress').val().trim();
+			
+			hide_loader();
+			
+			if( data == 'EXISTS' )
+			{
+				$.jGrowl(
+					'Supplier <strong>' + name + '</strong> already exists', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else if( data == 'ERROR' )
+			{
+				$.jGrowl(
+					'An error has occured. Please try again.', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else
+			{
+				$.jGrowl(
+					'Supplier <strong>' + name + '</strong> added successfully', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-success'
+					}
+				);
+				
+				// hide 
+				$('#modalNewSupplier .btn-close').trigger('click');
+				
+				// add new to Select
+				$('select[name="supplier"]').append('<option value="' + data + '" selected>' + name + '</option>');
+				$('#supplierAddress').val(address); 
+				// add to json array
+				suppliers.push('{"sID":"' + data + '","address":"' + address + '"}');
+				
+				// clear value 
+				$('#modalNewSupplier').find('.form-control').val('');
+			}
+			
+			//$('#results').html(data);
+		});
+		
+		return false;
+	});
 });
 
 function removeAtt()

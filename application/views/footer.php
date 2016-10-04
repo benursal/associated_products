@@ -19,11 +19,11 @@
 									
 									<div class="form-group">
 										<label>Company Name</label>
-										<input type="text" class="form-control" id="txtSupplierName" name="supplier_name" placeholder="Name...">
+										<input type="text" class="form-control" id="txtSupplierName" name="supplier_name" placeholder="Name..." required />
 									</div>
 									<div class="form-group">
 										<label>Address</label>
-										<textarea class="form-control" id="txtSupplierAddress" name="supplier_address" placeholder="Address..." rows="3"></textarea>
+										<textarea class="form-control" id="txtSupplierAddress" name="supplier_address" placeholder="Address..." rows="3"required></textarea>
 									</div>
 								</div>
 							</div>
@@ -55,11 +55,11 @@
 								<div class="col-md-10 col-md-offset-1">
 									<div class="form-group">
 										<label>Company Name</label>
-										<input type="text" class="form-control" id="txtCustomerName" name="customer_name" placeholder="Name...">
+										<input type="text" class="form-control" id="txtCustomerName" name="customer_name" placeholder="Name..." required />
 									</div>
 									<div class="form-group">
 										<label>Address</label>
-										<textarea class="form-control" id="txtCustomerAddress" name="customer_address" placeholder="Address..." rows="3"></textarea>
+										<textarea class="form-control" id="txtCustomerAddress" name="customer_address" placeholder="Address..." rows="3"required></textarea>
 									</div>
 								</div>
 							</div>

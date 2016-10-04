@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	$('select[name="customer"]').focus();
 	
 	// capture quantity
@@ -137,7 +138,6 @@ $(document).ready(function(){
 				$('#customerAddress').val( customer.address );
 			}
 			
-			
 		});
 	});
 	
@@ -157,6 +157,71 @@ $(document).ready(function(){
 			$('input[name="discount_rate"]').attr('disabled','');
 			$('input[name="discount_rate"]').removeAttr('required');
 		}
+	});
+	
+	
+	// customer
+	$('#formNewCustomer').submit(function(){
+		
+		show_loader();
+		
+		$.post( base_url + 'customers/save_customer_popup', $( this ).serialize(), function( data ) {
+			
+			var name = $('#txtCustomerName').val().trim();
+			var address = $('#txtCustomerAddress').val().trim();
+			
+			hide_loader();
+			
+			if( data == 'EXISTS' )
+			{
+				$.jGrowl(
+					'Customer <strong>' + name + '</strong> already exists', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else if( data == 'ERROR' )
+			{
+				$.jGrowl(
+					'An error has occured. Please try again.', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-danger'
+					}
+				);
+			}
+			else
+			{
+				$.jGrowl(
+					'Customer <strong>' + name + '</strong> added successfully', 
+					{ 
+						life: 5000,
+						position: 'center', 
+						theme: 'alert alert-success'
+					}
+				);
+				
+				// hide 
+				$('#modalNewCustomer .btn-close').trigger('click');
+				
+				// add new to Select
+				$('select[name="customer"]').append('<option value="' + data + '" selected>' + name + '</option>');
+				$('#customerAddress').val(address); 
+				// add to json array
+				customers.push('{"custID":"' + data + '","address":"' + address + '"}');
+				
+				// clear value 
+				$('#modalNewCustomer').find('.form-control').val('');
+			}
+			
+			//$('#results').html(data);
+		});
+		
+		return false;
 	});
 	
 });

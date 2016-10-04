@@ -112,6 +112,11 @@
 	font-style:italic !important;
 }
 
+.text-capitalize,
+select.text-capitalize option{
+	text-transform:capitalize;
+}
+
 .text-12{
 	font-size:12px !important;
 	line-height:20px !important;

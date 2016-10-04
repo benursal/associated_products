@@ -34,7 +34,7 @@
 								</label>
 								<div class="col-md-7 col-sm-8 col-xs-12">
 									
-									<select name="supplier" required="required" class="form-control input-sm col-md-8 col-xs-12">
+									<select name="supplier" required="required" class="form-control input-sm col-md-8 col-xs-12 text-capitalize">
 										<option value="">[Select Supplier]</option>
 										<?php if( $suppliers->exists() ) : ?>
 										<?php foreach( $suppliers as $c ) : ?>
@@ -56,7 +56,7 @@
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
 									<textarea type="text" name="supplierAddress" id="supplierAddress" required="required" 
-									class="form-control input-sm col-md-7 col-xs-12" rows="3" readonly></textarea>
+									class="form-control input-sm col-md-7 col-xs-12 text-capitalize" rows="3" readonly></textarea>
 								</div>
 							</div>
 							
@@ -104,7 +104,7 @@
 									Terms
 								</label>
 								<div class="col-md-7 col-sm-8 col-xs-12">
-									<select name="terms" required="required" class="form-control input-sm col-md-8 col-xs-12">
+									<select name="terms" required="required" class="form-control input-sm col-md-8 col-xs-12 text-capitalize">
 										<option value="">[Select Payment Terms]</option>
 										<?php if( $terms->exists() ) : ?>
 										<?php foreach( $terms as $t ) : ?>
@@ -125,7 +125,7 @@
 									Delivery
 								</label>
 								<div class="col-md-7 col-sm-8 col-xs-12">
-									<select name="delivery" required="required" class="form-control input-sm col-md-8 col-xs-12">
+									<select name="delivery" required="required" class="form-control input-sm col-md-8 col-xs-12 text-capitalize">
 										<option value="">[Select Delivery Terms]</option>
 										<?php if( $deliveries->exists() ) : ?>
 										<?php foreach( $deliveries as $d ) : ?>
