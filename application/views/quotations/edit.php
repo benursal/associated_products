@@ -269,6 +269,12 @@
 									</tr>
 									<?php $counter++; ?>
 									<?php endforeach; ?>
+									<?php else : ?>
+									<tr>
+										<td colspan="7" class="text-center">
+											<button type="button" class="btn btn-sm btn-primary" onclick="add_first_row(this);">Add Row</button>
+										</td>
+									</tr>
 									<?php endif; ?>
 								</tbody>
 								

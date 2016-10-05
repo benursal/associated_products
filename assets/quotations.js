@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	$('select[name="customer"]').focus();
+	$('input[name="transaction_description"]').focus();
 	
 	// capture quantity
 	$(document).on('keyup', '.qty, .price', function(e){
@@ -405,4 +405,12 @@ function delete_quotation(trans_num, id, object, source)
 		}});
 		
 	}
+}
+
+function add_first_row()
+{
+	var first_row = $('table.orderline tbody');
+	
+	first_row.html(get_new_row_html());
+	first_row.find('.qty').focus();
 }

@@ -192,7 +192,7 @@
 					</div>
 					<div class="row">
 						<div class="col-lg-12 sub-form">
-							<table class="table table-bordered table-striped table-hover">
+							<table class="table table-bordered table-striped table-hover orderline">
 								<tbody>
 									<?php $grand_total = 0; ?>
 									<?php $counter = 1; ?>
@@ -234,6 +234,12 @@
 									</tr>
 									<?php $counter++; ?>
 									<?php endforeach; ?>
+									<?php else : ?>
+									<tr>
+										<td colspan="7" class="text-center">
+											<button type="button" class="btn btn-sm btn-primary" onclick="add_first_row(this);">Add Row</button>
+										</td>
+									</tr>
 									<?php endif; ?>
 								</tbody>
 								
