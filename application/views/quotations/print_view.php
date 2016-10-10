@@ -42,6 +42,10 @@
 								<td class="text-right text-bold">Reference # :</td>
 								<td><?php echo $row->subject; ?></td>
 							</tr>
+							<tr>
+								<td class="text-right text-bold">Reference # :</td>
+								<td><strong id="theGrandTotal"></strong></td>
+							</tr>
 						</tbody>
 					</table>
 									
@@ -182,3 +186,7 @@
 	</div>
 	
 </div>
+<script>
+var grand_total = '<?php echo number_format( $grand_total, 2); ?>';
+document.getElementById('theGrandTotal').innerHTML = 'PHP ' + grand_total;
+</script>

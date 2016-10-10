@@ -18,15 +18,15 @@ class Dashboard extends User_Controller
 		
 		// get quotations
 		$q = new Quotation();
-		$q->order_by('id', 'DESC');
 		$q->where('status', 1);
+		$q->order_by('date', 'DESC');
 		$q->limit(7, 0);
 		$q->get();
 	
 		// get purchase orders
 		$p = new Purchase_Order();
-		$p->order_by('id', 'DESC');
 		$p->where('status', 1);
+		$p->order_by('date', 'DESC');
 		$p->limit(7, 0);
 		$p->get();
 		

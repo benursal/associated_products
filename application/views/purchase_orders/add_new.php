@@ -183,7 +183,7 @@
 											<input type="text" class="form-control unit" name="unit[]" value="<?php echo $row->unit; ?>" />
 										</td>
 										<td class="col-description">
-											<textarea class="form-control description" name="description[]" rows="2"><?php echo $row->descript; ?></textarea>
+											<textarea class="form-control description" name="description[]" rows="5"><?php echo $row->descript; ?></textarea>
 										</td>
 										<td class="col-unit-price">
 											<input type="text" class="form-control price" name="price[]" value="<?php echo $row->unitPrice; ?>" />

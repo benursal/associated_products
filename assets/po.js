@@ -314,7 +314,7 @@ function get_new_row_html()
 				'<td class="text-center col-item-no padding-top-10"></td>' + 
 				'<td class="text-center col-qty"><input type="number" class="form-control qty" name="qty[]" min="1" /></td>' + 
 				'<td class="text-center col-unit"><input type="text" class="form-control unit" name="unit[]" /></td>' + 
-				'<td class="col-description"><textarea class="form-control description" name="description[]" rows="2"></textarea></td>' + 
+				'<td class="col-description"><textarea class="form-control description" name="description[]" rows="5"></textarea></td>' + 
 				'<td class="col-unit-price"><input type="text" class="form-control price" name="price[]" /></td>' + 
 				'<td class="text-center col-amount padding-top-10">' + 
 					'<strong>P <span class="amount">0.00</span></strong>' + 

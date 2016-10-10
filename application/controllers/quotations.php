@@ -31,7 +31,7 @@ class Quotations extends User_Controller
 						WHERE (quotation.transNum LIKE '%$keyword%' OR quotation.transDescript LIKE '%$keyword%' 
 						OR customer.custName LIKE '%$keyword%')  
 						AND quotation.status = 1 
-						ORDER BY quotation.id DESC";
+						ORDER BY quotation.date DESC, quotation.transNum DESC";
 						
 		$query = $this->db->query($sql_string);
 		
@@ -200,7 +200,7 @@ class Quotations extends User_Controller
 					$o->itemNo = $item_number;
 					$o->qty = $_POST['qty'][$counter];
 					$o->unit = $_POST['unit'][$counter];
-					$o->descript = $_POST['description'][$counter];
+					$o->descript = nl2br($_POST['description'][$counter]);
 					$o->sPrice = $_POST['s-price'][$counter];
 					$o->unitPrice = $_POST['price'][$counter];
 					
@@ -289,7 +289,7 @@ class Quotations extends User_Controller
 					$o->transNum = $q->id;
 					$o->qty = $_POST['qty'][$counter];
 					$o->unit = $_POST['unit'][$counter];
-					$o->descript = $_POST['description'][$counter];
+					$o->descript = nl2br($_POST['description'][$counter]);
 					$o->sPrice = $_POST['s-price'][$counter];
 					$o->unitPrice = $_POST['price'][$counter];
 					
@@ -518,28 +518,30 @@ class Quotations extends User_Controller
 		
 	}
 	
-	function foreign_key()
+	/*function foreign_key()
 	{
 		$o = new Orderline();
-		$o->where('type', 'quotation');
-		$o->where('transNum IS NULL');
+		$o->where('type', 'po');
+		//$o->where('transNum IS NULL');
+		$o->limit(500,1100);
 		$o->get();
 		
 		foreach( $o as $row )
 		{
-			//echo $row->num . '<br />';
+			echo $row->num . '<br />';
 			
-			$q = new Quotation();
+			$q = new Purchase_Order();
 			$q->where('transNum', $row->num);
 			$q->get();
 			
-			//echo '<h1>' . $q->id . '</h1>';
+			echo $row->num . ' - ' . $q->id . '<br />';
+			
 			$row->transNum = $q->id;			
 			$row->save();
 		}
 		
 		$this->show_profiler();
 		
-	}
+	}*/
 }
 ?>

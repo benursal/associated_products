@@ -30,7 +30,7 @@ class Purchase_Orders extends User_Controller
 						LEFT JOIN supplier ON po.supplierID = supplier.sID 
 						WHERE (po.transNum LIKE '%$keyword%' OR po.transDescript LIKE '%$keyword%' 
 						OR supplier.name LIKE '%$keyword%') AND po.status = 1 
-						ORDER BY po.id DESC";
+						ORDER BY po.date DESC, po.transNum DESC";
 						
 		$query = $this->db->query($sql_string);
 		
@@ -204,7 +204,7 @@ class Purchase_Orders extends User_Controller
 					$o->itemNo = $item_number;
 					$o->qty = $_POST['qty'][$counter];
 					$o->unit = $_POST['unit'][$counter];
-					$o->descript = $_POST['description'][$counter];
+					$o->descript = nl2br($_POST['description'][$counter]);
 					$o->unitPrice = $_POST['price'][$counter];
 					
 					$save = $o->save();
@@ -272,7 +272,7 @@ class Purchase_Orders extends User_Controller
 					$o->transNum = $q->id;
 					$o->qty = $_POST['qty'][$counter];
 					$o->unit = $_POST['unit'][$counter];
-					$o->descript = $_POST['description'][$counter];
+					$o->descript = nl2br($_POST['description'][$counter]);
 					$o->unitPrice = $_POST['price'][$counter];
 					
 					// update / add new
@@ -474,7 +474,7 @@ class Purchase_Orders extends User_Controller
 		
 	}
 	
-	function foreign_key()
+	/*function foreign_key()
 	{
 		$o = new Orderline();
 		$o->where('type', 'po');
@@ -496,6 +496,6 @@ class Purchase_Orders extends User_Controller
 		
 		$this->show_profiler();
 		
-	}
+	}*/
 }
 ?>

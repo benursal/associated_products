@@ -210,7 +210,10 @@
 											<input type="text" class="form-control unit" name="unit[]" value="<?php echo $o->unit; ?>" />
 										</td>
 										<td class="col-description">
-											<textarea class="form-control description" name="description[]" rows="2"><?php echo $o->descript; ?></textarea>
+										<?php
+											$description = strip_tags($o->descript);
+										?>
+											<textarea class="form-control description" name="description[]" rows="5"><?php echo $description; ?></textarea>
 										</td>
 										<td class="col-unit-price">
 											<input type="text" class="form-control price" name="price[]" value="<?php echo $o->unitPrice; ?>" />

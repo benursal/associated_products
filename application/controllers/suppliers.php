@@ -59,7 +59,7 @@ class Suppliers extends User_Controller
 		
 		$this->output('suppliers/supplier_list', $data);
 		
-		$this->show_profiler();
+		#$this->show_profiler();
 	}
 	
 	// add new

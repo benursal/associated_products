@@ -59,7 +59,7 @@ class Customers extends User_Controller
 		
 		$this->output('customers/customer_list', $data);
 		
-		$this->show_profiler();
+		#$this->show_profiler();
 	}
 	
 	// add new
