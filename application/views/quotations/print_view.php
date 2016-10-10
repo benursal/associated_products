@@ -43,8 +43,8 @@
 								<td><?php echo $row->subject; ?></td>
 							</tr>
 							<tr>
-								<td class="text-right text-bold">Reference # :</td>
-								<td><strong id="theGrandTotal"></strong></td>
+								<td class="text-right text-bold">Total Amount :</td>
+								<td><u id="theGrandTotal"></u></td>
 							</tr>
 						</tbody>
 					</table>
