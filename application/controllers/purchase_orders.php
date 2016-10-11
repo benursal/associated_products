@@ -169,7 +169,7 @@ class Purchase_Orders extends User_Controller
 			$q->attention = $this->input->post('attention');
 			$q->transDescript = $this->input->post('transaction_description');
 			$q->totalAmount = $this->input->post('grandTotal');
-			$q->prepared = 'Ben Ursal';
+			$q->prepared = $this->account->fname . ' ' . $this->account->lname;
 			
 			$is_saved = false;
 			
@@ -240,7 +240,7 @@ class Purchase_Orders extends User_Controller
 			$q->attention = $this->input->post('attention');
 			$q->transDescript = $this->input->post('transaction_description');
 			$q->totalAmount = $this->input->post('grandTotal');
-			//$q->prepared = 'Ben Ursal';
+			$q->prepared = $this->account->fname . ' ' . $this->account->lname;
 			
 			$q->save();
 			

@@ -23,7 +23,7 @@
 									Supplier Name <span class="required">*</span>
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" name="supplier_name" id="supplierName" required="required" class="form-control col-md-7 col-xs-12 text-capitalize" value="<?php echo $row->name; ?>">
+									<input type="text" name="supplier_name" id="supplierName" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $row->name; ?>">
 								</div>
 							</div>
 							<div class="form-group">
@@ -32,7 +32,7 @@
 								</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
 									<textarea type="text" name="supplier_address" id="supplierAddress" required="required" 
-									class="form-control col-md-7 col-xs-12 text-capitalize" rows="5"><?php echo $row->address; ?></textarea>
+									class="form-control col-md-7 col-xs-12" rows="5"><?php echo $row->address; ?></textarea>
 								</div>
 							</div>
 							<div class="ln_solid"></div>
