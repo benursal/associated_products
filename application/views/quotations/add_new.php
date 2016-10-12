@@ -286,6 +286,7 @@
 	</div>
 </div>
 
+
 <script>
 var transaction_id = 0;
 var customers = <?php echo $customers->all_to_json(array('custID', 'address'), TRUE); ?>;

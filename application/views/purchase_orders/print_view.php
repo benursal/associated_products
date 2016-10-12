@@ -92,11 +92,6 @@
 				<?php $min_rows--; ?>
 				<?php endforeach; ?>
 				<?php endif; ?>
-				<?php for( $x = 1; $x <= $min_rows; $x++ ) : ?>
-					<tr>
-						<td colspan="6">&nbsp;</td>
-					</tr>
-				<?php endfor; ?>
 				</tbody>
 				<tfoot style="border-top:1px solid gray">
 					<tr>
@@ -131,3 +126,6 @@
 	</div>
 	
 </div>
+<script>
+var min_height = 452;
+</script>

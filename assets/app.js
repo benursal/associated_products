@@ -303,3 +303,8 @@ function modal_add_new_validity()
 		$('#txtValidityName').focus()
 	});
 }
+
+function nl2br( string )
+{
+    return string.replace(/(?:\r\n|\r|\n)/g, "<br />");
+}

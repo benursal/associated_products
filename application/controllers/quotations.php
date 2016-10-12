@@ -149,10 +149,18 @@ class Quotations extends User_Controller
 		//$this->show_profiler();
 	}
 	
+	function wrap_test()
+	{
+		$content = nl2br($_POST['content']);
+		$d = explode('<br />', str_replace('<br>', '<br />', $content));
+		
+		echo "$content - " . count( $d );
+	}
+	
 	function save()
 	{
-		if( $this->is_ajax() )
-		{
+		//if( $this->is_ajax() )
+		//{
 			$q = new Quotation();
 		
 			$q->year = date('Y');
@@ -224,7 +232,9 @@ class Quotations extends User_Controller
 			
 			$new = new Quotation();
 			echo $new->generate_number();
-		}
+			
+			$this->show_profiler();
+		//}
 	}
 	
 	function test_delete()

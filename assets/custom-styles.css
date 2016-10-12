@@ -281,7 +281,7 @@ select.text-capitalize option{
 
 .table.printable{
 	border:1px solid gray;
-	min-height:220px;
+	/*min-height:220px;*/
 	border-radius:5px;
 	padding:10px;
 }
@@ -293,6 +293,10 @@ select.text-capitalize option{
 
 .table.printable td{
 	border:0;
+}
+
+.table.printable tr.has-border td{
+	border-bottom:1px solid #000000;
 }
 
 /* message */

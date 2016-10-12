@@ -414,3 +414,43 @@ function add_first_row()
 	first_row.html(get_new_row_html());
 	first_row.find('.qty').focus();
 }
+
+function make_br()
+{
+	
+	var string = $('textarea[name="content"]').val();
+	var string = nl2br(string);
+	
+	alert(string);
+	
+	$('textarea[name="content"]').val( string );
+}
+
+function get_height()
+{
+	var table_body_height = $('.printable tbody').height();
+	alert( table_body_height );
+}
+
+// 
+function add_blank_rows()
+{
+	var height_per_row = 33;
+	var table_body_height = $('.printable tbody').height();
+	var height_diff = min_height - table_body_height;
+	
+	//alert( table_body_height );
+	
+	var rows_to_add = Math.round(height_diff / height_per_row);
+	//alert( rows_to_add );
+	var html = '';
+	
+	for( var x = 1; x <= rows_to_add; x++ )
+	{
+		html += '<tr>' + 
+					'<td colspan="6">&nbsp;</td>' + 
+				'</tr>';
+	}
+	
+	$('.printable tbody').append( html );
+}

@@ -72,12 +72,19 @@
 				</thead>
 				<tbody>
 				<?php 
+					$default_lines = 20; // based on number of BRs
+					$total_lines = 0;
+					
 					$min_rows = 7; 
 					$grand_total = 0; // gross total amount
 				?>
 				<?php if( $orderline->exists() ) : ?>
 				<?php foreach( $orderline as $o ) : ?>
 				<?php
+					// description
+					
+					//$d = explode('<br />', str_replace('<br>', '<br />', $o->descript));
+					
 					$line_total = $o->qty * $o->unitPrice;
 					$grand_total += $line_total;
 				?>
@@ -92,11 +99,7 @@
 				<?php $min_rows--; ?>
 				<?php endforeach; ?>
 				<?php endif; ?>
-				<?php for( $x = 1; $x <= $min_rows; $x++ ) : ?>
-					<tr>
-						<td colspan="6">&nbsp;</td>
-					</tr>
-				<?php endfor; ?>
+				
 				</tbody>
 			</table>
 			
@@ -180,8 +183,14 @@
 			<p class="margin-top-40 text-center hidden-in-print">
 				<button type="button" class="btn btn-primary" onclick="print();">
 					Print Now
-				</button>
+				</button> 
+				<!--<button type="button" class="btn btn-success" onclick="get_height();">
+					Get height of table
+				</button>-->
 			</p>
+			
+			
+			
 		</div>
 	</div>
 	
@@ -189,4 +198,5 @@
 <script>
 var grand_total = '<?php echo number_format( $grand_total, 2); ?>';
 document.getElementById('theGrandTotal').innerHTML = 'PHP ' + grand_total;
+var min_height = 320;
 </script>
